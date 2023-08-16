@@ -1,8 +1,7 @@
-Package: packagetemplate
-Title: Your Package Title in Titlecase
+Package: numberizeR
+Title: Convert words to numbers in multiple languages
 Version: 0.0.1
 Authors@R: c(
-    person(given = "Thibaut", family = "Jombart", , email = "thibaut@data.org", role = c("aut", "cre")),
     person(given = "Avinash", family = "Laddha", , email = "avinash@data.org", role = c("aut")),
     person(given = "James M.", family = "Azam", , email = "james.azam@lshtm.ac.uk", role = c("aut"),
            comment = c(ORCID = "https://orcid.org/0000-0001-5782-7330")),
@@ -13,11 +12,10 @@ Authors@R: c(
     person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut"),
            comment = c(ORCID = "0000-0001-5218-3046")),
     person(given = "Hugo", family = "Gruson", email = "hugo.gruson+R@normalesup.org", role = c("aut"),
-           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476"))
+           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")),
+    person("Banky", "Ahadzie", email = "bahadzie@gmail.com", role = c("aut", "cre"))
   )
-Description: Your package description. It must end with a period (".") and
-    include relevant bibliographical references if applicable, using the 
-    following format: Author et al. (2023) <doi:10.5281/zenodo.6619350>.
+Description: Converts numbers up to a trillion spelt in words in English, French or Spanish to their equivalent numeric.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -29,3 +27,5 @@ Config/testthat/edition: 3
 Config/Needs/website:
     epiverse-trace/epiversetheme
 Language: en-US
+URL: https://github.com/bahadzie/numberizeR
+BugReports: https://github.com/bahadzie/numberizeR/issues
