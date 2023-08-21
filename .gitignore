@@ -1,6 +1,8 @@
 # All files starting with double underscore __
 ^__.*$
 
+README.html
+
 # History files
 .Rhistory
 .Rapp.history
