@@ -15,3 +15,7 @@
 - Recon. Used [this image](https://www.reconverse.org/images/badge-experimental.svg) instead of the repo image which appear broken but that might have been temporary.
 - Updated `render_readme.yml` by adding trailing `--` to `git diff-index --quiet HEAD --` line 87. Based on [SO reference](https://stackoverflow.com/questions/28296130/what-does-this-git-diff-index-quiet-head-mean)
 - Also found in the GH Action logs that the script didn't have permission to commit the build README.md file to the repo. This was fixed by allowing workflow permission to be read/write in GH repo > Actions > General (scroll to bottom)
+
+# TODO
+- Include brand guide in {hexstickers repo}
+- Update package template README.md with steps to do as you start to build your package

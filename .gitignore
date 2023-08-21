@@ -1,5 +1,5 @@
-# README.md will be generated from README.Rmd
-README.md
+# All files starting with double underscore __
+^__.*$
 
 # History files
 .Rhistory
