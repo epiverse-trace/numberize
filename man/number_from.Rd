@@ -3,23 +3,24 @@
 \name{number_from}
 \alias{number_from}
 \title{Generate number from a numeric vector.
-This is the output of the digits_from()}
+Uses \code{digits_from()} output to generate the numeric value of the text.}
 \usage{
 number_from(digits)
 }
 \arguments{
-\item{digits}{a numeric vector translated from words}
+\item{digits}{A numeric vector translated from words.}
 }
 \value{
-numeric vector
+A numeric value.
 }
 \description{
 Generate number from a numeric vector.
-This is the output of the digits_from()
+Uses \code{digits_from()} output to generate the numeric value of the text.
 }
 \examples{
 \dontrun{
-number_from(c(500, 40, 5))
+number_from(c(5, 100, 30, 8))
+# [1] 538
 }
 
 }

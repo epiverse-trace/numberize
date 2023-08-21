@@ -2,26 +2,29 @@
 % Please edit documentation in R/numberize.R
 \name{numberize}
 \alias{numberize}
-\title{Convert a text string of spelt numbers to its numeric equivalent.}
+\title{Convert a string of spelt numbers in a supported language to its numeric
+equivalent.}
 \usage{
 numberize(text, lang = "en")
 }
 \arguments{
-\item{text}{string containing spelt numbers in a supported language.}
+\item{text}{String containing spelt numbers in a supported language.}
 
-\item{lang}{the language of the spelt numbers. Currently en|fr|es.}
+\item{lang}{The language of the spelt numbers. Supports en|fr|es.}
 }
 \value{
-numeric value
+A numeric value.
 
-numeric vector
+A numeric value.
 }
 \description{
-Convert a text string of spelt numbers to its numeric equivalent.
+Convert a string of spelt numbers in a supported language to its numeric
+equivalent.
 }
 \examples{
 \dontrun{
 numberize("five hundred and thirty eight")
+# [1] 538
 }
 
 }
