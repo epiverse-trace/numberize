@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# numberizeR <img src="man/figures/logo.svg" align="right" width="120" />
+# *numberizeR* <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -25,15 +25,15 @@ French and Spanish from a character string to a numeric value.
 
 <!-- This sentence is optional and can be removed -->
 
-numberizeR is developed at the [Centre for the Mathematical Modelling of
-Infectious
+*numberizeR* is developed at the [Centre for the Mathematical Modelling
+of Infectious
 Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
 at the London School of Hygiene and Tropical Medicine as part of the
 [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
-You can install the development version of numberizeR from
+You can install the development version of *numberizeR* from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -75,7 +75,7 @@ requests](https://github.com/bahadzie/numberizeR/pulls).
 
 ### Code of Conduct
 
-Please note that the numberizeR project is released with a [Contributor
-Code of
+Please note that the *numberizeR* project is released with a
+[Contributor Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
