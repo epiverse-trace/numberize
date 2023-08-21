@@ -15,7 +15,7 @@ Authors@R: c(
            comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")),
     person("Banky", "Ahadzie", email = "bahadzie@gmail.com", role = c("aut", "cre"))
   )
-Description: Converts numbers up to a trillion spelt in words in English, French or Spanish to their equivalent numeric.
+Description: Converts numbers up to a quadrallion (not inclusive) spelt in English, French or Spanish words to their equivalent numeric.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
