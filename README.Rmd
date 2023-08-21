@@ -65,7 +65,7 @@ numberize("zéro",  lang = "fr")
 ### Lifecycle
 
 This package is currently *experimental*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means it is a draft of a functional package, but interfaces and functionalities may change over time, testing and documentation maye be lacking.
+lifecycle](https://www.reconverse.org/lifecycle.html). This means it is a draft of a functional package, but interfaces and functionalities may change over time, testing and documentation may be lacking.
 
 ### Contributions
 
