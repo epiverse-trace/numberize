@@ -9,7 +9,7 @@
 
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# {{ desc::desc\_get(“Package”) }} <img src="man/figures/logo.svg" align="right" width="120" />
+# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -67,7 +67,7 @@ numberize("zéro",  lang = "fr")
 This package is currently *experimental*, as defined by the [RECON
 software lifecycle](https://www.reconverse.org/lifecycle.html). This
 means it is a draft of a functional package, but interfaces and
-functionalities may change over time, testing and documentation maye be
+functionalities may change over time, testing and documentation may be
 lacking.
 
 ### Contributions
