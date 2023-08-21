@@ -7,12 +7,12 @@
 digits_from(text, lang = "en")
 }
 \arguments{
-\item{text}{word(s) that spell numbers}
+\item{text}{Word(s) that spell numbers.}
 
-\item{lang}{the language of the numbers currently en|fr|es}
+\item{lang}{The text's language. Currently one of \code{en|fr|es}}
 }
 \value{
-numeric vector
+A numeric vector.
 }
 \description{
 Generate digits from text with spelt numbers in a supported language.
@@ -20,6 +20,7 @@ Generate digits from text with spelt numbers in a supported language.
 \examples{
 \dontrun{
 digits_from("five hundred and thirty eight")
+# [1]   5 100  30   8
 }
 
 }
