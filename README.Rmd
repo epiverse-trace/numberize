@@ -48,6 +48,7 @@ pak::pak("{{ gh_repo }}")
 These examples illustrate the current functionality.
 
 ``` r
+# pak::pak("devtools")
 devtools::load_all()
 
 numberize("zéro",  lang = "fr")
