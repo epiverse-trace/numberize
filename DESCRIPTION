@@ -27,5 +27,5 @@ Config/testthat/edition: 3
 Config/Needs/website:
     epiverse-trace/epiversetheme
 Language: en-US
-URL: https://github.com/bahadzie/numberizeR
+URL: https://bahadzie.github.io/numberizeR/index.html, https://github.com/bahadzie/numberizeR
 BugReports: https://github.com/bahadzie/numberizeR/issues
