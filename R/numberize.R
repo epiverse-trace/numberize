@@ -141,4 +141,3 @@ number_from <- function(digits) {
 numberize <- function(text, lang = "en") {
   number_from(digits_from(text, lang))
 }
-
