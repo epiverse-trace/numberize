@@ -61,6 +61,7 @@ digits_from <- function(text, lang = "en") {
   if (lang == "es") {
     text <- gsub("\\bcien\\b", "ciento", text)
     text <- gsub("millones", "mill\u00f3n", text, fixed = TRUE)
+    text <- gsub("billones", "bill\u00f3n", text, fixed = TRUE)
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
