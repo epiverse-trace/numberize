@@ -1,0 +1,73 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "numberizeR" in publications use:'
+type: software
+license: MIT
+title: 'numberizeR: Convert words to numbers in multiple languages'
+version: 0.0.1
+abstract: Converts numbers up to a trillion spelt in words in English, French or Spanish
+  to their equivalent numeric.
+authors:
+- family-names: Laddha
+  given-names: Avinash
+  email: avinash@data.org
+- family-names: Azam
+  given-names: James M.
+  email: james.azam@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0001-5782-7330
+- family-names: Gupte
+  given-names: Pratik
+  email: pratik.gupte@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0001-5294-7819
+- family-names: Lambert
+  given-names: Joshua W.
+  email: joshua.lambert@lshtm.ac.uk
+  orcid: https://orcid.org/0000-0001-5218-3046
+- family-names: Gruson
+  given-names: Hugo
+  email: hugo.gruson+R@normalesup.org
+  orcid: https://orcid.org/0000-0002-4094-1476
+- family-names: Ahadzie
+  given-names: Banky
+  email: bahadzie@gmail.com
+repository-code: https://github.com/bahadzie/numberizeR
+url: https://bahadzie.github.io/numberizeR/index.html
+contact:
+- family-names: Ahadzie
+  given-names: Banky
+  email: bahadzie@gmail.com
+keywords:
+- r-package
+- r-programming
+references:
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2023'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2023'
+  version: '>= 3.0.0'
