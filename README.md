@@ -1,11 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
+
 <!-- The code to render this README is stored in .github/workflows/render-readme.yaml -->
+
 <!-- Variables marked with double curly braces will be transformed beforehand: -->
+
 <!-- `packagename` is extracted from the DESCRIPTION file -->
+
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="120" />
+# {{ desc::desc\_get(“Package”) }} <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
@@ -17,12 +21,16 @@ coverage](https://codecov.io/gh/%7B%7B%20gh_repo%20%7D%7D/branch/main/graph/badg
 [![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
 <!-- badges: end -->
 
-{{ packagename }} provides functions to ….
+*{{ packagename }}* is an R package to convert whole numbers written as
+words from zero to nine hundred and ninety nine trillion, nine hundred
+and ninety nine billion, nine hundred and ninety nine million, nine
+hundred and ninety nine thousand, nine hundred and ninety nine in
+English, French and Spanish from a character string to a numeric value.
 
 <!-- This sentence is optional and can be removed -->
 
-{{ packagename }} is developed at the [CENTER\|similar](url) at the
-[UNIVERSITY\|similar](url) as part of the [Epiverse-TRACE
+{{ packagename }} is developed at the [CENTER|similar](url) at the
+[UNIVERSITY|similar](url) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
 ## Installation
@@ -39,14 +47,28 @@ pak::pak("{{ gh_repo }}")
 
 These examples illustrate some of the current functionalities
 
+``` r
+devtools::load_all()
+
+formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg")
+#> "999,999,999,999,999"
+    
+numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
+#> 7545
+
+numberize("zéro",  lang = "fr")
+#> 0
+```
+
 ## Development
 
 ### Lifecycle
 
-This package is currently a *concept*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means that
-essential features and mechanisms are still being developed, and the
-package is not ready for use outside of the development team.
+This package is currently *experimental*, as defined by the [RECON
+software lifecycle](https://www.reconverse.org/lifecycle.html). This
+means it is a draft of a functional package, but interfaces and
+functionalities may change over time, testing and documentation maye be
+lacking.
 
 ### Contributions
 

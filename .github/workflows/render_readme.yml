@@ -84,5 +84,5 @@ jobs:
           then
             git add man/figures/
           fi
-          git diff-index --quiet HEAD || git commit -m "Automatic readme update"
+          git diff-index --quiet HEAD -- || git commit -m "Automatic readme update"
           git push origin || echo "No changes to push"
