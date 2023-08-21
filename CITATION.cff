@@ -9,8 +9,8 @@ type: software
 license: MIT
 title: 'numberizeR: Convert words to numbers in multiple languages'
 version: 0.0.1
-abstract: Converts numbers up to a trillion spelt in words in English, French or Spanish
-  to their equivalent numeric.
+abstract: Converts numbers up to a quadrallion (not inclusive) spelt in English, French
+  or Spanish words to their equivalent numeric.
 authors:
 - family-names: Laddha
   given-names: Avinash
