@@ -49,17 +49,21 @@ pak::pak("{{ gh_repo }}")
 These examples illustrate the current functionality.
 
 ``` r
-# pak::pak("devtools")
+# library("numberizeR")
 devtools::load_all()
+#> ℹ Loading numberizeR
 
+# numberize the French string "zéro"
 numberize("zéro",  lang = "fr")
-#> 0
-    
-numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
-#> 7545
+#> [1] 0
 
-formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg")
-#> "999,999,999,999,999"
+# numberize the Spanish string "Siete mil quinientos cuarenta y cinco"
+numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
+#> [1] 7545
+
+# numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
+formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
+#> [1] "999,999,999,999,999"
 ```
 
 ## Development
