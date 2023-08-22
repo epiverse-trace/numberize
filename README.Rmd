@@ -38,27 +38,27 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-``` r
+```{r eval=TRUE}
 # install.packages("pak")
 pak::pak("{{ gh_repo }}")
+library("numberizeR")
 ```
 
 ## Example
 
 These examples illustrate the current functionality.
 
-``` r
-# pak::pak("devtools")
-devtools::load_all()
+```{r eval=TRUE}
+# devtools::load_all()
 
+# numberize the French string "zéro"
 numberize("zéro",  lang = "fr")
-#> 0
-    
-numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
-#> 7545
 
-formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg")
-#> "999,999,999,999,999"
+# numberize the Spanish string "Siete mil quinientos cuarenta y cinco"
+numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
+
+# numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
+formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
 ```
 
 ## Development
