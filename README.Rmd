@@ -49,8 +49,6 @@ library("numberizeR")
 These examples illustrate the current functionality.
 
 ```{r eval=TRUE}
-# devtools::load_all()
-
 # numberize the French string "zéro"
 numberize("zéro",  lang = "fr")
 
@@ -67,7 +65,9 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 
 This package is currently *{{ recon }}*, as defined by the [RECON software
 lifecycle](https://www.reconverse.org/lifecycle.html).
-> {{ recon_description }}
+
+  > [!NOTE] 
+  >{{ recon_description }}
 
 ### Contributions
 
