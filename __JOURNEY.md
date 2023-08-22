@@ -19,5 +19,19 @@
 # TODO
 - Include brand guide in {hexstickers repo}
 - Update package template README.md with steps to do as you start to build your package
-- Fix README.Rmd `fig.path = "man/figures/README-",` linter message
+[x] Fix README.Rmd `fig.path = "man/figures/README-",` linter message
 - Fix issue where rendered README.md is not updated on the website
+- Fix issues raised by `goodpractice::gp()`
+
+```r
+# from dev-utils.R file
+# This unexported function adds a custom item to `usethis::use_release_issue()`
+release_bullets <- function() {
+
+  c(
+    "Run `goodpractice::gp()`",
+    "Review [WORDLIST](https://docs.cran.dev/spelling#wordlist)"
+  )
+
+}
+```
