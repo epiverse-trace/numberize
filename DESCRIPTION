@@ -2,30 +2,36 @@ Package: numberizeR
 Title: Convert words to numbers in multiple languages
 Version: 0.0.1
 Authors@R: c(
-    person(given = "Avinash", family = "Laddha", , email = "avinash@data.org", role = c("aut")),
-    person(given = "James M.", family = "Azam", , email = "james.azam@lshtm.ac.uk", role = c("aut"),
+    person("Avinash", "Laddha", , "avinash@data.org", role = "aut"),
+    person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = "aut",
            comment = c(ORCID = "https://orcid.org/0000-0001-5782-7330")),
-    person(given = "Jaime A.", family = "Pavlich-Mariscal", , email = "jpavlich@javeriana.edu.co", role = c("ctb"),
+    person("Jaime A.", "Pavlich-Mariscal", , "jpavlich@javeriana.edu.co", role = "ctb",
            comment = c(ORCID = "https://orcid.org/0000-0002-3892-6680")),
-    person(given = "Pratik", family = "Gupte", email = "pratik.gupte@lshtm.ac.uk", role = c("aut"), 
+    person("Pratik", "Gupte", , "pratik.gupte@lshtm.ac.uk", role = "aut",
            comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")),
-    person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut"),
+    person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0001-5218-3046")),
-    person(given = "Hugo", family = "Gruson", email = "hugo.gruson+R@normalesup.org", role = c("aut"),
+    person("Hugo", "Gruson", , "hugo.gruson+R@normalesup.org", role = "aut",
            comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")),
-    person("Banky", "Ahadzie", email = "bahadzie@gmail.com", role = c("aut", "cre"))
+    person("Banky", "Ahadzie", , "bahadzie@gmail.com", role = c("aut", "cre"))
   )
-Description: Converts numbers up to a quadrallion (not inclusive) spelt in English, French or Spanish words to their equivalent numeric.
+Description: Converts numbers written as English, French or Spanish words
+    to their equivalent number.  English, French or Spanish words to their
+    equivalent numeric.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+URL: https://bahadzie.github.io/numberizeR/index.html,
+    https://github.com/bahadzie/numberizeR
+BugReports: https://github.com/bahadzie/numberizeR/issues
 Suggests: 
     spelling,
     testthat (>= 3.0.0)
+Config/Institution: London School of Hygiene and Tropical Medicine
+Config/Needs/website: epiverse-trace/epiversetheme
 Config/testthat/edition: 3
-Config/Needs/website:
-    epiverse-trace/epiversetheme
+Config/Department: Centre for the Mathematical Modelling of Infectious Diseases
+Config/DepartmentURL: https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases
+Config/Recon: experimental
+Config/ReconDescription: Draft of a functional package, but interfaces and functionalities may change over time, testing and documentation maye be lacking. Typically semantic version < 0.1.0.RoxygenNote: 7.2.3
+Encoding: UTF-8
 Language: en-US
-URL: https://bahadzie.github.io/numberizeR/index.html, https://github.com/bahadzie/numberizeR
-BugReports: https://github.com/bahadzie/numberizeR/issues
+Roxygen: list(markdown = TRUE)
