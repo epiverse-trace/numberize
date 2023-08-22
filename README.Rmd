@@ -66,9 +66,6 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 This package is currently *{{ recon }}*, as defined by the [RECON software
 lifecycle](https://www.reconverse.org/lifecycle.html).
 
-  > [!NOTE] 
-  >{{ recon_description }}
-
 ### Contributions
 
 Contributions are welcome via [pull requests](https://github.com/{{ gh_repo }}/pulls).
