@@ -41,16 +41,16 @@ pak::pak("bahadzie/numberize")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8c7e45d)
+#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 96a630f)
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (31.36 kB)
+#> ✔ Got numberize 0.0.1 (source) (31.10 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (370ms)
+#> ✔ Packaged numberize 0.0.1 (356ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (975ms)
-#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@8c7e45d) (27ms)
+#> ✔ Built numberize 0.0.1 (1s)
+#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@96a630f) (36ms)
 #> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.5s]
-library("numberize")
+library("numberizeR")
 ```
 
 ## Example
@@ -78,11 +78,6 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 This package is currently *experimental*, as defined by the [RECON
 software lifecycle](https://www.reconverse.org/lifecycle.html).
 
-> [!NOTE] 
-> Draft of a functional package, but interfaces and
-> functionalities may change over time, testing and documentation may
-> be lacking.
-
 ### Contributions
 
 Contributions are welcome via [pull
@@ -90,7 +85,7 @@ requests](https://github.com/bahadzie/numberize/pulls).
 
 ### Code of Conduct
 
-Please note that the *numberize* project is released with a
-[Contributor Code of
+Please note that the *numberize* project is released with a [Contributor
+Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
