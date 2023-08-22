@@ -41,15 +41,15 @@ pak::pak("bahadzie/numberizeR")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberizeR 0.0.1 → 0.0.1 [bld][cmp] (GitHub: d8f2e63)
+#> + numberizeR 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8c7e45d)
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberizeR 0.0.1 (source) (31.02 kB)
+#> ✔ Got numberizeR 0.0.1 (source) (31.36 kB)
 #> ℹ Packaging numberizeR 0.0.1
-#> ✔ Packaged numberizeR 0.0.1 (395ms)
+#> ✔ Packaged numberizeR 0.0.1 (370ms)
 #> ℹ Building numberizeR 0.0.1
-#> ✔ Built numberizeR 0.0.1 (1.1s)
-#> ✔ Installed numberizeR 0.0.1 (github::bahadzie/numberizeR@d8f2e63) (36ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.7s]
+#> ✔ Built numberizeR 0.0.1 (975ms)
+#> ✔ Installed numberizeR 0.0.1 (github::bahadzie/numberizeR@8c7e45d) (27ms)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.5s]
 library("numberizeR")
 ```
 
@@ -58,8 +58,6 @@ library("numberizeR")
 These examples illustrate the current functionality.
 
 ``` r
-# devtools::load_all()
-
 # numberize the French string "zéro"
 numberize("zéro",  lang = "fr")
 #> [1] 0
@@ -78,10 +76,11 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 ### Lifecycle
 
 This package is currently *experimental*, as defined by the [RECON
-software lifecycle](https://www.reconverse.org/lifecycle.html). \> Draft
-of a functional package, but interfaces and functionalities may change
-over time, testing and documentation maye be lacking. Typically semantic
-version \< 0.1.0.RoxygenNote: 7.2.3
+software lifecycle](https://www.reconverse.org/lifecycle.html).
+
+> \[!NOTE\] Draft of a functional package, but interfaces and
+> functionalities may change over time, testing and documentation maye
+> be lacking. Typically semantic version \< 0.1.0.RoxygenNote: 7.2.3
 
 ### Contributions
 
