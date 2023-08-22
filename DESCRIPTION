@@ -1,4 +1,4 @@
-Package: numberizeR
+Package: numberize
 Title: Convert words to numbers in multiple languages
 Version: 0.0.1
 Authors@R: c(
@@ -31,7 +31,7 @@ Config/testthat/edition: 3
 Config/Department: Centre for the Mathematical Modelling of Infectious Diseases
 Config/DepartmentURL: https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases
 Config/Recon: experimental
-Config/ReconDescription: Draft of a functional package, but interfaces and functionalities may change over time, testing and documentation maye be lacking. Typically semantic version < 0.1.0.RoxygenNote: 7.2.3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

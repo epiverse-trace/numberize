@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(numberizeR) # nolint: missing_package_linter.
+library(numberize) # nolint: missing_package_linter.
 
-test_check("numberizeR")
+test_check("numberize")

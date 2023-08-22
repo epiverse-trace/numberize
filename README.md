@@ -5,26 +5,26 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# *numberizeR* <img src="man/figures/logo.svg" align="right" width="120" />
+# *numberize* <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
-[![R-CMD-check](https://github.com/bahadzie/numberizeR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bahadzie/numberizeR/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/bahadzie/numberize/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bahadzie/numberize/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bahadzie/numberizeR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/bahadzie/numberizeR?branch=main)
+coverage](https://codecov.io/gh/bahadzie/numberize/branch/main/graph/badge.svg)](https://app.codecov.io/gh/bahadzie/numberize?branch=main)
 [![lifecycle-experimental](https://www.reconverse.org/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
 <!-- badges: end -->
 
-*numberizeR* is an R package to convert numbers written as English,
+*numberize* is an R package to convert numbers written as English,
 French or Spanish words from `"zero"` to
 `"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"`
 from a character string to a numeric value.
 
 <!-- This sentence is optional and can be removed -->
 
-*numberizeR* is developed at the [Centre for the Mathematical Modelling
+*numberize* is developed at the [Centre for the Mathematical Modelling
 of Infectious
 Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases)
 at the London School of Hygiene and Tropical Medicine as part of the
@@ -32,25 +32,25 @@ at the London School of Hygiene and Tropical Medicine as part of the
 
 ## Installation
 
-You can install the development version of *numberizeR* from
+You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("bahadzie/numberizeR")
+pak::pak("bahadzie/numberize")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberizeR 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8c7e45d)
+#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8c7e45d)
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberizeR 0.0.1 (source) (31.36 kB)
-#> ℹ Packaging numberizeR 0.0.1
-#> ✔ Packaged numberizeR 0.0.1 (370ms)
-#> ℹ Building numberizeR 0.0.1
-#> ✔ Built numberizeR 0.0.1 (975ms)
-#> ✔ Installed numberizeR 0.0.1 (github::bahadzie/numberizeR@8c7e45d) (27ms)
+#> ✔ Got numberize 0.0.1 (source) (31.36 kB)
+#> ℹ Packaging numberize 0.0.1
+#> ✔ Packaged numberize 0.0.1 (370ms)
+#> ℹ Building numberize 0.0.1
+#> ✔ Built numberize 0.0.1 (975ms)
+#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@8c7e45d) (27ms)
 #> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.5s]
-library("numberizeR")
+library("numberize")
 ```
 
 ## Example
@@ -78,18 +78,19 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 This package is currently *experimental*, as defined by the [RECON
 software lifecycle](https://www.reconverse.org/lifecycle.html).
 
-> \[!NOTE\] Draft of a functional package, but interfaces and
-> functionalities may change over time, testing and documentation maye
-> be lacking. Typically semantic version \< 0.1.0.RoxygenNote: 7.2.3
+> [!NOTE] 
+> Draft of a functional package, but interfaces and
+> functionalities may change over time, testing and documentation may
+> be lacking.
 
 ### Contributions
 
 Contributions are welcome via [pull
-requests](https://github.com/bahadzie/numberizeR/pulls).
+requests](https://github.com/bahadzie/numberize/pulls).
 
 ### Code of Conduct
 
-Please note that the *numberizeR* project is released with a
+Please note that the *numberize* project is released with a
 [Contributor Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
