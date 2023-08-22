@@ -20,3 +20,4 @@
 - Include brand guide in {hexstickers repo}
 - Update package template README.md with steps to do as you start to build your package
 - Fix README.Rmd `fig.path = "man/figures/README-",` linter message
+- Fix issue where rendered README.md is not updated on the website
