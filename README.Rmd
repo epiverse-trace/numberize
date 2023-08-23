@@ -38,10 +38,10 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-```{r eval=TRUE}
+```{r eval=TRUE results='hide'}
 # install.packages("pak")
 pak::pak("{{ gh_repo }}")
-library("numberizeR")
+library("numberize")
 ```
 
 ## Example
