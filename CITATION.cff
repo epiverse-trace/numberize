@@ -4,10 +4,10 @@
 # -----------------------------------------------------------
  
 cff-version: 1.2.0
-message: 'To cite package "numberizeR" in publications use:'
+message: 'To cite package "numberize" in publications use:'
 type: software
 license: MIT
-title: 'numberizeR: Convert words to numbers in multiple languages'
+title: 'numberize: Convert words to numbers in multiple languages'
 version: 0.0.1
 abstract: Converts numbers written as English, French or Spanish words to their equivalent
   number. English, French or Spanish words to their equivalent numeric.
