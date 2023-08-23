@@ -41,16 +41,16 @@ pak::pak("bahadzie/numberize")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 96a630f)
+#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 220ba40)
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (31.10 kB)
+#> ✔ Got numberize 0.0.1 (source) (30.84 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (356ms)
+#> ✔ Packaged numberize 0.0.1 (336ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (1s)
-#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@96a630f) (36ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.5s]
-library("numberizeR")
+#> ✔ Built numberize 0.0.1 (902ms)
+#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@220ba40) (27ms)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [3.8s]
+library("numberize")
 ```
 
 ## Example
