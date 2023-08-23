@@ -41,15 +41,15 @@ pak::pak("bahadzie/numberize")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 220ba40)
+#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: b69827a)
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (30.84 kB)
+#> ✔ Got numberize 0.0.1 (source) (30.72 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (336ms)
+#> ✔ Packaged numberize 0.0.1 (416ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (902ms)
-#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@220ba40) (27ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [3.8s]
+#> ✔ Built numberize 0.0.1 (1.1s)
+#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@b69827a) (33ms)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [5.2s]
 library("numberize")
 ```
 
@@ -58,17 +58,23 @@ library("numberize")
 These examples illustrate the current functionality.
 
 ``` r
-# numberize the French string "zéro"
+# numberize a French string
 numberize("zéro",  lang = "fr")
 #> [1] 0
 
-# numberize the Spanish string "Siete mil quinientos cuarenta y cinco"
+# numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
 #> [1] 7545
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
 #> [1] "999,999,999,999,999"
+
+# some edge cases
+numberize("veintiún", lang = "es")
+#> [1] 21
+numberize("veintiuno", lang = "es")
+#> [1] 21
 ```
 
 ## Development
