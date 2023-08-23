@@ -2,20 +2,20 @@
 % Please edit documentation in R/numberize.R
 \name{digits_from}
 \alias{digits_from}
-\title{Generate digits from text with spelt numbers in a supported language.}
+\title{Generate a numeric vector from text in a supported language.}
 \usage{
 digits_from(text, lang = "en")
 }
 \arguments{
-\item{text}{Word(s) that spell numbers.}
+\item{text}{Word(s) that spell numbers. e.g. "one", "deux", "trois"}
 
-\item{lang}{The text's language. Currently one of \code{en|fr|es}}
+\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}}
 }
 \value{
 A numeric vector.
 }
 \description{
-Generate digits from text with spelt numbers in a supported language.
+Generate a numeric vector from text in a supported language.
 }
 \examples{
 \dontrun{
