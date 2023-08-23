@@ -1,8 +1,8 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Generate digits from text with spelt numbers in a supported language.
+#' Generate a numeric vector from text in a supported language.
 #'
-#' @param text Word(s) that spell numbers.
-#' @param lang The text's language. Currently one of `en|fr|es`
+#' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
+#' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
 #'
 #'
 #' @examples
@@ -23,9 +23,9 @@ digits_from <- function(text, lang = "en") {
       seq(100, 900, by = 100), 1000, 1E6, 1E9, 1E12
     ),
     en = c(
-      "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-      "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-      "seventeen", "eighteen", "nineteen",
+      "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+      "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+      "sixteen", "seventeen", "eighteen", "nineteen",
       "twenty", "", "", "", "", "", "", "", "", "",
       "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
       "hundred", "", "", "", "", "", "", "", "",
@@ -62,6 +62,8 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("\\bcien\\b", "ciento", text)
     text <- gsub("millones", "mill\u00f3n", text, fixed = TRUE)
     text <- gsub("billones", "bill\u00f3n", text, fixed = TRUE)
+    text <- gsub("veinti\u00fan", "veintiuno", text, fixed = TRUE) # edge case
+    text <- gsub("\\sun\\s", " uno ", text)
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
@@ -78,7 +80,7 @@ digits_from <- function(text, lang = "en") {
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Generate number from a numeric vector.
+#' Generate a number from a numeric vector.
 #' Uses `digits_from()` output to generate the numeric value of the text.
 #'
 #' @param digits A numeric vector translated from words.
@@ -125,7 +127,7 @@ number_from <- function(digits) {
 #' equivalent.
 #'
 #' @param text String containing spelt numbers in a supported language.
-#' @param lang The language of the spelt numbers. Supports en|fr|es.
+#' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
 #'
 #' @return A numeric value.
 #'
