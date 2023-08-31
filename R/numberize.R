@@ -67,7 +67,7 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
-    text <- gsub("(\\w+ill\\w+)s\\b", "\\1", text) # lang=fr plural->singular # nolint: nonportable_path_linter, line_length_linter.
+    text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text) # lang=fr plural->singular # nolint: nonportable_path_linter, line_length_linter.
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE) # lang=fr one word # nolint: line_length_linter.
   }
 
