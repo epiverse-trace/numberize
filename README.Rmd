@@ -24,7 +24,9 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
-[![lifecycle-{{ recon }}](https://www.reconverse.org/images/badge-{{ recon }}.svg)](https://www.reconverse.org/lifecycle.html#{{ recon }}) 
+[![lifecycle-{{ recon }}](https://www.reconverse.org/images/badge-{{ recon }}.svg)](https://www.reconverse.org/lifecycle.html#{{ recon }})
+[![CRAN status](https://www.r-pkg.org/badges/version/{{ packagename }})](https://CRAN.R-project.org/package={{ packagename }})
+
 <!-- badges: end -->
 
 _{{ packagename }}_ is an R package to convert numbers written as English, French or Spanish words from `"zero"` to `"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"` from a character string to a numeric value.
@@ -63,7 +65,13 @@ numberize("veintiún", lang = "es")
 numberize("veintiuno", lang = "es")
 ```
 
-## Development
+## Related packages and Limitations
+- [`{numberwang}`](https://github.com/coolbutuseless/numberwang) converts numbers to words and vice versa. Limitation: English only, not on CRAN.
+- [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{english}`](https://cran.r-project.org/web/packages/english/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html) converts numbers to words and vice versa. Limitation: Spanish only.
+
+_{{ packagename }}_ is released as a standalone package in the hope that it will be useful to the R community at large. _{{ packagename }}_ was created in response to data cleaning requirements in [{cleanepi}](https://github.com/epiverse-trace/cleanepi).
 
 ### Lifecycle
 
