@@ -11,9 +11,9 @@
 
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
-[![R-CMD-check](https://github.com/bahadzie/numberize/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bahadzie/numberize/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/epiverse-trace/numberize/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/numberize/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/bahadzie/numberize/branch/main/graph/badge.svg)](https://app.codecov.io/gh/bahadzie/numberize?branch=main)
+coverage](https://codecov.io/gh/epiverse-trace/numberize/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/numberize?branch=main)
 [![lifecycle-experimental](https://www.reconverse.org/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.org/package=numberize)
@@ -40,20 +40,20 @@ You can install the development version of *numberize* from
 
 ``` r
 # install.packages("pak")
-pak::pak("bahadzie/numberize")
+pak::pak("epiverse-trace/numberize")
 #> 
 #> → Will update 1 package.
 #> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8a426e4)
+#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8f0650a)
 #> 
 #> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (31.08 kB)
+#> ✔ Got numberize 0.0.1 (source) (31.88 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (351ms)
+#> ✔ Packaged numberize 0.0.1 (342ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (974ms)
-#> ✔ Installed numberize 0.0.1 (github::bahadzie/numberize@8a426e4) (27ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.4s]
+#> ✔ Built numberize 0.0.1 (930ms)
+#> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@8f0650a) (25ms)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.2s]
 library("numberize")
 ```
 
@@ -108,7 +108,7 @@ software lifecycle](https://www.reconverse.org/lifecycle.html).
 ### Contributions
 
 Contributions are welcome via [pull
-requests](https://github.com/bahadzie/numberize/pulls).
+requests](https://github.com/epiverse-trace/numberize/pulls).
 
 ### Code of Conduct
 
