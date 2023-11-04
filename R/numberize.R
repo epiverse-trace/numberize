@@ -91,11 +91,8 @@ digits_from <- function(text, lang = "en") {
 #' @return A numeric value.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
-  # match can return NA so make a vector ending 0 and get the first non NA
-  thousand_index <- c(match(1000, digits), 0)
-  million_index <- c(match(1E6, digits), 0)
-  thousand_index <- thousand_index[!is.na(thousand_index)][1]
-  million_index <- million_index[!is.na(million_index)][1]
+  thousand_index <- match(1000, digits, nomatch = 0)
+  million_index <- match(1E6, digits, nomatch = 0)
 
   # for lang = "es" multiply 1000 * 1E6 for billion
   if (thousand_index < million_index) { # es thousand million = billion
