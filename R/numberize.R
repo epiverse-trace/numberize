@@ -141,6 +141,7 @@ number_from <- function(digits) {
 #'
 #' @export
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-numberize <- function(text, lang = "en") {
+numberize <- function(text, lang = c("en", "fr", "es")) {
+  lang <- match.arg(lang)
   number_from(digits_from(text, lang))
 }
