@@ -125,10 +125,7 @@ number_from <- function(digits) {
 #' @return A numeric value.
 #'
 #' @examples
-#' \dontrun{
 #' numberize("five hundred and thirty eight")
-#' # [1] 538
-#' }
 #'
 #' @return A numeric value.
 #'
