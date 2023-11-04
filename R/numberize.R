@@ -64,7 +64,6 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("billones", "bill\u00f3n", text, fixed = TRUE)
     text <- gsub("veinti\u00fan", "veintiuno", text, fixed = TRUE) # edge case
     text <- gsub("\\sun\\s", " uno ", text)
-    text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
     text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text) # lang=fr plural->singular # nolint: nonportable_path_linter, line_length_linter.
