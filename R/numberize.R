@@ -72,9 +72,7 @@ digits_from <- function(text, lang = "en") {
   }
 
   words <- strsplit(text, "\\s+")[[1]]
-  mapping <- numbers[numbers[[lang]] %in% words, c("digit", lang)]
-  row.names(mapping) <- mapping[[lang]] # to easily subset next line
-  digits <- mapping[words, ]$digit
+  digits <- numbers[match(words, numbers[[lang]]), "digit"]
   digits
 }
 
