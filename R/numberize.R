@@ -101,15 +101,15 @@ number_from <- function(digits) {
 
   summed <- 0
   total <- 0
-  for (i in seq_along(digits)) {
-    if (digits[i] %in% c(1E3, 1E6, 1E9, 1E12)) {
-      total <- total + summed * digits[i]
+  for (d in digits) {
+    if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
+      total <- total + summed * d
       summed <- 0
-    } else if (digits[i] == 100) {
+    } else if (d == 100) {
       if (summed == 0) summed <- 1 # needed for standalone cent/100 (fr)
-      summed <- summed * digits[i]
+      summed <- summed * d
     } else {
-      summed <- summed + digits[i]
+      summed <- summed + d
     }
   }
   summed + total
