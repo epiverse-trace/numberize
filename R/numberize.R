@@ -71,8 +71,7 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE) # lang=fr one word # nolint: line_length_linter.
   }
 
-  text <- gsub("\\s{2,}", " ", text) # collapse spaces
-  words <- strsplit(text, " ", fixed = TRUE)[[1]]
+  words <- strsplit(text, "\\s+")[[1]]
   mapping <- numbers[numbers[[lang]] %in% words, c("digit", lang)]
   row.names(mapping) <- mapping[[lang]] # to easily subset next line
   digits <- mapping[words, ]$digit
