@@ -9,7 +9,7 @@ digits_from(text, lang = "en")
 \arguments{
 \item{text}{Word(s) that spell numbers. e.g. "one", "deux", "trois"}
 
-\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}}
+\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.}
 }
 \value{
 A numeric vector.
