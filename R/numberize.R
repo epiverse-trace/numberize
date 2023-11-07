@@ -64,18 +64,14 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("billones", "bill\u00f3n", text, fixed = TRUE)
     text <- gsub("veinti\u00fan", "veintiuno", text, fixed = TRUE) # edge case
     text <- gsub("\\sun\\s", " uno ", text)
-    text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
     text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text) # lang=fr plural->singular # nolint: nonportable_path_linter, line_length_linter.
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE) # lang=fr one word # nolint: line_length_linter.
   }
 
-  text <- gsub("\\s{2,}", " ", text) # collapse spaces
-  words <- strsplit(text, " ", fixed = TRUE)[[1]]
-  mapping <- numbers[numbers[[lang]] %in% words, c("digit", lang)]
-  row.names(mapping) <- mapping[[lang]] # to easily subset next line
-  digits <- mapping[words, ]$digit
+  words <- strsplit(text, "\\s+")[[1]]
+  digits <- numbers[match(words, numbers[[lang]]), "digit"]
   digits
 }
 
@@ -95,11 +91,8 @@ digits_from <- function(text, lang = "en") {
 #' @return A numeric value.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
-  # match can return NA so make a vector ending 0 and get the first non NA
-  thousand_index <- c(match(1000, digits), 0)
-  million_index <- c(match(1E6, digits), 0)
-  thousand_index <- thousand_index[!is.na(thousand_index)][1]
-  million_index <- million_index[!is.na(million_index)][1]
+  thousand_index <- match(1000, digits, nomatch = 0)
+  million_index <- match(1E6, digits, nomatch = 0)
 
   # for lang = "es" multiply 1000 * 1E6 for billion
   if (thousand_index < million_index) { # es thousand million = billion
@@ -108,15 +101,15 @@ number_from <- function(digits) {
 
   summed <- 0
   total <- 0
-  for (i in seq_along(digits)) {
-    if (digits[i] %in% c(1E3, 1E6, 1E9, 1E12)) {
-      total <- total + summed * digits[i]
+  for (d in digits) {
+    if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
+      total <- total + summed * d
       summed <- 0
-    } else if (digits[i] == 100) {
+    } else if (d == 100) {
       if (summed == 0) summed <- 1 # needed for standalone cent/100 (fr)
-      summed <- summed * digits[i]
+      summed <- summed * d
     } else {
-      summed <- summed + digits[i]
+      summed <- summed + d
     }
   }
   summed + total
@@ -132,15 +125,13 @@ number_from <- function(digits) {
 #' @return A numeric value.
 #'
 #' @examples
-#' \dontrun{
 #' numberize("five hundred and thirty eight")
-#' # [1] 538
-#' }
 #'
 #' @return A numeric value.
 #'
 #' @export
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-numberize <- function(text, lang = "en") {
+numberize <- function(text, lang = c("en", "fr", "es")) {
+  lang <- match.arg(lang)
   number_from(digits_from(text, lang))
 }

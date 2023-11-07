@@ -19,9 +19,8 @@ Description: Converts numbers written as English, French or Spanish words
     to their equivalent number.  English, French or Spanish words to their
     equivalent numeric.
 License: MIT + file LICENSE
-URL: https://bahadzie.github.io/numberizeR/index.html,
-    https://github.com/bahadzie/numberizeR
-BugReports: https://github.com/bahadzie/numberizeR/issues
+URL: https://github.com/epiverse-trace/numberize
+BugReports: https://github.com/epiverse-trace/numberize/issues
 Suggests: 
     spelling,
     testthat (>= 3.0.0)
@@ -35,3 +34,4 @@ Config/Needs/website: epiverse-trace/epiversetheme
 Config/Department: Centre for the Mathematical Modelling of Infectious Diseases
 Config/DepartmentURL: https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases
 Config/Recon: experimental
+

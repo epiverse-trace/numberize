@@ -5,12 +5,12 @@
 \title{Convert a string of spelt numbers in a supported language to its numeric
 equivalent.}
 \usage{
-numberize(text, lang = "en")
+numberize(text, lang = c("en", "fr", "es"))
 }
 \arguments{
 \item{text}{String containing spelt numbers in a supported language.}
 
-\item{lang}{The language of the spelt numbers. Supports en|fr|es.}
+\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.}
 }
 \value{
 A numeric value.
@@ -22,9 +22,6 @@ Convert a string of spelt numbers in a supported language to its numeric
 equivalent.
 }
 \examples{
-\dontrun{
 numberize("five hundred and thirty eight")
-# [1] 538
-}
 
 }
