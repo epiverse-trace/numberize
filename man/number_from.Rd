@@ -2,7 +2,7 @@
 % Please edit documentation in R/numberize.R
 \name{number_from}
 \alias{number_from}
-\title{Generate number from a numeric vector.
+\title{Generate a number from a numeric vector.
 Uses \code{digits_from()} output to generate the numeric value of the text.}
 \usage{
 number_from(digits)
@@ -14,7 +14,7 @@ number_from(digits)
 A numeric value.
 }
 \description{
-Generate number from a numeric vector.
+Generate a number from a numeric vector.
 Uses \code{digits_from()} output to generate the numeric value of the text.
 }
 \examples{
