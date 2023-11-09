@@ -40,8 +40,8 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-```{r eval=TRUE}
-# install.packages("pak")
+```{r echo=TRUE, results="hide", message=FALSE}
+if (!require("pak")) install.packages("pak")
 pak::pak("{{ gh_repo }}")
 library("numberize")
 ```
@@ -75,7 +75,7 @@ _{{ packagename }}_ is released as a standalone package in the hope that it will
 
 ### Lifecycle
 
-This package is currently *{{ recon }}*, as defined by the [RECON software
+This package is currently {{ recon }}, as defined by the [RECON software
 lifecycle](https://www.reconverse.org/lifecycle.html).
 
 ### Contributions
