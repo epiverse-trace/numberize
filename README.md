@@ -44,8 +44,7 @@ You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
 ``` r
-if (!require("pak")) install.packages("pak")
-pak::pak("epiverse-trace/numberize")
+if (system.file(package = "numberizer") == "") pak::pak("epiverse-trace/numberize")
 library("numberize")
 ```
 
