@@ -41,8 +41,7 @@ You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
 ```{r echo=TRUE, results="hide", message=FALSE}
-if (!require("pak")) install.packages("pak")
-pak::pak("{{ gh_repo }}")
+if (system.file(package = "numberizer") == "") pak::pak("{{ gh_repo }}")
 library("numberize")
 ```
 
