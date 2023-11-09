@@ -1,8 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
+
 <!-- The code to render this README is stored in .github/workflows/render-readme.yaml -->
+
 <!-- Variables marked with double curly braces will be transformed beforehand: -->
+
 <!-- `packagename` is extracted from the DESCRIPTION file -->
+
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
 # *numberize* <img src="man/figures/logo.svg" align="right" width="120" />
@@ -21,9 +25,10 @@ status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.
 <!-- badges: end -->
 
 *numberize* is an R package to convert numbers written as English,
-French or Spanish words from `"zero"` to
-`"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"`
-from a character string to a numeric value.
+French or Spanish words from `"zero"` to `"nine hundred and ninety nine
+trillion, nine hundred and ninety nine billion, nine hundred and ninety
+nine million, nine hundred and ninety nine thousand, nine hundred and
+ninety nine"` from a character string to a numeric value.
 
 <!-- This sentence is optional and can be removed -->
 
@@ -39,21 +44,8 @@ You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
+if (!require("pak")) install.packages("pak")
 pak::pak("epiverse-trace/numberize")
-#> 
-#> → Will update 1 package.
-#> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8f0650a)
-#> 
-#> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (31.88 kB)
-#> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (342ms)
-#> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (930ms)
-#> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@8f0650a) (25ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.2s]
 library("numberize")
 ```
 
@@ -83,17 +75,17 @@ numberize("veintiuno", lang = "es")
 
 ## Related packages and Limitations
 
-- [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
-  converts numbers to words and vice versa. Limitation: English only,
-  not on CRAN.
-- [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html)
-  converts numerics into words. Limitation: English only, no word to
-  number conversion.
-- [`{english}`](https://cran.r-project.org/web/packages/english/index.html)
-  converts numerics into words. Limitation: English only, no word to
-  number conversion.
-- [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html)
-  converts numbers to words and vice versa. Limitation: Spanish only.
+  - [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
+    converts numbers to words and vice versa. Limitation: English only,
+    not on CRAN.
+  - [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html)
+    converts numerics into words. Limitation: English only, no word to
+    number conversion.
+  - [`{english}`](https://cran.r-project.org/web/packages/english/index.html)
+    converts numerics into words. Limitation: English only, no word to
+    number conversion.
+  - [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html)
+    converts numbers to words and vice versa. Limitation: Spanish only.
 
 *numberize* is released as a standalone package in the hope that it will
 be useful to the R community at large. *numberize* was created in
@@ -102,7 +94,7 @@ response to data cleaning requirements in
 
 ### Lifecycle
 
-This package is currently *experimental*, as defined by the [RECON
+This package is currently experimental, as defined by the [RECON
 software lifecycle](https://www.reconverse.org/lifecycle.html).
 
 ### Contributions
