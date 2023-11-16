@@ -40,18 +40,20 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-```{r echo=TRUE, results="hide", message=FALSE}
-if (system.file(package = "numberizer") == "") pak::pak("{{ gh_repo }}")
-library("numberize")
+```{r eval = FALSE}
+pak::pak("{{ gh_repo }}")
 ```
 
+```{r}
+library("numberize")
+```
 ## Example
 
 These examples illustrate the current functionality.
 
 ```{r eval=TRUE}
 # numberize a French string
-numberize("zéro",  lang = "fr")
+numberize("zéro", lang = "fr")
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
