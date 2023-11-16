@@ -103,12 +103,10 @@ number_from <- function(digits) {
   total <- 0
   for (d in digits) {
     if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
-      if (summed == 0) summed <- 1 # fix for standalone mil/mille/1000 (es/fr)
-      total <- total + summed * d
+      total <- ifelse(summed == 0, total + d, total + summed * d)
       summed <- 0
     } else if (d == 100) {
-      if (summed == 0) summed <- 1 # fix for standalone cent/100 (fr)
-      summed <- summed * d
+      summed <- ifelse(summed == 0, d, summed * d)
     } else {
       summed <- summed + d
     }
