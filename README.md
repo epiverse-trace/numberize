@@ -39,21 +39,10 @@ You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
 pak::pak("epiverse-trace/numberize")
-#> 
-#> → Will update 1 package.
-#> → The package (0 B) is cached.
-#> + numberize 0.0.1 → 0.0.1 [bld][cmp] (GitHub: 8f0650a)
-#> 
-#> ℹ No downloads are needed, 1 pkg is cached
-#> ✔ Got numberize 0.0.1 (source) (31.88 kB)
-#> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (342ms)
-#> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (930ms)
-#> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@8f0650a) (25ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4.2s]
+```
+
+``` r
 library("numberize")
 ```
 
@@ -63,7 +52,7 @@ These examples illustrate the current functionality.
 
 ``` r
 # numberize a French string
-numberize("zéro",  lang = "fr")
+numberize("zéro", lang = "fr")
 #> [1] 0
 
 # numberize a Spanish string
@@ -102,7 +91,7 @@ response to data cleaning requirements in
 
 ### Lifecycle
 
-This package is currently *experimental*, as defined by the [RECON
+This package is currently experimental, as defined by the [RECON
 software lifecycle](https://www.reconverse.org/lifecycle.html).
 
 ### Contributions

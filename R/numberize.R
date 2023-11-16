@@ -34,9 +34,9 @@ digits_from <- function(text, lang = "en") {
     es = c(
       "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho",
       "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
-      "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte", # nolint: nonportable_path_linter, line_length_linter.
-      "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro", # nolint: nonportable_path_linter, line_length_linter.
-      "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", # nolint: nonportable_path_linter, line_length_linter.
+      "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte",
+      "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro",
+      "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho",
       "veintinueve", "treinta", "cuarenta", "cincuenta", "sesenta",
       "setenta", "ochenta", "noventa",
       "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
@@ -103,11 +103,10 @@ number_from <- function(digits) {
   total <- 0
   for (d in digits) {
     if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
-      total <- total + summed * d
+      total <- ifelse(summed == 0, total + d, total + summed * d)
       summed <- 0
     } else if (d == 100) {
-      if (summed == 0) summed <- 1 # needed for standalone cent/100 (fr)
-      summed <- summed * d
+      summed <- ifelse(summed == 0, d, summed * d)
     } else {
       summed <- summed + d
     }

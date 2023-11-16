@@ -40,19 +40,20 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-```{r eval=TRUE}
-# install.packages("pak")
+```{r eval = FALSE}
 pak::pak("{{ gh_repo }}")
-library("numberize")
 ```
 
+```{r}
+library("numberize")
+```
 ## Example
 
 These examples illustrate the current functionality.
 
 ```{r eval=TRUE}
 # numberize a French string
-numberize("zéro",  lang = "fr")
+numberize("zéro", lang = "fr")
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
@@ -75,7 +76,7 @@ _{{ packagename }}_ is released as a standalone package in the hope that it will
 
 ### Lifecycle
 
-This package is currently *{{ recon }}*, as defined by the [RECON software
+This package is currently {{ recon }}, as defined by the [RECON software
 lifecycle](https://www.reconverse.org/lifecycle.html).
 
 ### Contributions

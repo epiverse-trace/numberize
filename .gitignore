@@ -1,5 +1,5 @@
 # All files starting with double underscore __
-^__.*$
+__*
 
 README.html
 
