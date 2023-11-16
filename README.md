@@ -39,7 +39,10 @@ You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
 ``` r
-if (system.file(package = "numberizer") == "") pak::pak("epiverse-trace/numberize")
+pak::pak("epiverse-trace/numberize")
+```
+
+``` r
 library("numberize")
 ```
 
@@ -49,7 +52,7 @@ These examples illustrate the current functionality.
 
 ``` r
 # numberize a French string
-numberize("zéro",  lang = "fr")
+numberize("zéro", lang = "fr")
 #> [1] 0
 
 # numberize a Spanish string
