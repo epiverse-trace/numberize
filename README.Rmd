@@ -44,7 +44,7 @@ You can install the development version of _{{ packagename }}_ from
 pak::pak("{{ gh_repo }}")
 ```
 
-```{r}
+```{r eval = FALSE}
 library("numberize")
 ```
 ## Example
