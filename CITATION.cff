@@ -34,8 +34,8 @@ authors:
 - family-names: Ahadzie
   given-names: Banky
   email: bahadzie@gmail.com
-repository-code: https://github.com/bahadzie/numberizeR
-url: https://bahadzie.github.io/numberizeR/index.html
+repository-code: https://github.com/epiverse-trace/numberize
+url: https://github.com/epiverse-trace/numberize
 contact:
 - family-names: Ahadzie
   given-names: Banky
@@ -58,7 +58,7 @@ references:
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
-  year: '2023'
+  year: '2024'
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -69,5 +69,5 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2023'
+  year: '2024'
   version: '>= 3.0.0'
