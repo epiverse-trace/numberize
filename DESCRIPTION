@@ -4,15 +4,15 @@ Version: 0.0.1
 Authors@R: c(
     person("Avinash", "Laddha", , "avinash@data.org", role = "aut"),
     person("James M.", "Azam", , "james.azam@lshtm.ac.uk", role = "aut",
-           comment = c(ORCID = "https://orcid.org/0000-0001-5782-7330")),
+           comment = c(ORCID = "0000-0001-5782-7330")),
     person("Jaime A.", "Pavlich-Mariscal", , "jpavlich@javeriana.edu.co", role = "ctb",
-           comment = c(ORCID = "https://orcid.org/0000-0002-3892-6680")),
+           comment = c(ORCID = "0000-0002-3892-6680")),
     person("Pratik", "Gupte", , "pratik.gupte@lshtm.ac.uk", role = "aut",
-           comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")),
+           comment = c(ORCID = "0000-0001-5294-7819")),
     person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0001-5218-3046")),
     person("Hugo", "Gruson", , "hugo.gruson+R@normalesup.org", role = "aut",
-           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476")),
+           comment = c(ORCID = "0000-0002-4094-1476")),
     person("Banky", "Ahadzie", , "bahadzie@gmail.com", role = c("aut", "cre"))
   )
 Description: Converts numbers written as English, French or Spanish words
