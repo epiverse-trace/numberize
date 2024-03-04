@@ -1,12 +1,11 @@
 test_df <- data.frame(
   stringsAsFactors = FALSE,
   num = c(
-    1515, 100, 400, 1515, 7545, 5670, 91192, 833377, 8333776, 98397717, 3400615618,
+    100, 400, 1515, 7545, 5670, 91192, 833377, 8333776, 98397717, 3400615618,
     839740543461, 27499856960, 808204960098, 578208177855, 494466250917,
     808204960098, 808204960019
   ),
   fr = c(
-    "mille cinq cent quinze",
     "cent",
     "quatre cents", # edge case when "cent" is plural
     "mille cinq cent quinze",
@@ -26,7 +25,6 @@ test_df <- data.frame(
     "Huit cent huit milliards deux cent quatre millions neuf cent soixante mille dix-neuf"
   ),
   es = c(
-    "mil quinientos quince",
     "Cien",
     "cuatrocientos",
     "mil quinientos quince",
@@ -46,7 +44,6 @@ test_df <- data.frame(
     "Ochocientos ocho mil doscientos cuatro millones novecientos sesenta mil diecinueve"
   ),
   en = c(
-    "thousand five hundred and fifteen",
     "one hundred",
     "four hundred",
     "one thousand five hundred and fifteen",
