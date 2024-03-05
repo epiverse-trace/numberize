@@ -65,18 +65,28 @@ test_df <- data.frame(
 )
 
 test_that("translating English numbers works", {
-  res <- sapply(test_df[["en"]], numberize)
+  res <- numberize(test_df[["en"]])
+  # res <- sapply(test_df[["en"]], numberize)
   expect_identical(unname(res), test_df[["num"]])
 })
 
 test_that("translating French numbers works", {
-  res <- sapply(test_df[["fr"]], numberize, lang = "fr")
+  res <- numberize(test_df[["fr"]], lang = "fr")
   expect_identical(unname(res), test_df[["num"]])
 })
 
 test_that("translating Spanish numbers works", {
-  res <- sapply(test_df[["es"]], numberize, lang = "es")
+  res <- numberize(test_df[["es"]], lang = "es")
   expect_identical(unname(res), test_df[["num"]])
 })
 
+test_that("translating single french text works", {
+  res <- numberize("mille cinq cent quinze", lang = "fr")
+  expect_identical(unname(res), 1515)
+})
+
+test_that("non digit word returns NA", {
+  res <- numberize("epiverse", lang = "en")
+  expect_true(is.na(res))
+})
 # TODO test edge cases in es and fr
