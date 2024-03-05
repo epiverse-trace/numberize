@@ -58,6 +58,8 @@ digits_from <- function(text, lang = "en") {
   # clean and prep
   text <- tolower(text)
   text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # all lang
+
+  # TODO check the words are in the selected lang or return NA
   if (lang == "es") {
     text <- gsub("\\bcien\\b", "ciento", text)
     text <- gsub("millones", "mill\u00f3n", text, fixed = TRUE)
@@ -66,8 +68,10 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
-    text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text) # lang=fr plural->singular # nolint: nonportable_path_linter, line_length_linter.
-    text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE) # lang=fr one word # nolint: line_length_linter.
+    # lang=fr plural-> singular
+    text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text)
+    # lang=fr one word
+    text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE)
   }
 
   words <- strsplit(text, "\\s+")[[1]]
@@ -115,10 +119,32 @@ number_from <- function(digits) {
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Convert a string of spelt numbers in a supported language to its numeric
-#' equivalent.
+#' Internal function used in the vectorized numberize call.
 #'
-#' @param text String containing spelt numbers in a supported language.
+#' @param text Character string in a supported language.
+#' @param lang Language of the character string.
+#' Currently one of `"en" | "fr" | "es"`.
+#'
+#' @return A numeric value.
+#'
+#' @examples
+#' numberize("five hundred and thirty eight")
+#'
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.numberize <- function(text, lang = c("en", "fr", "es")) {
+  lang <- match.arg(lang)
+  digits <- digits_from(text, lang)
+  if (anyNA(digits)) {
+    return(NA)
+  }
+  number_from(digits)
+}
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#' Convert a vector string of spelt numbers in a supported language to
+#' its numeric equivalent
+#'
+#' @param text Vector containing spelt numbers in a supported language.
 #' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
 #'
 #' @return A numeric value.
@@ -131,6 +157,5 @@ number_from <- function(digits) {
 #' @export
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 numberize <- function(text, lang = c("en", "fr", "es")) {
-  lang <- match.arg(lang)
-  number_from(digits_from(text, lang))
+  vapply(text, .numberize, FUN.VALUE = double(1), lang = lang)
 }
