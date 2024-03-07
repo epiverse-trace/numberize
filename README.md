@@ -1,8 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
+
 <!-- The code to render this README is stored in .github/workflows/render-readme.yaml -->
+
 <!-- Variables marked with double curly braces will be transformed beforehand: -->
+
 <!-- `packagename` is extracted from the DESCRIPTION file -->
+
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
 # *numberize* <img src="man/figures/logo.svg" align="right" width="120" />
@@ -20,10 +24,11 @@ status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.
 
 <!-- badges: end -->
 
-*numberize* is an R package to convert numbers written as English,
-French or Spanish words from `"zero"` to
-`"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"`
-from a character string to a numeric value.
+*numberize* is an R package to convert integers written as English,
+French or Spanish words from `"zero"` to `"nine hundred and ninety nine
+trillion, nine hundred and ninety nine billion, nine hundred and ninety
+nine million, nine hundred and ninety nine thousand, nine hundred and
+ninety nine"` from a character string to a numeric value.
 
 <!-- This sentence is optional and can be removed -->
 
@@ -53,36 +58,41 @@ These examples illustrate the current functionality.
 ``` r
 # numberize a French string
 numberize("zéro", lang = "fr")
-#> [1] 0
+#> zéro 
+#>    0
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
-#> [1] 7545
+#> Siete mil quinientos cuarenta y cinco 
+#>                                  7545
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
-#> [1] "999,999,999,999,999"
+#> nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine 
+#>                                                                                                                                                                  "999,999,999,999,999"
 
 # some edge cases
 numberize("veintiún", lang = "es")
-#> [1] 21
+#> veintiún 
+#>       21
 numberize("veintiuno", lang = "es")
-#> [1] 21
+#> veintiuno 
+#>        21
 ```
 
 ## Related packages and Limitations
 
-- [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
-  converts numbers to words and vice versa. Limitation: English only,
-  not on CRAN.
-- [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html)
-  converts numerics into words. Limitation: English only, no word to
-  number conversion.
-- [`{english}`](https://cran.r-project.org/web/packages/english/index.html)
-  converts numerics into words. Limitation: English only, no word to
-  number conversion.
-- [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html)
-  converts numbers to words and vice versa. Limitation: Spanish only.
+  - [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
+    converts numbers to words and vice versa. Limitation: English only,
+    not on CRAN.
+  - [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html)
+    converts numerics into words. Limitation: English only, no word to
+    number conversion.
+  - [`{english}`](https://cran.r-project.org/web/packages/english/index.html)
+    converts numerics into words. Limitation: English only, no word to
+    number conversion.
+  - [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html)
+    converts numbers to words and vice versa. Limitation: Spanish only.
 
 *numberize* is released as a standalone package in the hope that it will
 be useful to the R community at large. *numberize* was created in
