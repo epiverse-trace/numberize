@@ -53,21 +53,26 @@ These examples illustrate the current functionality.
 ``` r
 # numberize a French string
 numberize("zéro", lang = "fr")
-#> [1] 0
+#> zéro 
+#>    0
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
-#> [1] 7545
+#> Siete mil quinientos cuarenta y cinco 
+#>                                  7545
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
-#> [1] "999,999,999,999,999"
+#> nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine 
+#>                                                                                                                                                                  "999,999,999,999,999"
 
 # some edge cases
 numberize("veintiún", lang = "es")
-#> [1] 21
+#> veintiún 
+#>       21
 numberize("veintiuno", lang = "es")
-#> [1] 21
+#> veintiuno 
+#>        21
 ```
 
 ## Related packages and Limitations
