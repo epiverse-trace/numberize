@@ -64,29 +64,40 @@ test_df <- data.frame(
   )
 )
 
-test_that("translating English numbers works", {
+test_that("translating vector of English numbers works", {
   res <- numberize(test_df[["en"]])
-  # res <- sapply(test_df[["en"]], numberize)
   expect_identical(unname(res), test_df[["num"]])
 })
 
-test_that("translating French numbers works", {
+test_that("translating vector of French numbers works", {
   res <- numberize(test_df[["fr"]], lang = "fr")
   expect_identical(unname(res), test_df[["num"]])
 })
 
-test_that("translating Spanish numbers works", {
+test_that("translating vector of Spanish numbers works", {
   res <- numberize(test_df[["es"]], lang = "es")
   expect_identical(unname(res), test_df[["num"]])
 })
 
-test_that("translating single french text works", {
-  res <- numberize("mille cinq cent quinze", lang = "fr")
+test_that("french text with leading and trailing whitespace works", {
+  res <- numberize("  mille cinq  cent quinze
+    ", lang = "fr")
   expect_identical(unname(res), 1515)
 })
 
-test_that("non digit word returns NA", {
+
+test_that("text with non digit word returns NA", {
   res <- numberize("epiverse", lang = "en")
   expect_true(is.na(res))
 })
-# TODO test edge cases in es and fr
+
+test_that("vector contains actual digits and spelt digits", {
+  res <- numberize(c("1", "two", 3))
+  expect_identical(unname(res), c(1, 2, 3))
+})
+
+test_that("text with whitespace at the start and end and tab and newline in between", {
+  res <- numberize("  one  hundred
+  and thirty   ", lang = "en")
+  expect_identical(unname(res), 130)
+})
