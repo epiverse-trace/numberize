@@ -47,6 +47,7 @@ pak::pak("{{ gh_repo }}")
 ```{r}
 library("numberize")
 ```
+
 ## Example
 
 These examples illustrate the current functionality.
@@ -64,6 +65,12 @@ formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninet
 # some edge cases
 numberize("veintiún", lang = "es")
 numberize("veintiuno", lang = "es")
+
+# convert a vector of written values
+numberize(
+  text = c("dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+  lang = "fr"
+)
 ```
 
 ## Related packages and Limitations
