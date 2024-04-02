@@ -2,26 +2,28 @@
 % Please edit documentation in R/numberize.R
 \name{numberize}
 \alias{numberize}
-\title{Convert a string of spelt numbers in a supported language to its numeric
-equivalent.}
+\title{Convert a vector string of spelled numbers in a supported language to
+its numeric equivalent.}
 \usage{
 numberize(text, lang = c("en", "fr", "es"))
 }
 \arguments{
-\item{text}{String containing spelt numbers in a supported language.}
+\item{text}{Vector containing spelled numbers in a supported language.}
 
 \item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.}
 }
 \value{
-A numeric value.
-
-A numeric value.
+A vector of numeric values.
 }
 \description{
-Convert a string of spelt numbers in a supported language to its numeric
-equivalent.
+Convert a vector string of spelled numbers in a supported language to
+its numeric equivalent.
 }
 \examples{
+# convert to numbers a scalar
 numberize("five hundred and thirty eight")
+
+# convert a vector of values
+numberize(c("dix", "soixante-cinq", "deux mille vingt-quatre"), lang = "fr")
 
 }
