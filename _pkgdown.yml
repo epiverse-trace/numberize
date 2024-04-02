@@ -1,3 +1,9 @@
 url: ~
 template:
   package: epiversetheme
+
+reference:
+- title: Exported functions
+  desc: "`{numberize}` functions available to end-users"
+- contents:
+  - lacks_concept("internal")
