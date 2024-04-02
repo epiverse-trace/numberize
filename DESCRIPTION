@@ -28,10 +28,9 @@ Encoding: UTF-8
 Language: en-US
 Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/Institution: London School of Hygiene and Tropical Medicine
 Config/Needs/website: epiverse-trace/epiversetheme
 Config/Department: Centre for the Mathematical Modelling of Infectious Diseases
 Config/DepartmentURL: https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling-infectious-diseases
 Config/Recon: experimental
-

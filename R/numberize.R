@@ -4,14 +4,8 @@
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
 #' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
 #'
-#'
-#' @examples
-#' \dontrun{
-#' digits_from("five hundred and thirty eight")
-#' # [1]   5 100  30   8
-#' }
-#'
 #' @return A numeric vector.
+#' @keywords internal
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 digits_from <- function(text, lang = "en") {
   # data frame that maps numbers to words
@@ -85,14 +79,9 @@ digits_from <- function(text, lang = "en") {
 #'
 #' @param digits A numeric vector translated from words.
 #'
-#'
-#' @examples
-#' \dontrun{
-#' number_from(c(5, 100, 30, 8))
-#' # [1] 538
-#' }
-#'
 #' @return A numeric value.
+#' 
+#' @keywords internal
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
   thousand_index <- match(1000, digits, nomatch = 0)
@@ -119,16 +108,15 @@ number_from <- function(digits) {
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Internal function used in the vectorized numberize call.
+#' Internal function used in the numberize() call for vectors.
 #'
 #' @param text Character string in a supported language.
 #' @param lang Language of the character string.
 #' Currently one of `"en" | "fr" | "es"`.
 #'
 #' @return A numeric value.
-#'
-#' @examples
-#' numberize("five hundred and thirty eight")
+#' 
+#' @keywords internal
 #'
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .numberize <- function(text, lang = c("en", "fr", "es")) {
@@ -141,18 +129,20 @@ number_from <- function(digits) {
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Convert a vector string of spelt numbers in a supported language to
-#' its numeric equivalent
+#' Convert a vector string of spelled numbers in a supported language to
+#' its numeric equivalent.
 #'
-#' @param text Vector containing spelt numbers in a supported language.
+#' @param text Vector containing spelled numbers in a supported language.
 #' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
 #'
-#' @return A numeric value.
+#' @return A vector of numeric values.
 #'
 #' @examples
+#' # convert to numbers a scalar
 #' numberize("five hundred and thirty eight")
-#'
-#' @return A numeric value.
+#' 
+#' # convert a vector of values
+#' numberize(c("dix", "soixante-cinq", "deux mille vingt-quatre"), lang = "fr")
 #'
 #' @export
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

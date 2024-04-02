@@ -17,10 +17,4 @@ A numeric value.
 Generate a number from a numeric vector.
 Uses \code{digits_from()} output to generate the numeric value of the text.
 }
-\examples{
-\dontrun{
-number_from(c(5, 100, 30, 8))
-# [1] 538
-}
-
-}
+\keyword{internal}

@@ -17,10 +17,4 @@ A numeric vector.
 \description{
 Generate a numeric vector from text in a supported language.
 }
-\examples{
-\dontrun{
-digits_from("five hundred and thirty eight")
-# [1]   5 100  30   8
-}
-
-}
+\keyword{internal}
