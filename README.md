@@ -73,6 +73,16 @@ numberize("veintiún", lang = "es")
 numberize("veintiuno", lang = "es")
 #> veintiuno 
 #>        21
+
+# convert a vector of written values
+numberize(
+  text = c("dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+  lang = "fr"
+)
+#>                     dix           soixante-cinq deux mille vingt-quatre 
+#>                      10                      65                    2024 
+#>                    <NA> 
+#>                      NA
 ```
 
 ## Related packages and Limitations
