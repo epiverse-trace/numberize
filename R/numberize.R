@@ -53,7 +53,6 @@ digits_from <- function(text, lang = "en") {
   text <- tolower(text)
   text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # all lang
 
-  # TODO check the words are in the selected lang or return NA
   if (lang == "es") {
     text <- gsub("\\bcien\\b", "ciento", text)
     text <- gsub("millones", "mill\u00f3n", text, fixed = TRUE)
@@ -80,7 +79,7 @@ digits_from <- function(text, lang = "en") {
 #' @param digits A numeric vector translated from words.
 #'
 #' @return A numeric value.
-#' 
+#'
 #' @keywords internal
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
@@ -115,12 +114,11 @@ number_from <- function(digits) {
 #' Currently one of `"en" | "fr" | "es"`.
 #'
 #' @return A numeric value.
-#' 
+#'
 #' @keywords internal
 #'
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .numberize <- function(text, lang = c("en", "fr", "es")) {
-  lang <- match.arg(lang)
   digits <- digits_from(text, lang)
   if (anyNA(digits)) {
     return(NA)
@@ -140,12 +138,19 @@ number_from <- function(digits) {
 #' @examples
 #' # convert to numbers a scalar
 #' numberize("five hundred and thirty eight")
-#' 
+#'
 #' # convert a vector of values
 #' numberize(c("dix", "soixante-cinq", "deux mille vingt-quatre"), lang = "fr")
 #'
 #' @export
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 numberize <- function(text, lang = c("en", "fr", "es")) {
-  vapply(text, .numberize, FUN.VALUE = double(1), lang = lang)
+  lang <- match.arg(lang)
+  vapply(
+    text,
+    .numberize,
+    FUN.VALUE = double(1),
+    lang = lang,
+    USE.NAMES = FALSE
+  )
 }
