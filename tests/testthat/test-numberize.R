@@ -88,3 +88,11 @@ test_that("non digit word returns NA", {
   res <- numberize("epiverse", lang = "en")
   expect_true(is.na(res))
 })
+
+test_that("vector with number and words and NA is properly handled", {
+  res <- numberize(
+    c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+    lang = "fr"
+  )
+  expect_identical(res, c(17, 10, 65, 2024, NA))
+})
