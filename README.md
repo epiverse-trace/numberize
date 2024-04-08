@@ -53,36 +53,28 @@ These examples illustrate the current functionality.
 ``` r
 # numberize a French string
 numberize("zéro", lang = "fr")
-#> zéro 
-#>    0
+#> [1] 0
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
-#> Siete mil quinientos cuarenta y cinco 
-#>                                  7545
+#> [1] 7545
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
-#> nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine 
-#>                                                                                                                                                                  "999,999,999,999,999"
+#> [1] "999,999,999,999,999"
 
 # some edge cases
 numberize("veintiún", lang = "es")
-#> veintiún 
-#>       21
+#> [1] 21
 numberize("veintiuno", lang = "es")
-#> veintiuno 
-#>        21
+#> [1] 21
 
 # convert a vector of written values
 numberize(
-  text = c("dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+  text = c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
   lang = "fr"
 )
-#>                     dix           soixante-cinq deux mille vingt-quatre 
-#>                      10                      65                    2024 
-#>                    <NA> 
-#>                      NA
+#> [1]   17   10   65 2024   NA
 ```
 
 ## Related packages and Limitations
