@@ -20,9 +20,13 @@ digits_from <- function(text, lang = "en") {
       "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
       "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
       "sixteen", "seventeen", "eighteen", "nineteen",
-      "twenty", "", "", "", "", "", "", "", "", "",
+      "twenty", "twenty one", "twenty two", "twenty three", "twenty four",
+      "twenty five", "twenty six", "twenty seven", "twenty eight",
+      "twenty nine",
       "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
-      "hundred", "", "", "", "", "", "", "", "",
+      "hundred", "two hundred", "three hundred", "four hundred",
+      "five hundred", "six hundred", "seven hundred", "eight hundred",
+      "nine hundred",
       "thousand", "million", "billion", "trillion"
     ),
     es = c(
@@ -50,7 +54,8 @@ digits_from <- function(text, lang = "en") {
   )
 
   # clean and prep
-  text <- tolower(text)
+  text <- tolower(text) # converts to string as a side effect
+  text <- trimws(text)
   text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # all lang
 
   if (lang == "es") {
@@ -66,7 +71,7 @@ digits_from <- function(text, lang = "en") {
     # lang=fr one word
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE)
   }
-
+  
   words <- strsplit(text, "\\s+")[[1]]
   digits <- numbers[match(words, numbers[[lang]]), "digit"]
   digits
@@ -145,6 +150,7 @@ number_from <- function(digits) {
 #'
 #' @param text Vector containing spelled numbers in a supported language.
 #' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
+#' Default is "en"
 #'
 #' @return A vector of numeric values.
 #'
