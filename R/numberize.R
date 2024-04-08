@@ -119,11 +119,24 @@ number_from <- function(digits) {
 #'
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .numberize <- function(text, lang = c("en", "fr", "es")) {
-  digits <- digits_from(text, lang)
-  if (anyNA(digits)) {
+  # return NA if the input is NA
+  if (is.na(text)) {
     return(NA)
   }
-  number_from(digits)
+  
+  # convert to numeric. Numeric values will pass and non numeric values will be
+  # coerced to NA and converted into numbers.
+  tmp_text <- suppressWarnings(as.numeric(text))
+  if (!is.na(tmp_text)) {
+    return(tmp_text)
+  } else {
+    # when the text does not correspond to a number, digits_from() returns NA
+    digits <- digits_from(text, lang)
+    if (anyNA(digits)) {
+      return(NA)
+    }
+    number_from(digits)
+  }
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

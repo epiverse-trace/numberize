@@ -68,7 +68,7 @@ numberize("veintiuno", lang = "es")
 
 # convert a vector of written values
 numberize(
-  text = c("dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+  text = c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
   lang = "fr"
 )
 ```
