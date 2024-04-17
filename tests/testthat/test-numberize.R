@@ -64,17 +64,17 @@ test_df <- data.frame(
   )
 )
 
-test_that("translating English numbers works", {
+test_that("translating vector of English numbers works", {
   res <- numberize(test_df[["en"]])
   expect_identical(res, test_df[["num"]])
 })
 
-test_that("translating French numbers works", {
+test_that("translating vector of French numbers works", {
   res <- numberize(test_df[["fr"]], lang = "fr")
   expect_identical(res, test_df[["num"]])
 })
 
-test_that("translating Spanish numbers works", {
+test_that("translating vector of Spanish numbers works", {
   res <- numberize(test_df[["es"]], lang = "es")
   expect_identical(res, test_df[["num"]])
 })
@@ -84,15 +84,23 @@ test_that("translating single french text works", {
   expect_identical(res, 1515)
 })
 
-test_that("non digit word returns NA", {
+
+test_that("text with non digit word returns NA", {
   res <- numberize("epiverse", lang = "en")
   expect_true(is.na(res))
 })
 
+# NB: this vector is coerced into character by R
 test_that("vector with number and words and NA is properly handled", {
   res <- numberize(
     c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
     lang = "fr"
   )
   expect_identical(res, c(17, 10, 65, 2024, NA))
+})
+
+test_that("text with leading and trailing whitespace works", {
+  res <- numberize("  mille cinq  cent quinze
+    ", lang = "fr")
+  expect_identical(res, 1515)
 })

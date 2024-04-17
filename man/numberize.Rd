@@ -10,7 +10,8 @@ numberize(text, lang = c("en", "fr", "es"))
 \arguments{
 \item{text}{Vector containing spelled numbers in a supported language.}
 
-\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.}
+\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.
+Default is "en"}
 }
 \value{
 A vector of numeric values.

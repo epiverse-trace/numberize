@@ -50,7 +50,8 @@ digits_from <- function(text, lang = "en") {
   )
 
   # clean and prep
-  text <- tolower(text)
+  text <- tolower(text) # converts to string as a side effect
+  text <- trimws(text)
   text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # all lang
 
   if (lang == "es") {
@@ -123,7 +124,7 @@ number_from <- function(digits) {
   if (is.na(text)) {
     return(NA)
   }
-  
+
   # convert to numeric. Numeric values will pass and non numeric values will be
   # coerced to NA and converted into numbers.
   tmp_text <- suppressWarnings(as.numeric(text))
@@ -145,6 +146,7 @@ number_from <- function(digits) {
 #'
 #' @param text Vector containing spelled numbers in a supported language.
 #' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
+#' Default is "en"
 #'
 #' @return A vector of numeric values.
 #'
