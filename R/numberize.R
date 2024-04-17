@@ -20,13 +20,9 @@ digits_from <- function(text, lang = "en") {
       "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
       "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
       "sixteen", "seventeen", "eighteen", "nineteen",
-      "twenty", "twenty one", "twenty two", "twenty three", "twenty four",
-      "twenty five", "twenty six", "twenty seven", "twenty eight",
-      "twenty nine",
+      "twenty", "", "", "", "", "", "", "", "", "",
       "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
-      "hundred", "two hundred", "three hundred", "four hundred",
-      "five hundred", "six hundred", "seven hundred", "eight hundred",
-      "nine hundred",
+      "hundred", "", "", "", "", "", "", "", "",
       "thousand", "million", "billion", "trillion"
     ),
     es = c(
@@ -71,7 +67,7 @@ digits_from <- function(text, lang = "en") {
     # lang=fr one word
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE)
   }
-  
+
   words <- strsplit(text, "\\s+")[[1]]
   digits <- numbers[match(words, numbers[[lang]]), "digit"]
   digits
@@ -128,7 +124,7 @@ number_from <- function(digits) {
   if (is.na(text)) {
     return(NA)
   }
-  
+
   # convert to numeric. Numeric values will pass and non numeric values will be
   # coerced to NA and converted into numbers.
   tmp_text <- suppressWarnings(as.numeric(text))
