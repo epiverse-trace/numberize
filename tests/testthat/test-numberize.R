@@ -104,3 +104,35 @@ test_that("text with leading and trailing whitespace works", {
     ", lang = "fr")
   expect_identical(res, 1515)
 })
+
+test_that("text with ambigious number conversion returns NA", {
+  res <- numberize("twenty twenty four", lang = "fr")
+  expect_true(is.na(res))
+})
+
+test_that("NA to return NA", {
+  res <- numberize(NA, lang = "fr")
+  expect_true(is.na(res))
+})
+
+test_that("NaN to return NA", {
+  res <- numberize(NaN, lang = "fr")
+  expect_true(is.na(res))
+})
+
+test_that("TRUE to return NA", {
+  res <- numberize(TRUE, lang = "fr")
+  expect_true(is.na(res))
+})
+test_that("FALSE to return NA", {
+  res <- numberize(FALSE, lang = "fr")
+  expect_true(is.na(res))
+})
+test_that("NULL to return NA", {
+  res <- numberize(NULL, lang = "fr")
+  expect_true(is.na(res))
+})
+test_that("Inf to return NA", {
+  res <- numberize(Inf, lang = "fr")
+  expect_true(is.na(res))
+})
