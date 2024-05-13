@@ -28,7 +28,7 @@ status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.
 French or Spanish words from `"zero"` to `"nine hundred and ninety nine
 trillion, nine hundred and ninety nine billion, nine hundred and ninety
 nine million, nine hundred and ninety nine thousand, nine hundred and
-ninety nine"` from a character string to a numeric value.
+ninety nine"` to positive integer values.
 
 <!-- This sentence is optional and can be removed -->
 

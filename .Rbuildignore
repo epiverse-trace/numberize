@@ -10,4 +10,4 @@
 ^\.Rproj\.user$
 ^CITATION\.cff$
 ^__.*$
-^\.vscode$
+^\.vscode.*
