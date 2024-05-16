@@ -1,36 +1,17 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "numberize" in publications use:'
 type: software
 license: MIT
-title: 'numberize: Convert words to numbers in multiple languages'
-version: 0.0.1
-abstract: Converts numbers written as English, French or Spanish words to their equivalent
-  number. English, French or Spanish words to their equivalent numeric.
+title: 'numberize: Convert Words To Numbers In Multiple Languages'
+version: 1.0.0
+abstract: Converts written out numbers into their equivalent numbers. Supports numbers
+  written out in English, French, or Spanish.
 authors:
-- family-names: Laddha
-  given-names: Avinash
-  email: avinash@data.org
-- family-names: Azam
-  given-names: James M.
-  email: james.azam@lshtm.ac.uk
-  orcid: https://orcid.org/0000-0001-5782-7330
-- family-names: Gupte
-  given-names: Pratik
-  email: pratik.gupte@lshtm.ac.uk
-  orcid: https://orcid.org/0000-0001-5294-7819
-- family-names: Lambert
-  given-names: Joshua W.
-  email: joshua.lambert@lshtm.ac.uk
-  orcid: https://orcid.org/0000-0001-5218-3046
-- family-names: Gruson
-  given-names: Hugo
-  email: hugo.gruson+R@normalesup.org
-  orcid: https://orcid.org/0000-0002-4094-1476
 - family-names: Ahadzie
   given-names: Banky
   email: bahadzie@gmail.com
@@ -48,7 +29,7 @@ references:
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
   notes: Suggests
-  url: https://docs.ropensci.org/spelling/
+  url: https://ropensci.r-universe.dev/spelling
   repository: https://CRAN.R-project.org/package=spelling
   authors:
   - family-names: Ooms
@@ -71,3 +52,4 @@ references:
     email: hadley@posit.co
   year: '2024'
   version: '>= 3.0.0'
+
