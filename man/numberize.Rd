@@ -14,7 +14,7 @@ numberize(text, lang = c("en", "fr", "es"))
 Default is "en"}
 }
 \value{
-A vector of positive integers.
+A numeric vector.
 }
 \description{
 The range of words supported is between \strong{zero} and
