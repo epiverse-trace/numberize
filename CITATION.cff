@@ -2,54 +2,70 @@
 # CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # --------------------------------------------
- 
+
 cff-version: 1.2.0
 message: 'To cite package "numberize" in publications use:'
 type: software
 license: MIT
 title: 'numberize: Convert Words To Numbers In Multiple Languages'
 version: 1.0.0
-abstract: Converts written out numbers into their equivalent numbers. Supports numbers
+abstract:
+  Converts written out numbers into their equivalent numbers. Supports numbers
   written out in English, French, or Spanish.
 authors:
-- family-names: Ahadzie
-  given-names: Banky
-  email: bahadzie@gmail.com
+  - family-names: Gruson
+    given-names: Hugo
+    email: hugo.gruson+R@normalesup.org
+    orcid: https://orcid.org/0000-0002-4094-1476
+  - family-names: Ahadzie
+    given-names: Bankole
+    email: bankole.ahadzie@lshtm.ac.uk
 repository-code: https://github.com/epiverse-trace/numberize
 url: https://github.com/epiverse-trace/numberize
 contact:
-- family-names: Ahadzie
-  given-names: Banky
-  email: bahadzie@gmail.com
+  - family-names: Ahadzie
+    given-names: Bankole
+    email: bankole.ahadzie@lshtm.ac.uk
 keywords:
-- r-package
-- r-programming
+  - r-package
+  - r-programming
 references:
-- type: software
-  title: spelling
-  abstract: 'spelling: Tools for Spell Checking in R'
-  notes: Suggests
-  url: https://ropensci.r-universe.dev/spelling
-  repository: https://CRAN.R-project.org/package=spelling
-  authors:
-  - family-names: Ooms
-    given-names: Jeroen
-    email: jeroen@berkeley.edu
-    orcid: https://orcid.org/0000-0002-4035-0289
-  - family-names: Hester
-    given-names: Jim
-    email: james.hester@rstudio.com
-  year: '2024'
-- type: software
-  title: testthat
-  abstract: 'testthat: Unit Testing for R'
-  notes: Suggests
-  url: https://testthat.r-lib.org
-  repository: https://CRAN.R-project.org/package=testthat
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2024'
-  version: '>= 3.0.0'
-
+  - type: software
+    title: 'R: A Language and Environment for Statistical Computing'
+    notes: Depends
+    url: https://www.R-project.org/
+    authors:
+      - name: R Core Team
+    location:
+      name: Vienna, Austria
+    year: '2024'
+    institution:
+      name: R Foundation for Statistical Computing
+    version: '>= 3.5.0'
+  - type: software
+    title: spelling
+    abstract: 'spelling: Tools for Spell Checking in R'
+    notes: Suggests
+    url: https://ropensci.r-universe.dev/spelling
+    repository: https://CRAN.R-project.org/package=spelling
+    authors:
+      - family-names: Ooms
+        given-names: Jeroen
+        email: jeroen@berkeley.edu
+        orcid: https://orcid.org/0000-0002-4035-0289
+      - family-names: Hester
+        given-names: Jim
+        email: james.hester@rstudio.com
+    year: '2024'
+  - type: software
+    title: testthat
+    abstract: 'testthat: Unit Testing for R'
+    notes: Suggests
+    url: https://testthat.r-lib.org
+    repository: https://CRAN.R-project.org/package=testthat
+    authors:
+      - family-names: Wickham
+        given-names: Hadley
+        email: hadley@posit.co
+    year: '2024'
+    version: '>= 3.0.0'
