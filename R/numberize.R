@@ -214,7 +214,7 @@ number_from <- function(digits) {
 #' @param lang The text's language. Currently one of `c("en", "fr", "es")`.
 #' Default is "en"
 #'
-#' @return A vector of positive integers.
+#' @return A numeric vector.
 #'
 #' @examples
 #' # convert to numbers a scalar
