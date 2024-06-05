@@ -14,13 +14,12 @@
 <!-- badges: start -->
 
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/numberize/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/numberize/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/numberize/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/numberize?branch=main)
 [![lifecycle-stable](https://www.reconverse.org/images/badge-stable.svg)](https://www.reconverse.org/lifecycle.html#stable)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.org/package=numberize)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/numberize)](https://CRAN.R-project.org/package=numberize) -->
 
 <!-- badges: end -->
 
@@ -40,6 +39,14 @@ at the London School of Hygiene and Tropical Medicine as part of the
 
 ## Installation
 
+The package can be installed from CRAN using
+
+``` r
+install.packages("numberize")
+```
+
+### Development version
+
 You can install the development version of *numberize* from
 [GitHub](https://github.com/) with:
 
@@ -47,15 +54,13 @@ You can install the development version of *numberize* from
 pak::pak("epiverse-trace/numberize")
 ```
 
-``` r
-library("numberize")
-```
-
 ## Example
 
 These examples illustrate the current functionality.
 
 ``` r
+library("numberize")
+
 # numberize a French string
 numberize("zéro", lang = "fr")
 #> [1] 0
@@ -87,14 +92,14 @@ numberize(
   - [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
     converts numbers to words and vice versa. Limitation: English only,
     not on CRAN.
-  - [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html)
-    converts numerics into words. Limitation: English only, no word to
-    number conversion.
-  - [`{english}`](https://cran.r-project.org/web/packages/english/index.html)
-    converts numerics into words. Limitation: English only, no word to
-    number conversion.
-  - [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html)
-    converts numbers to words and vice versa. Limitation: Spanish only.
+  - [`{nombre}`](https://CRAN.R-project.org/package=nombre) converts
+    numerics into words. Limitation: English only, no word to number
+    conversion.
+  - [`{english}`](https://CRAN.R-project.org/package=english) converts
+    numerics into words. Limitation: English only, no word to number
+    conversion.
+  - [`{spanish}`](https://CRAN.R-project.org/package=spanish) converts
+    numbers to words and vice versa. Limitation: Spanish only.
 
 *numberize* is released as a standalone package in the hope that it will
 be useful to the R community at large. *numberize* was created in

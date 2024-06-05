@@ -21,11 +21,11 @@ knitr::opts_chunk$set(
 # _{{ packagename }}_ <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
 [![lifecycle-{{ recon }}](https://www.reconverse.org/images/badge-{{ recon }}.svg)](https://www.reconverse.org/lifecycle.html#{{ recon }})
-[![CRAN status](https://www.r-pkg.org/badges/version/{{ packagename }})](https://CRAN.R-project.org/package={{ packagename }})
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/{{ packagename }})](https://CRAN.R-project.org/package={{ packagename }}) -->
 
 <!-- badges: end -->
 
@@ -37,6 +37,14 @@ _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }})
 
 ## Installation
 
+The package can be installed from CRAN using
+
+```r
+install.packages("{{packagename}}")
+```
+
+### Development version
+
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
@@ -44,15 +52,13 @@ You can install the development version of _{{ packagename }}_ from
 pak::pak("{{ gh_repo }}")
 ```
 
-```{r}
-library("numberize")
-```
-
 ## Example
 
 These examples illustrate the current functionality.
 
 ```{r eval=TRUE}
+library("numberize")
+
 # numberize a French string
 numberize("zéro", lang = "fr")
 
@@ -75,9 +81,9 @@ numberize(
 
 ## Related packages and Limitations
 - [`{numberwang}`](https://github.com/coolbutuseless/numberwang) converts numbers to words and vice versa. Limitation: English only, not on CRAN.
-- [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
-- [`{english}`](https://cran.r-project.org/web/packages/english/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
-- [`{spanish}`](https://cran.r-project.org/web/packages/spanish/index.html) converts numbers to words and vice versa. Limitation: Spanish only.
+- [`{nombre}`](https://CRAN.R-project.org/package=nombre) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{english}`](https://CRAN.R-project.org/package=english) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{spanish}`](https://CRAN.R-project.org/package=spanish) converts numbers to words and vice versa. Limitation: Spanish only.
 
 _{{ packagename }}_ is released as a standalone package in the hope that it will be useful to the R community at large. _{{ packagename }}_ was created in response to data cleaning requirements in [{cleanepi}](https://github.com/epiverse-trace/cleanepi).
 

@@ -1,4 +1,3 @@
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Generate a numeric vector from text in a supported language.
 #'
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
@@ -6,7 +5,6 @@
 #'
 #' @return A numeric vector.
 #' @keywords internal
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 digits_from <- function(text, lang = "en") {
   invalid_structure <- function(positions) {
     valid_position <- c(
@@ -134,7 +132,6 @@ digits_from <- function(text, lang = "en") {
   numbers[match(words, numbers[[lang]]), "digit"]
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Generate a number from a numeric vector.
 #' Uses `digits_from()` output to generate the numeric value of the text.
 #'
@@ -143,7 +140,6 @@ digits_from <- function(text, lang = "en") {
 #' @return A numeric value.
 #'
 #' @keywords internal
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
   thousand_index <- match(1000, digits, nomatch = 0)
   million_index <- match(1E6, digits, nomatch = 0)
