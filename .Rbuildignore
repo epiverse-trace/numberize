@@ -12,3 +12,4 @@
 ^__.*$
 ^\.vscode.*
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
