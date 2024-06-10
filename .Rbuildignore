@@ -9,3 +9,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^CITATION\.cff$
+^__.*$
+^\.vscode.*
+^cran-comments\.md$
+^CRAN-SUBMISSION$

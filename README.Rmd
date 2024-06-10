@@ -13,49 +13,84 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = file.path(c("man", "figures", "README-")),
   out.width = "100%"
 )
 ```
 
-# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="120" />
+# _{{ packagename }}_ <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/{{ gh_repo }}/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/{{ gh_repo }}/branch/main/graph/badge.svg)](https://app.codecov.io/gh/{{ gh_repo }}?branch=main)
-[![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept) 
+[![lifecycle-{{ recon }}](https://www.reconverse.org/images/badge-{{ recon }}.svg)](https://www.reconverse.org/lifecycle.html#{{ recon }})
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/{{ packagename }})](https://CRAN.R-project.org/package={{ packagename }}) -->
+
 <!-- badges: end -->
 
-{{ packagename }} provides functions to ....
+_{{ packagename }}_ is an R package to convert numbers written as English, French or Spanish words from `"zero"` to `"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"` to positive integer values.
 
 <!-- This sentence is optional and can be removed -->
-{{ packagename }} is developed at the [CENTER|similar](url) at the [UNIVERSITY|similar](url) as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
+_{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }}) at the {{ institution }} as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
+
 
 ## Installation
 
-You can install the development version of {{ packagename }} from
+The package can be installed from CRAN using
+
+```r
+install.packages("{{packagename}}")
+```
+
+### Development version
+
+You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("pak")
+```{r eval = FALSE}
 pak::pak("{{ gh_repo }}")
 ```
 
 ## Example
 
-These examples illustrate some of the current functionalities
+These examples illustrate the current functionality.
 
+```{r eval=TRUE}
+library("numberize")
 
-## Development
+# numberize a French string
+numberize("zéro", lang = "fr")
+
+# numberize a Spanish string
+numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
+
+# numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
+formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
+
+# some edge cases
+numberize("veintiún", lang = "es")
+numberize("veintiuno", lang = "es")
+
+# convert a vector of written values
+numberize(
+  text = c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+  lang = "fr"
+)
+```
+
+## Related packages and Limitations
+- [`{numberwang}`](https://github.com/coolbutuseless/numberwang) converts numbers to words and vice versa. Limitation: English only, not on CRAN.
+- [`{nombre}`](https://CRAN.R-project.org/package=nombre) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{english}`](https://CRAN.R-project.org/package=english) converts numerics into words. Limitation: English only, no word to number conversion.
+- [`{spanish}`](https://CRAN.R-project.org/package=spanish) converts numbers to words and vice versa. Limitation: Spanish only.
+
+_{{ packagename }}_ is released as a standalone package in the hope that it will be useful to the R community at large. _{{ packagename }}_ was created in response to data cleaning requirements in [{cleanepi}](https://github.com/epiverse-trace/cleanepi).
 
 ### Lifecycle
 
-This package is currently a *concept*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means that essential
-features and mechanisms are still being developed, and the package is not ready
-for use outside of the development team.
-
+This package is currently {{ recon }}, as defined by the [RECON software
+lifecycle](https://www.reconverse.org/lifecycle.html).
 
 ### Contributions
 
@@ -63,6 +98,6 @@ Contributions are welcome via [pull requests](https://github.com/{{ gh_repo }}/p
 
 ### Code of Conduct
 
-Please note that the {{ packagename }} project is released with a 
+Please note that the _{{ packagename }}_ project is released with a 
 [Contributor Code of Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
