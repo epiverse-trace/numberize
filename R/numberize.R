@@ -125,7 +125,7 @@ digits_from <- function(text, lang = "en") {
   positions <- numbers[match(words, numbers[[lang]]), "position"]
   if (invalid_structure(positions)) {
     warning(
-      cat("[", original_text, "] can be interpreted in different ways.\n")
+      "[", original_text, "] can be interpreted in different ways.\n"
     )
     return(NA)
   }
