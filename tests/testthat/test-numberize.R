@@ -79,12 +79,6 @@ test_that("translating vector of Spanish numbers works", {
   expect_identical(res, test_df[["num"]])
 })
 
-test_that("translating single french text works", {
-  res <- numberize("mille cinq cent quinze", lang = "fr")
-  expect_identical(res, 1515)
-})
-
-
 test_that("text with non digit word returns NA", {
   res <- numberize("epiverse", lang = "en")
   expect_true(is.na(res))
@@ -100,32 +94,31 @@ test_that("vector with number and words and NA is properly handled", {
 })
 
 test_that("text with leading and trailing whitespace works", {
-  res <- numberize("  mille cinq  cent quinze
-    ", lang = "fr")
+  res <- numberize("  mille cinq  cent quinze    ", lang = "fr")
   expect_identical(res, 1515)
 })
 
-test_that("text with ambigious number conversion returns NA", {
-  res <- numberize("twenty twenty four", lang = "fr")
+test_that("warning for ambiguous conversion", {
+  expect_warning(res <- numberize("twenty twenty four"))
   expect_true(is.na(res))
 })
 
 test_that("NA to return NA", {
-  res <- numberize(NA, lang = "fr")
+  res <- numberize(NA, lang = "es")
   expect_true(is.na(res))
 })
 
 test_that("NaN to return NA", {
-  res <- numberize(NaN, lang = "fr")
+  res <- numberize(NaN, lang = "es")
   expect_true(is.na(res))
 })
 
 test_that("TRUE to return NA", {
-  res <- numberize(TRUE, lang = "fr")
+  res <- numberize(TRUE, lang = "en")
   expect_true(is.na(res))
 })
 test_that("FALSE to return NA", {
-  res <- numberize(FALSE, lang = "fr")
+  res <- numberize(FALSE, lang = "en")
   expect_true(is.na(res))
 })
 test_that("NULL to return NA", {
