@@ -1,12 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
-
 <!-- The code to render this README is stored in .github/workflows/render-readme.yaml -->
-
 <!-- Variables marked with double curly braces will be transformed beforehand: -->
-
 <!-- `packagename` is extracted from the DESCRIPTION file -->
-
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
 # *numberize* <img src="man/figures/logo.svg" align="right" width="120" />
@@ -24,10 +20,9 @@ coverage](https://codecov.io/gh/epiverse-trace/numberize/branch/main/graph/badge
 <!-- badges: end -->
 
 *numberize* is an R package to convert numbers written as English,
-French or Spanish words from `"zero"` to `"nine hundred and ninety nine
-trillion, nine hundred and ninety nine billion, nine hundred and ninety
-nine million, nine hundred and ninety nine thousand, nine hundred and
-ninety nine"` to positive integer values.
+French or Spanish words from `"zero"` to
+`"nine hundred and ninety nine trillion, nine hundred and ninety nine billion, nine hundred and ninety nine million, nine hundred and ninety nine thousand, nine hundred and ninety nine"`
+to positive integer values.
 
 <!-- This sentence is optional and can be removed -->
 
@@ -104,17 +99,17 @@ numberize(
 
 ## Related packages and Limitations
 
-  - [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
-    converts numbers to words and vice versa. Limitation: English only,
-    not on CRAN.
-  - [`{nombre}`](https://CRAN.R-project.org/package=nombre) converts
-    numerics into words. Limitation: English only, no word to number
-    conversion.
-  - [`{english}`](https://CRAN.R-project.org/package=english) converts
-    numerics into words. Limitation: English only, no word to number
-    conversion.
-  - [`{spanish}`](https://CRAN.R-project.org/package=spanish) converts
-    numbers to words and vice versa. Limitation: Spanish only.
+- [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
+  converts numbers to words and vice versa. Limitation: English only,
+  not on CRAN.
+- [`{nombre}`](https://CRAN.R-project.org/package=nombre) converts
+  numerics into words. Limitation: English only, no word to number
+  conversion.
+- [`{english}`](https://CRAN.R-project.org/package=english) converts
+  numerics into words. Limitation: English only, no word to number
+  conversion.
+- [`{spanish}`](https://CRAN.R-project.org/package=spanish) converts
+  numbers to words and vice versa. Limitation: Spanish only.
 
 *numberize* is released as a standalone package in the hope that it will
 be useful to the R community at large. *numberize* was created in
