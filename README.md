@@ -37,7 +37,7 @@ Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling
 at the London School of Hygiene and Tropical Medicine as part of the
 [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
-## Installation
+## Installation. Testing render readme
 
 The package can be installed from CRAN using
 
@@ -64,20 +64,35 @@ library("numberize")
 # numberize a French string
 numberize("zéro", lang = "fr")
 #> [1] 0
+```
+
+``` r
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
 #> [1] 7545
+```
+
+``` r
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
 #> [1] "999,999,999,999,999"
+```
+
+``` r
 
 # some edge cases
 numberize("veintiún", lang = "es")
 #> [1] 21
+```
+
+``` r
 numberize("veintiuno", lang = "es")
 #> [1] 21
+```
+
+``` r
 
 # convert a vector of written values
 numberize(
