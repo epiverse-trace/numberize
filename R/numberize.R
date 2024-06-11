@@ -1,4 +1,3 @@
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Generate a numeric vector from text in a supported language.
 #'
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
@@ -6,14 +5,29 @@
 #'
 #' @return A numeric vector.
 #' @keywords internal
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 digits_from <- function(text, lang = "en") {
+  invalid_structure <- function(positions) {
+    valid_position <- c(
+      "units", "tens", "hundreds", "thousand", "million", "billion", "trillion"
+    )
+    for (i in seq_along(valid_position)) {
+      index <- which(positions %in% valid_position[i])
+      is_adjacent <- any(diff(index) == 1)
+      if (is_adjacent) {
+        return(is_adjacent)
+      }
+    }
+    FALSE
+  }
+
   # data frame that maps numbers to words
   numbers <- data.frame(
     stringsAsFactors = FALSE,
     digit = c(
       0:30, # because es is unique to 30
-      seq(40, 90, by = 10),
+      seq(40, 70, by = 10),
+      71:80,
+      90:99,
       seq(100, 900, by = 100), 1000, 1E6, 1E9, 1E12
     ),
     en = c(
@@ -21,7 +35,10 @@ digits_from <- function(text, lang = "en") {
       "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
       "sixteen", "seventeen", "eighteen", "nineteen",
       "twenty", "", "", "", "", "", "", "", "", "",
-      "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",
+      "thirty", "forty", "fifty", "sixty",
+      "seventy", "", "", "", "", "", "", "", "", "",
+      "eighty",
+      "ninety", "", "", "", "", "", "", "", "", "",
       "hundred", "", "", "", "", "", "", "", "",
       "thousand", "million", "billion", "trillion"
     ),
@@ -30,9 +47,11 @@ digits_from <- function(text, lang = "en") {
       "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
       "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte",
       "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro",
-      "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho",
-      "veintinueve", "treinta", "cuarenta", "cincuenta", "sesenta",
-      "setenta", "ochenta", "noventa",
+      "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", "veintinueve", # nolint
+      "treinta", "cuarenta", "cincuenta", "sesenta",
+      "setenta", "", "", "", "", "", "", "", "", "",
+      "ochenta",
+      "noventa", "", "", "", "", "", "", "", "", "",
       "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
       "seiscientos", "setecientos", "ochocientos", "novecientos",
       "mil", "mill\u00f3n", "mil-millones", "bill\u00f3n"
@@ -42,13 +61,37 @@ digits_from <- function(text, lang = "en") {
       "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
       "quinze", "seize", "dix sept", "dix huit", "dix neuf",
       "vingt", "", "", "", "", "", "", "", "", "",
-      "trente", "quarante", "cinquante",
-      "soixante", "soixante dix", "quatre-vingt", "quatre-vingt dix",
+      "trente", "quarante", "cinquante", "soixante",
+      "soixante-dix", "soixante-onze", "soixante-douze", "soixante-treize",
+      "soixante-quatorze", "soixante-quinze", "soixante-seize",
+      "soixante-dix-sept", "soixante-dix-huit", "soixante-dix-neuf",
+      "quatre-vingt",
+      "quatre-vingt-dix", "quatre-vingt-onze", "quatre-vingt-douze", "quatre-vingt-treize", # nolint
+      "quatre-vingt-quatorze", "quatre-vingt-quinze", "quatre-vingt-seize",
+      "quatre-vingt-dix-sept", "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf",
       "cent", "", "", "", "", "", "", "", "",
       "mille", "million", "milliard", "billion"
+    ),
+    position = c(
+      rep("units", 10),
+      rep("tens", 45),
+      rep("hundreds", 9),
+      "thousand", "million", "billion", "trillion"
+    ),
+    positional_digit = c(
+      0:9, # units
+      rep(1, 10), # tens (10-19)
+      rep(2, 10), # tens (20-29)
+      3:6, # tens (30-60)
+      rep(7, 10), # tens (70-79)
+      8, # tens (80)
+      rep(9, 10), # tens (90-99)
+      1:9, # hundreds (100-900)
+      rep(1, 4) # thousand, million, billion, trillion
     )
   )
 
+  original_text <- text # to report warning if necessary
   # clean and prep
   text <- tolower(text) # converts to string as a side effect
   text <- trimws(text)
@@ -62,18 +105,33 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
-    # lang=fr plural-> singular
+    # plural to singular
     text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text)
-    # lang=fr one word
-    text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE)
+    # handle 70-79
+    text <- gsub(
+      "soixante (dix|onze|douze|treize|quatorze|quinze|seize)",
+      "soixante-\\1", text
+    )
+    text <- gsub("soixante-dix (sept|huit|neuf)", "soixante-dix-\\1", text)
+    # handle 90-99
+    text <- gsub(
+      "quatre vingt (dix|onze|douze|treize|quatorze|quinze|seize)",
+      "quatre-vingt-\\1", text
+    )
+    text <- gsub("quatre-vingt (sept|huit|neuf)", "quatre-vingt-\\1", text)
   }
 
   words <- strsplit(text, "\\s+")[[1]]
-  digits <- numbers[match(words, numbers[[lang]]), "digit"]
-  digits
+  positions <- numbers[match(words, numbers[[lang]]), "position"]
+  if (invalid_structure(positions)) {
+    warning(
+      "[", original_text, "] can be interpreted in different ways.\n"
+    )
+    return(NA)
+  }
+  numbers[match(words, numbers[[lang]]), "digit"]
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Generate a number from a numeric vector.
 #' Uses `digits_from()` output to generate the numeric value of the text.
 #'
@@ -82,7 +140,6 @@ digits_from <- function(text, lang = "en") {
 #' @return A numeric value.
 #'
 #' @keywords internal
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
   thousand_index <- match(1000, digits, nomatch = 0)
   million_index <- match(1E6, digits, nomatch = 0)
@@ -107,7 +164,6 @@ number_from <- function(digits) {
   summed + total
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Internal function used in the numberize() call for vectors.
 #'
 #' @param text Character string in a supported language.
@@ -118,10 +174,12 @@ number_from <- function(digits) {
 #'
 #' @keywords internal
 #'
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .numberize <- function(text, lang = c("en", "fr", "es")) {
-  # return NA if the input is NA
-  if (is.na(text)) {
+  text <- toString(text)
+  if (
+    trimws(text) %in%
+      c("NA", "TRUE", "FALSE", "nan", "Inf", "") || # check other R keywords
+      length(text) == 0) { # check for NULL
     return(NA)
   }
 
@@ -140,15 +198,19 @@ number_from <- function(digits) {
   }
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Convert a vector string of spelled numbers in a supported language to
 #' its numeric equivalent.
 #'
-#' @param text Vector containing spelled numbers in a supported language.
-#' @param lang The text's language. Currently one of `"en" | "fr" | "es"`.
+#' The range of words supported is between \strong{zero} and
+#' \strong{nine hundred and ninety nine trillion, nine hundred and}
+#' \strong{ninety nine billion, nine hundred and ninety nine million, nine}
+#' \strong{hundred and ninety nine thousand, nine hundred and ninety nine}
+#'
+#' @param text String vector of spelled numbers in a supported language.
+#' @param lang The text's language. Currently one of `c("en", "fr", "es")`.
 #' Default is "en"
 #'
-#' @return A vector of numeric values.
+#' @return A numeric vector.
 #'
 #' @examples
 #' # convert to numbers a scalar
@@ -158,9 +220,12 @@ number_from <- function(digits) {
 #' numberize(c("dix", "soixante-cinq", "deux mille vingt-quatre"), lang = "fr")
 #'
 #' @export
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 numberize <- function(text, lang = c("en", "fr", "es")) {
+  lang <- tolower(lang)
   lang <- match.arg(lang)
+  if (is.null(text)) {
+    return(NA)
+  }
   vapply(
     text,
     .numberize,
