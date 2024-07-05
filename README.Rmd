@@ -35,7 +35,7 @@ _{{ packagename }}_ is an R package to convert numbers written as English, Frenc
 _{{ packagename }}_ is developed at the [{{ department }}]({{ department_url }}) at the {{ institution }} as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
 
-## Installation. Testing render readme
+## Installation
 
 The package can be installed from CRAN using
 
