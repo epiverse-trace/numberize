@@ -32,7 +32,7 @@ Diseases](https://www.lshtm.ac.uk/research/centres/centre-mathematical-modelling
 at the London School of Hygiene and Tropical Medicine as part of the
 [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
-## Installation. Testing render readme
+## Installation
 
 The package can be installed from CRAN using
 
