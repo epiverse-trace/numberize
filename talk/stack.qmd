@@ -1,16 +1,25 @@
 ---
-title: Faster CI/CD feedback
-subtitle: using docker in GH actions
-# author: Banky
 highlight-style: github
 logo: https://epiverse-trace.github.io/hexlogo.png
+# author: Banky
+title: "3 Presentations"
+subtitle: "Quarto | Faster CI/CD | reproducible environments"
 format:
   revealjs:
-    preview-links: auto
+    navigation-mode: vertical
+    preview-links: true
     slide-number: true
     theme: dark
 #    footer: <https://epiverse-trace.github.io>
 ---
+
+# Quarto - interactive docs
+
+## altdocs
+
+## webR
+
+# Faster CI/CD - docker in GH actions
 
 ## GH actions
 
@@ -289,3 +298,183 @@ jobs:
           cat /tmp/image.tar | gzip > /tmp/image.tgz
 ```
 :::
+
+# reproducible environments - Nix & R
+
+## Nix
+
+![over 100,000 packages](images/nix.png)
+
+
+
+::: footer
+Learn more: [Nix](https://nixos.org/)
+:::
+
+
+## Install Nix {.smaller}
+
+macOS
+
+`sh <(curl -L https://nixos.org/nix/install)`
+
+:::{.fragment}
+Linux
+
+`sh <(curl -L https://nixos.org/nix/install) --daemon`
+:::
+:::{.fragment}
+
+Windows (WSL2)
+
+`sh <(curl -L https://nixos.org/nix/install) --daemon`
+:::
+
+
+::: footer
+Learn more: [Nix Reference Manual - Multi User Installation](https://nixos.org/download/#nix-install-linux)
+:::
+
+## Install software {.smaller}
+
+::: panel-tabset
+### R
+
+`nix-shell --packages R`
+
+![](images/nix-r.png){.border width="600"}
+
+### R + ggplot2
+
+`nix-shell --packages 'rWrapper.override{packages = [ rPackages.ggplot2 ];}'`
+
+![](images/r-ggplot.png){.border width="600"}
+
+### OS R vs Nix R
+
+![](images/r-versions.png){.border width="600"}
+
+:::
+
+## R >= 3.0.2 {.smaller}
+
+![](images/r-versions-web.png){.border width="700"}
+
+::: footer
+Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R)
+:::
+
+
+## Older versions {.smaller}
+
+::: panel-tabset
+### R 3.6.3
+
+::: {.r-fit-text}
+`nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/4426104c8c900fbe048c33a0e6f68a006235ac50.tar.gz`
+:::
+
+![](images/r-oldest-working.png){.border width="600"}
+
+### R 3.5.3
+
+::: {.r-fit-text}
+`nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/25b53f32236b308172673c958f570b5b488c7b73.tar.gz`
+:::
+
+![](images/r-3-5-3.png){.border width="600"}
+
+:::{.notes}
+- Fail due to arm based CPU. Probably works on Intel x86
+- Can troubleshoot the build scripts if its really necessary
+:::
+
+### Epiverse support
+
+::: {.columns}
+
+::: {.column}
+
+
+- R 4.4.1 (June, 2024)
+- R 4.4.0 (April, 2024)
+
+- R 4.3.3 (February, 2024)
+- R 4.3.2 (October, 2023)
+- R 4.3.1 (June, 2023)
+- R 4.3.0 (April, 2023)
+
+- R 4.2.3 (March, 2023)
+- R 4.2.2 (October, 2022)
+- R 4.2.1 (June, 2022)
+- R 4.2.0 (April, 2022)
+
+:::
+
+::: {.column}
+
+- R 4.1.3 (March, 2022)
+- R 4.1.2 (November, 2021)
+- R 4.1.1 (August, 2021)
+- R 4.1.0 (May, 2021)
+
+- R 4.0.5 (March, 2021)
+- R 4.0.4 (February, 2021)
+- R 4.0.3 (October, 2020)
+- R 4.0.2 (June, 2020)
+- R 4.0.1 (June, 2020)
+- R 4.0.0 (April, 2020)
+
+:::
+
+<!-- end columns -->
+:::
+
+:::
+
+## {rix} ![](https://b-rodrigues.r-universe.dev/badges/rix?scale=1&color=pink&style=round)
+
+![](images/rix.png){.border width="900"}
+
+::: footer
+Learn more: [rix: Reproducible Environments with Nix](https://b-rodrigues.github.io/rix/index.html)
+:::
+
+## rix(...)
+
+``` r
+rix(
+  r_ver = "latest",
+  r_pkgs = NULL,
+  system_pkgs = NULL,
+  git_pkgs = NULL,
+  local_r_pkgs = NULL,
+  tex_pkgs = NULL,
+  ide = c("other", "code", "radian", "rstudio", "rserver"),
+  project_path = ".",
+  overwrite = FALSE,
+  print = FALSE,
+  message_type = "simple",
+  shell_hook = NULL
+)
+```
+
+::: footer
+Learn more: [?rix](https://b-rodrigues.github.io/rix/reference/rix.html)
+:::
+
+
+## Testing rix()
+
+``` r
+rix(r_ver = "4.0.0",
+    r_pkgs = c("linelist", "cleanepi"),
+    system_pkgs = NULL,
+    git_pkgs = list(package_name = "finalsize",
+                    repo_url = "https://github.com/epiverse-trace/finalsize",
+                    branch_name = "main",
+                    commit = "1d4b6b17886fa042c363af47cdad8c720117d3bc"),
+    ide = "other",
+    project_path = tempdir(),
+    overwrite = TRUE)
+```

@@ -1,86 +1,111 @@
 ---
-title: nix and R
-subtitle: Easily reproducible environments
+title: Nix and R
+subtitle: reproducible environments
 # author: Banky
+highlight-style: github
+logo: https://epiverse-trace.github.io/hexlogo.png
 format:
   revealjs:
-    preview-links: auto
+    preview-links: true
     slide-number: true
     theme: dark
 #    footer: <https://epiverse-trace.github.io>
 ---
 
-## Requirements
-- OS (macOS, Linux, Windows + WSL2 )
-- nix, A package manager
-- internet connection
+## Nix
 
-## Installing nix {.smaller}
-<!-- Hide line numbers in this code block
-```{{}}
-    curl -L https://nixos.org/nix/install | sh -s -- --daemon
-```
- -->
+![over 100,000 packages](images/nix.png)
 
-`curl -L https://nixos.org/nix/install | sh -s -- --daemon`
+
 
 ::: footer
-Learn more: [Nix Reference Manual - Multi User Installation](https://nix.dev/manual/nix/2.18/installation/installing-binary#multi-user-installation)
+Learn more: [Nix](https://nixos.org/)
 :::
 
-## Installing R {.smaller}
+
+## Install Nix {.smaller}
+
+macOS
+
+`sh <(curl -L https://nixos.org/nix/install)`
+
+:::{.fragment}
+Linux
+
+`sh <(curl -L https://nixos.org/nix/install) --daemon`
+:::
+:::{.fragment}
+
+Windows (WSL2)
+
+`sh <(curl -L https://nixos.org/nix/install) --daemon`
+:::
+
+
+::: footer
+Learn more: [Nix Reference Manual - Multi User Installation](https://nixos.org/download/#nix-install-linux)
+:::
+
+## Install software {.smaller}
 
 ::: panel-tabset
-### OS R vs nix R
-
-.![nix R](images/r-versions.png)
-
-### Plain R
+### R
 
 `nix-shell --packages R`
 
-.![nix R](images/nix-r.png)
+![](images/nix-r.png){.border width="600"}
 
 ### R + ggplot2
 
 `nix-shell --packages 'rWrapper.override{packages = [ rPackages.ggplot2 ];}'`
 
-.![nix R](images/r-ggplot.png)
+![](images/r-ggplot.png){.border width="600"}
+
+### OS R vs Nix R
+
+![](images/r-versions.png){.border width="600"}
 
 :::
 
 ## R >= 3.0.2 {.smaller}
 
-.![nix R](images/r-versions-web.png)
+![](images/r-versions-web.png){.border width="700"}
 
 ::: footer
 Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R)
 :::
 
 
-## Install older versions {.smaller}
+## Older versions {.smaller .scrollable}
 
 ::: panel-tabset
 ### R 3.6.3
 
+::: {.r-fit-text}
 `nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/4426104c8c900fbe048c33a0e6f68a006235ac50.tar.gz`
+:::
 
-.![nix R](images/r-oldest-working.png)
+![](images/r-oldest-working.png){.border width="600"}
 
 ### R 3.5.3
 
+::: {.r-fit-text}
 `nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/25b53f32236b308172673c958f570b5b488c7b73.tar.gz`
+:::
 
+![](images/r-3-5-3.png){.border width="600"}
+
+:::{.notes}
 - Fail due to arm based CPU. Probably works on Intel x86
 - Can troubleshoot the build scripts if its really necessary
+:::
 
-.![nix R](images/r-3-5-3.png)
-
-### Epiverse R support
+### Epiverse support
 
 ::: {.columns}
 
 ::: {.column}
+
 
 - R 4.4.1 (June, 2024)
 - R 4.4.0 (April, 2024)
@@ -116,16 +141,14 @@ Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=n
 <!-- end columns -->
 :::
 
-We maintain a minimum support for the last four versions of R ...
-
-[Source: Blueprint](https://epiverse-trace.github.io/blueprints/dependencies.html#base-r-support-schedule){preview-link="true"}
+... last four versions of R ... [Source: Blueprint](https://epiverse-trace.github.io/blueprints/dependencies.html#base-r-support-schedule)
 
 
 :::
 
 ## {rix} ![](https://b-rodrigues.r-universe.dev/badges/rix?scale=1&color=pink&style=round)
 
-.![nix R](images/rix.png)
+![](images/rix.png){.border width="900"}
 
 ::: footer
 Learn more: [rix: Reproducible Environments with Nix](https://b-rodrigues.github.io/rix/index.html)
