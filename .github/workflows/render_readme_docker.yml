@@ -1,4 +1,4 @@
-name: Building Faster R CI
+name: render readme + docker
 
 on:
   workflow_dispatch:
