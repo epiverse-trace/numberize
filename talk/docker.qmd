@@ -1,0 +1,290 @@
+---
+title: Faster CI/CD feedback
+subtitle: using docker in GH actions
+# author: Banky
+highlight-style: github
+format:
+  revealjs:
+    preview-links: auto
+    slide-number: true
+    theme: dark
+#    footer: <https://epiverse-trace.github.io>
+---
+
+## GH actions
+
+::: panel-tabset
+### speed
+
+![](images/docker-speed-comp-1.png)
+
+### docker
+
+![](images/docker-speed-comp-2.png)
+
+### normal
+
+![](images/docker-speed-comp-4.png)
+
+### docker
+
+![](images/docker-speed-comp-3.png)
+
+### normal
+
+![](images/docker-speed-comp-5.png)
+
+:::
+
+## Files
+
+
+::: panel-tabset
+
+### normal
+
+render_readme.yml
+
+```{.yaml code-line-numbers="29-32,37-40"}
+name: render readme
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "docker"
+    paths:
+      - 'README.Rmd'
+      - '.github/workflows/render_readme.yml'
+      - '.github/workflows/render_readme_docker.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  render-readme:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v4
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Setup pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rmarkdown, local::.
+
+      - name: Compile the readme
+        run: |
+          writeLines(
+            knitr::knit_expand(
+              "README.Rmd",
+              packagename = read.dcf("DESCRIPTION", "Package"),
+              institution = read.dcf("DESCRIPTION", "Config/Institution"),
+              department = read.dcf("DESCRIPTION", "Config/Department"),
+              department_url = read.dcf("DESCRIPTION", "Config/DepartmentURL"),
+              recon = read.dcf("DESCRIPTION", "Config/Recon"),
+              recon_description = read.dcf("DESCRIPTION", "Config/ReconDescription"),
+              gh_repo = Sys.getenv("GITHUB_REPOSITORY")
+            ),
+            "README_expanded.Rmd"
+          )
+          rmarkdown::render(
+            "README_expanded.Rmd",
+            output_file = "README.md",
+            output_dir = "."
+          )
+        shell: Rscript {0}
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          if ! git diff-index --quiet HEAD; then
+            git add README.md
+            # Also add README figures if they exist
+            if [ -d man/figures ]
+            then
+              git add man/figures/
+            fi
+            git commit -m "Automatic readme update"
+            git pull --rebase origin ${{ github.ref.name }}
+            git push origin || echo "No changes to push"
+          fi
+
+```
+
+### fast
+
+render_readme_docker.yml
+
+```{.yaml code-line-numbers="17-20,48-50"}
+name: render readme + docker
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "docker"
+    paths:
+      - 'README.Rmd'
+      - '.github/workflows/render_readme.yml'
+      - '.github/workflows/render_readme_docker.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render-readme:
+    runs-on: ubuntu-latest
+    container: bahadzie/alpine-r:4.3.0
+    steps:
+      - name: Checkout repos
+        uses: actions/checkout@v4
+
+      - name: Compile the readme
+        run: |
+          writeLines(
+            knitr::knit_expand(
+              "README.Rmd",
+              packagename = read.dcf("DESCRIPTION", "Package"),
+              institution = read.dcf("DESCRIPTION", "Config/Institution"),
+              department = read.dcf("DESCRIPTION", "Config/Department"),
+              department_url = read.dcf("DESCRIPTION", "Config/DepartmentURL"),
+              recon = read.dcf("DESCRIPTION", "Config/Recon"),
+              recon_description = read.dcf("DESCRIPTION", "Config/ReconDescription"),
+              gh_repo = Sys.getenv("GITHUB_REPOSITORY")
+            ),
+            "README_expanded.Rmd"
+          )
+          rmarkdown::render(
+            "README_expanded.Rmd",
+            output_file = "README.md",
+            output_dir = "."
+          )
+        shell: Rscript {0}
+
+
+  commit-readme:
+    needs: render-readme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          if ! git diff-index --quiet HEAD; then
+            git add README.md
+            # Also add README figures if they exist
+            if [ -d man/figures ]
+            then
+              git add man/figures/
+            fi
+            git commit -m "Automatic readme update"
+            git pull --rebase origin ${{ github.ref.name }}
+            git push origin || echo "No changes to push"
+          fi
+        shell: bash {0}
+```
+
+### container
+
+Dockerfile
+
+```dockerfile
+FROM alpine:3.18
+
+# Install R 4.3.0, Pandoc, OS deps and pak package manager
+RUN apk --no-cache add pandoc-cli git R R-dev g++ && \
+    R -q -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s",  .Platform$pkgType,  R.Version()$os,  R.Version()$arch))'
+
+# Needed for rcmdcheck, pkgdown
+RUN apk --no-cache add linux-headers
+
+# Needed for pkgdown
+RUN apk --no-cache add libxml2-dev
+RUN apk --no-cache add fontconfig-dev
+RUN apk --no-cache add harfbuzz-dev
+RUN apk --no-cache add fribidi-dev
+RUN apk --no-cache add freetype-dev
+RUN apk --no-cache add libpng-dev
+RUN apk --no-cache add tiff-dev
+RUN apk --no-cache add libjpeg-turbo-dev
+
+RUN R -q -e 'pak::pak("any::rcmdcheck"); pak::cache_clean()'
+RUN R -q -e 'pak::pak("any::covr"); pak::cache_clean()'
+RUN R -q -e 'pak::pak("any::pkgdown"); pak::cache_clean()'
+# Installed with pkgdown so no need to install explicitly
+# RUN R -q -e 'pak::pak("any::rmarkdown"); pak::cache_clean()'
+
+# Problematic because alpine doesn't have a libv8 port
+# RUN R -q -e 'pak::pak("any::cffr"); pak::cache_clean()'
+# RUN R -q -e 'pak::pak("any::V8"); pak::cache_clean()'
+```
+
+### build
+
+build_container.yml
+
+```{.yaml code-line-numbers="4-5"}
+name: Build Docker R image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+
+# To be able to cancel a job in progress if the workflow file is updated
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Docker Image
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/image.tgz
+          key: ${{ runner.os }}-dockerimage-1-{{ hashFiles('/tmp/image.tgz') }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64 # only one needed to run on GH
+          file: ./Dockerfile
+          cache-from: type=gha # for cacheing build layers between builds
+          cache-to: type=gha,mode=max # for cacheing build layers between builds
+          outputs: type=tar,dest=/tmp/image.tar # output a local file that can be cached
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/alpine-r:4.3.0
+
+      - name: Zip image
+        run: |
+          cat /tmp/image.tar | gzip > /tmp/image.tgz
+```
+:::

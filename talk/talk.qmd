@@ -1,0 +1,118 @@
+---
+title: webR in Quarto HTML Documents
+theme:
+  light: flatly
+  dark: darkly
+format: html
+engine: knitr
+filters:
+  - webr
+  - include-code-files
+---
+
+```{.R include="z.R" start-line=1 end-line=5}
+```
+
+
+This is a webr-enabled code cell in a Quarto HTML document.
+
+```{webr-r}
+fit = lm(mpg ~ am, data = mtcars)
+
+summary(fit)
+```
+
+
+- #### Faster CI/CD feedback using docker in GH actions
+- #### Adding interactivity to documentation using quarto
+- #### Working with multiple R, package and OS dependencies side by side
+
+::: {.panel-tabset}
+
+# Faster CI/CD
+
+- Include the yaml files for creating a docker container with all the deps needed for GH workflows
+- Include GHA that uses R container to run workflow
+
+# Interactivity Documents
+
+- Embed webR and Shiny in `.qmd` files
+- Write package vignettes, website, presentation, PDF in quarto
+
+# Reproducible Environments
+
+- Install Nix package manager for Linux, macOS and Windows
+- Use {rix} to build reproducible environments for most workflows
+
+<!-- inside the structure from last chunk -->
+
+# Nebulae Visualization
+
+Visualizing the intricate structures of various nebulae encountered.
+
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(x=wt, y=mpg)) + geom_point()
+```
+
+# Mermaid Diagrams
+
+```{mermaid}
+graph TD;
+    A[Data Exploration] -->|Transform| B(Data Modeling);
+    B --> C{Insight Discovery};
+    C -->|Yes| D[Communicate Results];
+    C -->|No| E[Iterate Further];
+```
+
+# Dot Plots
+:::
+
+
+This statement requires further illumination[^1].
+
+[^1]: Here lies the deeper exploration of the statement, shining light on the intricacies and supporting information that enrich the narrative.
+
+
+# Reproducible environments with [Nix](https://nixos.org/learn/) and [{rix}](https://b-rodrigues.github.io/rix/)
+Nix is a package manager which comes in a form of many command line tools. Packages that Nix can build are defined with the Nix Expression Language.
+
+[Nix Reference Manual](https://nix.dev/manual/nix/2.18/)
+
+> ### Multiple versions
+> 
+> You can have multiple versions or variants of a package installed at the same time. This is especially important when different applications have dependencies on different versions of the same package — it prevents the “DLL hell”. Because of the hashing scheme, different versions of a package end up in different paths in the Nix store, so they don’t interfere with each other.
+> 
+> An important consequence is that operations like upgrading or uninstalling an application cannot break other applications, since these operations never “destructively” update or delete files that are used by other packages.
+> 
+> ### Complete dependencies
+> 
+> Nix helps you make sure that package dependency specifications are complete. In general, when you’re making a package for a package management system like RPM, you have to specify for each package what its dependencies are, but there are no guarantees that this specification is complete. If you forget a dependency, then the package will build and work correctly on your machine if you have the dependency installed, but not on the end user's machine if it's not there.
+> 
+> Since Nix on the other hand doesn’t install packages in “global” locations like /usr/bin but in package-specific directories, the risk of incomplete dependencies is greatly reduced. This is because tools such as compilers don’t search in per-packages directories such as /nix/store/5lbfaxb722zp…-openssl-0.9.8d/include, so if a package builds correctly on your system, this is because you specified the dependency explicitly. This takes care of the build-time dependencies.
+> 
+> Once a package is built, runtime dependencies are found by scanning binaries for the hash parts of Nix store paths (such as r8vvq9kq…). This sounds risky, but it works extremely well.
+> 
+> ### Nix Packages collection
+> 
+> We provide a large set of Nix expressions containing hundreds of existing Unix packages, the Nix Packages collection (Nixpkgs).
+
+> ### Managing build environments
+> 
+> Nix is extremely useful for developers as it makes it easy to automatically set up the build environment for a package. Given a Nix expression that describes the dependencies of your package, the command nix-shell will build or download those dependencies if they’re not already in your Nix store, and then start a Bash shell in which all necessary environment variables (such as compiler search paths) are set.
+
+From [Nix Reference Manual - Multi User Installation](https://nix.dev/manual/nix/2.18/installation/installing-binary#multi-user-installation)
+
+> The multi-user Nix installation creates system users, and a system service for the Nix daemon.
+> 
+> Supported Systems
+> 
+> - Linux (i686, x86_64, aarch64) running systemd, with SELinux disabled
+> - macOS (x86_64, aarch64)
+> 
+> You can instruct the installer to perform a multi-user installation on your system:
+> 
+> `curl -L https://nixos.org/nix/install | sh -s -- --daemon`
+
+# Faster CI/CD feedback using docker in GH actions
+

@@ -1,0 +1,171 @@
+---
+title: nix and R
+subtitle: Easily reproducible environments
+# author: Banky
+format:
+  revealjs:
+    preview-links: auto
+    slide-number: true
+    theme: dark
+#    footer: <https://epiverse-trace.github.io>
+---
+
+## Requirements
+- OS (macOS, Linux, Windows + WSL2 )
+- nix, A package manager
+- internet connection
+
+## Installing nix {.smaller}
+<!-- Hide line numbers in this code block
+```{{}}
+    curl -L https://nixos.org/nix/install | sh -s -- --daemon
+```
+ -->
+
+`curl -L https://nixos.org/nix/install | sh -s -- --daemon`
+
+::: footer
+Learn more: [Nix Reference Manual - Multi User Installation](https://nix.dev/manual/nix/2.18/installation/installing-binary#multi-user-installation)
+:::
+
+## Installing R {.smaller}
+
+::: panel-tabset
+### OS R vs nix R
+
+.![nix R](images/r-versions.png)
+
+### Plain R
+
+`nix-shell --packages R`
+
+.![nix R](images/nix-r.png)
+
+### R + ggplot2
+
+`nix-shell --packages 'rWrapper.override{packages = [ rPackages.ggplot2 ];}'`
+
+.![nix R](images/r-ggplot.png)
+
+:::
+
+## R >= 3.0.2 {.smaller}
+
+.![nix R](images/r-versions-web.png)
+
+::: footer
+Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R)
+:::
+
+
+## Install older versions {.smaller}
+
+::: panel-tabset
+### R 3.6.3
+
+`nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/4426104c8c900fbe048c33a0e6f68a006235ac50.tar.gz`
+
+.![nix R](images/r-oldest-working.png)
+
+### R 3.5.3
+
+`nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/25b53f32236b308172673c958f570b5b488c7b73.tar.gz`
+
+- Fail due to arm based CPU. Probably works on Intel x86
+- Can troubleshoot the build scripts if its really necessary
+
+.![nix R](images/r-3-5-3.png)
+
+### Epiverse R support
+
+::: {.columns}
+
+::: {.column}
+
+- R 4.4.1 (June, 2024)
+- R 4.4.0 (April, 2024)
+
+- R 4.3.3 (February, 2024)
+- R 4.3.2 (October, 2023)
+- R 4.3.1 (June, 2023)
+- R 4.3.0 (April, 2023)
+
+- R 4.2.3 (March, 2023)
+- R 4.2.2 (October, 2022)
+- R 4.2.1 (June, 2022)
+- R 4.2.0 (April, 2022)
+
+:::
+
+::: {.column}
+
+- R 4.1.3 (March, 2022)
+- R 4.1.2 (November, 2021)
+- R 4.1.1 (August, 2021)
+- R 4.1.0 (May, 2021)
+
+- R 4.0.5 (March, 2021)
+- R 4.0.4 (February, 2021)
+- R 4.0.3 (October, 2020)
+- R 4.0.2 (June, 2020)
+- R 4.0.1 (June, 2020)
+- R 4.0.0 (April, 2020)
+
+:::
+
+<!-- end columns -->
+:::
+
+We maintain a minimum support for the last four versions of R ...
+
+[Source: Blueprint](https://epiverse-trace.github.io/blueprints/dependencies.html#base-r-support-schedule){preview-link="true"}
+
+
+:::
+
+## {rix} ![](https://b-rodrigues.r-universe.dev/badges/rix?scale=1&color=pink&style=round)
+
+.![nix R](images/rix.png)
+
+::: footer
+Learn more: [rix: Reproducible Environments with Nix](https://b-rodrigues.github.io/rix/index.html)
+:::
+
+## rix(...)
+
+``` r
+rix(
+  r_ver = "latest",
+  r_pkgs = NULL,
+  system_pkgs = NULL,
+  git_pkgs = NULL,
+  local_r_pkgs = NULL,
+  tex_pkgs = NULL,
+  ide = c("other", "code", "radian", "rstudio", "rserver"),
+  project_path = ".",
+  overwrite = FALSE,
+  print = FALSE,
+  message_type = "simple",
+  shell_hook = NULL
+)
+```
+
+::: footer
+Learn more: [?rix](https://b-rodrigues.github.io/rix/reference/rix.html)
+:::
+
+
+## Testing rix()
+
+``` r
+rix(r_ver = "4.0.0",
+    r_pkgs = c("linelist", "cleanepi"),
+    system_pkgs = NULL,
+    git_pkgs = list(package_name = "finalsize",
+                    repo_url = "https://github.com/epiverse-trace/finalsize",
+                    branch_name = "main",
+                    commit = "1d4b6b17886fa042c363af47cdad8c720117d3bc"),
+    ide = "other",
+    project_path = tempdir(),
+    overwrite = TRUE)
+```
