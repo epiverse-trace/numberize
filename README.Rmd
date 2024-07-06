@@ -48,7 +48,7 @@ install.packages("{{packagename}}")
 You can install the development version of _{{ packagename }}_ from
 [GitHub](https://github.com/) with:
 
-```{r eval = FALSE}
+```{r eval = TRUE}
 pak::pak("{{ gh_repo }}")
 ```
 
