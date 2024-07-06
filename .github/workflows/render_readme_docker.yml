@@ -63,3 +63,4 @@ jobs:
             git pull --rebase origin ${{ github.ref.name }}
             git push origin || echo "No changes to push"
           fi
+        shell: bash {0}
