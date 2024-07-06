@@ -55,11 +55,11 @@ pak::pak("epiverse-trace/numberize")
 #> ℹ No downloads are needed, 1 pkg is cached
 #> ✔ Got numberize 0.0.1 (source) (31.77 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (487ms)
+#> ✔ Packaged numberize 0.0.1 (501ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (851ms)
+#> ✔ Built numberize 0.0.1 (904ms)
 #> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@fc32825) (1s)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [5.1s]
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [5.5s]
 ```
 
 ## Example
