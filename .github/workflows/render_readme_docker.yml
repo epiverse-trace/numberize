@@ -15,16 +15,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  render-readme:
     runs-on: ubuntu-latest
     container: bahadzie/alpine-r:4.3.0
     steps:
       - name: Checkout repos
         uses: actions/checkout@v4
-
-      # - name: Temp Fix. https://github.com/peter-evans/create-pull-request/issues/1170
-      #   run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-        
 
       - name: Compile the readme
         run: |
@@ -48,34 +44,11 @@ jobs:
           )
         shell: Rscript {0}
 
-      # - name: Commit files
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-      #     if ! git diff-index --quiet HEAD; then
-      #       git add README.md
-      #       # Also add README figures if they exist
-      #       if [ -d man/figures ]
-      #       then
-      #         git add man/figures/
-      #       fi
-      #       git commit -m "Automatic readme update"
-      #       git pull --rebase origin ${{ github.ref.name }}
-      #       git push origin || echo "No changes to push"
-      #     fi
-      #   shell: bash {0}
 
-  commit:
-    needs: build
+  commit-readme:
+    needs: render-readme
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout repos
-      #   uses: actions/checkout@v4
-
-      # - name: Temp Fix. https://github.com/peter-evans/create-pull-request/issues/1170
-      #   run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-        
-
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
