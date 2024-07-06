@@ -52,11 +52,14 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add README.md
-          # Also add README figures if they exist
-          if [ -d man/figures ]
-          then
-            git add man/figures/
+          if ! git diff-index --quiet HEAD; then
+            git add README.md
+            # Also add README figures if they exist
+            if [ -d man/figures ]
+            then
+              git add man/figures/
+            fi
+            git commit -m "Automatic readme update"
+            git pull --rebase origin ${{ github.ref.name }}
+            git push origin || echo "No changes to push"
           fi
-          git diff-index --quiet HEAD || git commit -m "Automatic readme update"
-          git push origin R-test || echo "No changes to push"

@@ -1,4 +1,4 @@
-name: render readme old
+name: render readme
 
 on:
   workflow_dispatch:
