@@ -3,7 +3,7 @@ highlight-style: github
 logo: https://epiverse-trace.github.io/hexlogo.png
 # author: Banky
 title: "3 Presentations"
-subtitle: "Quarto | Faster CI/CD | reproducible environments"
+subtitle: "Faster CI/CD | reproducible environments | Quarto"
 format:
   revealjs:
     navigation-mode: vertical
@@ -13,12 +13,6 @@ format:
 #    footer: <https://epiverse-trace.github.io>
 ---
 
-# Quarto - interactive docs
-
-## altdocs
-
-## webR
-
 # Faster CI/CD - docker in GH actions
 
 ## GH actions
@@ -26,34 +20,31 @@ format:
 ::: panel-tabset
 ### speed
 
-![](images/docker-speed-comp-1.png)
+![](images/docker-speed-comp-1.png){.border width="600"}
 
-### docker
+### slow
 
-![](images/docker-speed-comp-2.png)
+![](images/docker-speed-comp-4.png){.border width="600"}
 
-### normal
+### slow
 
-![](images/docker-speed-comp-4.png)
+![](images/docker-speed-comp-5.png){.border width="600"}
 
-### docker
+### fast
 
-![](images/docker-speed-comp-3.png)
+![](images/docker-speed-comp-2.png){.border width="600"}
 
-### normal
+### fast
 
-![](images/docker-speed-comp-5.png)
+![](images/docker-speed-comp-3.png){.border width="600"}
 
 :::
 
-## Files
-
+## Files {.smaller}
 
 ::: panel-tabset
 
-### normal
-
-render_readme.yml
+### slow
 
 ```{.yaml code-line-numbers="29-32,37-40"}
 name: render readme
@@ -139,8 +130,6 @@ jobs:
 
 ### fast
 
-render_readme_docker.yml
-
 ```{.yaml code-line-numbers="17-20,48-50"}
 name: render readme + docker
 
@@ -213,8 +202,6 @@ jobs:
 
 ### container
 
-Dockerfile
-
 ```dockerfile
 FROM alpine:3.18
 
@@ -247,8 +234,6 @@ RUN R -q -e 'pak::pak("any::pkgdown"); pak::cache_clean()'
 ```
 
 ### build
-
-build_container.yml
 
 ```{.yaml code-line-numbers="4-5"}
 name: Build Docker R image
@@ -478,3 +463,10 @@ rix(r_ver = "4.0.0",
     project_path = tempdir(),
     overwrite = TRUE)
 ```
+
+<!-- # Quarto - interactive docs
+
+## altdocs
+
+## webR -->
+
