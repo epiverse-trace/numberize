@@ -7,7 +7,7 @@ subtitle: "Faster CI/CD | reproducible environments | Quarto"
 format:
   revealjs:
     navigation-mode: vertical
-    preview-links: true
+    # preview-links: true
     slide-number: true
     theme: dark
 #    footer: <https://epiverse-trace.github.io>
