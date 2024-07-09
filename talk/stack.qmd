@@ -16,7 +16,7 @@ filters:
   - webr
 ---
 
-# Faster CI/CD - docker in GH actions
+# faster CI/CD - docker in GH actions
 
 ## GH actions
 
@@ -41,6 +41,10 @@ filters:
 
 ![](images/docker-speed-comp-3.png){.border width="600"}
 
+:::
+
+::: footer
+Learn more [Workflow runs](https://github.com/epiverse-trace/numberize/actions)
 :::
 
 ## Files {.smaller}
