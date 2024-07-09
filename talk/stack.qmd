@@ -18,40 +18,70 @@ filters:
 
 # faster CI/CD - docker in GH actions
 
-## GH actions
+## GH actions {.smaller}
 
-::: panel-tabset
-### speed
+::: {.columns}
+::: {.column}
 
 ![](images/docker-speed-comp-1.png){.border width="600"}
 
-### slow
-
-![](images/docker-speed-comp-4.png){.border width="600"}
-
-### slow
-
-![](images/docker-speed-comp-5.png){.border width="600"}
-
-### fast
-
-![](images/docker-speed-comp-2.png){.border width="600"}
-
-### fast
-
-![](images/docker-speed-comp-3.png){.border width="600"}
-
 :::
+::: {.column}
+```{r}
+times <- data.frame( run = 9:1,
+  docker = c(46, 57, 43, 47, 44, 42, 49, 49, 50),
+                 normal = c(80, 94, 87, 87, 104, 91, 85, 89, 82)
+                 )
+
+
+knitr::kable(times)
+cat("mean:", c(mean(times[,2]), mean(times[,3])))
+
+```
+:::
+
+<!-- end columns -->
+::: 
 
 ::: footer
 Learn more [Workflow runs](https://github.com/epiverse-trace/numberize/actions)
 :::
 
+## workflow steps {.smaller}
+::: {.columns}
+::: {.column}
+
+![setup R and install depdencies are slow](images/docker-speed-comp-5.png){.border width="600"}
+
+:::
+::: {.column}
+![initialize containers is faster](images/docker-speed-comp-3.png){.border width="600"}
+
+:::
+
+<!-- end columns -->
+::: 
+
+## workflow jobs {.smaller}
+::: {.columns}
+::: {.column}
+
+![host: render-readme](images/docker-speed-comp-4.png){.border width="600"}
+
+:::
+::: {.column}
+![container: render-readme, host: commit-readme](images/docker-speed-comp-2.png){.border width="600"}
+
+:::
+
+<!-- end columns -->
+::: 
+
 ## Files {.smaller}
 
 ::: panel-tabset
 
-### slow
+### current
 
 ```{.yaml code-line-numbers="29-32,37-40"}
 name: render readme
@@ -135,7 +165,7 @@ jobs:
 
 ```
 
-### fast
+### faster
 
 ```{.yaml code-line-numbers="17-20,48-50"}
 name: render readme + docker
@@ -207,7 +237,7 @@ jobs:
         shell: bash {0}
 ```
 
-### container
+### Dockerfile
 
 ```dockerfile
 FROM alpine:3.18
@@ -240,9 +270,9 @@ RUN R -q -e 'pak::pak("any::pkgdown"); pak::cache_clean()'
 # RUN R -q -e 'pak::pak("any::V8"); pak::cache_clean()'
 ```
 
-### build
+### YAML
 
-```{.yaml code-line-numbers="4-5"}
+```{.yaml}
 name: Build Docker R image
 
 on:
@@ -291,6 +321,18 @@ jobs:
 ```
 :::
 
+## Uses
+
+::: {.columns}
+::: {.column}
+- Speed
+- Reproducible environments
+:::
+::: {.column}
+:::
+:::
+ <!-- end columns -->
+
 # reproducible environments - Nix & R
 
 ## Nix
@@ -327,40 +369,21 @@ Windows (WSL2)
 Learn more: [Nix Reference Manual - Multi User Installation](https://nixos.org/download/#nix-install-linux)
 :::
 
-## Install software {.smaller}
-
-::: panel-tabset
-### R
+## Install R {.smaller}
 
 `nix-shell --packages R`
 
-![](images/nix-r.png){.border width="600"}
+![library(ggplot) error](images/nix-r.png){.border width="900"}
 
-### R + ggplot2
+## Install R + ggplot2 {.smaller}
 
+::: {.r-fit-text}
 `nix-shell --packages 'rWrapper.override{packages = [ rPackages.ggplot2 ];}'`
-
-![](images/r-ggplot.png){.border width="600"}
-
-### OS R vs Nix R
-
-![](images/r-versions.png){.border width="600"}
-
 :::
 
-## R >= 3.0.2 {.smaller}
+![](images/r-ggplot.png){.border width="900"}
 
-![](images/r-versions-web.png){.border width="700"}
-
-::: footer
-Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R)
-:::
-
-
-## Older versions {.smaller}
-
-::: panel-tabset
-### R 3.6.3
+## Install R 3.6.3 {.smaller}
 
 ::: {.r-fit-text}
 `nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/4426104c8c900fbe048c33a0e6f68a006235ac50.tar.gz`
@@ -368,7 +391,7 @@ Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=n
 
 ![](images/r-oldest-working.png){.border width="600"}
 
-### R 3.5.3
+## Error Installing R 3.5.3
 
 ::: {.r-fit-text}
 `nix-shell -p R -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/25b53f32236b308172673c958f570b5b488c7b73.tar.gz`
@@ -381,7 +404,7 @@ Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=n
 - Can troubleshoot the build scripts if its really necessary
 :::
 
-### Epiverse support
+## Epiverse support
 
 ::: {.columns}
 
@@ -422,7 +445,24 @@ Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=n
 <!-- end columns -->
 :::
 
+## Available R (3.0.2 - 4.4.1) {.smaller}
+
+![](images/r-versions-web.png){.border width="700"}
+
+<!-- ```{=html}
+<iframe width="780" height="500" src="https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R" title="Webpage example"></iframe>
+``` -->
+
+::: footer
+Learn more: [Nix package versions](https://lazamar.co.uk/nix-versions/?channel=nixpkgs-unstable&package=R), [Nix Packages](https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=R)
 :::
+
+## OS R vs Nix R
+
+![](images/r-versions.png){.border width="900"}
+
+
+
 
 ## {rix} ![](https://b-rodrigues.r-universe.dev/badges/rix?scale=1&color=pink&style=round)
 
@@ -471,24 +511,34 @@ rix(r_ver = "4.0.0",
     overwrite = TRUE)
 ```
 
-<!-- # Quarto - interactive docs
+## Uses
+- multiple isolated installed versions
+- install R packages directly
+- can replace `brew` on Mac
+- can replace `apt`, `yum` on Linux
+- easily install e.g. blas, cmdstan, python
 
-## altdocs
+##  
 
-## webR -->
-
+![Graph](https://repology.org/graph/map_repo_size_fresh.svg){width=100%}
 
 # interactive quarto
 
 ## finalsize demo
 
-[Interactive version](https://bahadzie.github.io/finalsize/README.html){preview-link="true" style="text-align: center"}
+[Standard Readme](https://epiverse-trace.github.io/finalsize/){preview-link="true" style="text-align: center"}
+
+
+[Interactive Readme](https://bahadzie.github.io/finalsize/README.html){preview-link="true" style="text-align: center"}
 
 ## howto {.smaller}
 
 1. Open folder in CLI
 1. Install quarto-webR extension using `quarto add coatless/quarto-webr`
-1. Add the following lines to yaml frontmatter
+1. rename README.Rmd -> README.qmd
+1. Add highlighted metadata lines below to document
+1. Change code blocks from  `{r, include = FALSE}` to `{webr-r}`
+1. run `quarto render README.qmd`
 ```{.yaml code-line-numbers="7-10"}
 ---
 # existing Rmd metadata
@@ -503,9 +553,6 @@ filters:
 ---
 
 ```
-1. rename README.Rmd to README.qmd
-1. Change code blocks from  `{r, include = FALSE}` to `{webr-r}`
-1. run `quarto render README.qmd`
 
 ## IDE
 
@@ -515,7 +562,12 @@ filters:
 Learn more: [Demo workspace code](https://github.com/r-wasm/webr/blob/main/src/repl/App.tsx)
 :::
 
-## quarto tutorial examples
+## Uses
+
+Create interactive docs and tutorials
+
+
+## Example Tutorials
 
 [Hands on Programming with R](https://jjallaire.github.io/hopr/){preview-link="true"}
 
