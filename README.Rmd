@@ -52,7 +52,7 @@ You can install the development version of _{{ packagename }}_ from
 pak::pak("{{ gh_repo }}")
 ```
 
-## Example. Compare 6
+## Example. Compare 7
 
 These examples illustrate the current functionality.
 
