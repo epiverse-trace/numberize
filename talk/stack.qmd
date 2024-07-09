@@ -1,9 +1,8 @@
 ---
 highlight-style: github
 logo: https://epiverse-trace.github.io/hexlogo.png
-# author: Banky
-title: "3 Presentations"
-subtitle: "Faster CI/CD | reproducible environments | Quarto"
+title: "Rabbit Holes"
+subtitle: "faster CI/CD | reproducible environments | interactive quarto"
 format:
   revealjs:
     navigation-mode: vertical
@@ -11,6 +10,10 @@ format:
     slide-number: true
     theme: dark
 #    footer: <https://epiverse-trace.github.io>
+
+engine: knitr
+filters:
+  - webr
 ---
 
 # Faster CI/CD - docker in GH actions
@@ -469,4 +472,52 @@ rix(r_ver = "4.0.0",
 ## altdocs
 
 ## webR -->
+
+
+# interactive quarto
+
+## finalsize demo
+
+[Interactive version](https://bahadzie.github.io/finalsize/README.html){preview-link="true" style="text-align: center"}
+
+## howto {.smaller}
+
+1. Open folder in CLI
+1. Install quarto-webR extension using `quarto add coatless/quarto-webr`
+1. Add the following lines to yaml frontmatter
+```{.yaml code-line-numbers="7-10"}
+---
+# existing Rmd metadata
+output: github_document
+bibliography: vignettes/references.json
+link-citations: true
+
+format: html
+engine: knitr
+filters:
+  - webr
+---
+
+```
+1. rename README.Rmd to README.qmd
+1. Change code blocks from  `{r, include = FALSE}` to `{webr-r}`
+1. run `quarto render README.qmd`
+
+## IDE
+
+[WebR REPL](https://webr.r-wasm.org/latest/)
+
+:::{.footer}
+Learn more: [Demo workspace code](https://github.com/r-wasm/webr/blob/main/src/repl/App.tsx)
+:::
+
+## quarto tutorial examples
+
+[Hands on Programming with R](https://jjallaire.github.io/hopr/){preview-link="true"}
+
+[Time Series Analysis](https://vlyubchich.github.io/tsar/l01_regression.html){preview-link="true"}
+
+[Data Science in a Box](https://datasciencebox.org/02-hello-world){preview-link="true"}
+
+[STA 210: Regression Analysis](https://sta210-s22.github.io/website/){preview-link="true"}
 

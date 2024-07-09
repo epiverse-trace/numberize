@@ -10,7 +10,7 @@
 <link href="stack_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.43">
 
-  <title>3 Presentations</title>
+  <title>Rabbit Holes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -390,8 +390,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">3 Presentations</h1>
-  <p class="subtitle">Faster CI/CD | reproducible environments | Quarto</p>
+  <h1 class="title">Rabbit Holes</h1>
+  <p class="subtitle">faster CI/CD | reproducible environments | interactive quarto</p>
 
 <div class="quarto-title-authors">
 </div>
@@ -824,6 +824,53 @@
 ## altdocs
 
 ## webR -->
+</section></section>
+<section>
+<section id="interactive-quarto" class="title-slide slide level1 center">
+<h1>interactive quarto</h1>
+
+</section>
+<section id="finalsize-demo" class="slide level2">
+<h2>finalsize demo</h2>
+<p><a href="https://bahadzie.github.io/finalsize/README.html" data-preview-link="true" style="text-align: center">Interactive version</a></p>
+</section>
+<section id="howto" class="slide level2 smaller">
+<h2>howto</h2>
+<ol type="1">
+<li>Open folder in CLI</li>
+<li>Install quarto-webR extension using <code>quarto add coatless/quarto-webr</code></li>
+<li>Add the following lines to yaml frontmatter</li>
+</ol>
+<div class="sourceCode" id="cb7" data-code-line-numbers="7-10"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href=""></a><span class="pp">---</span></span>
+<span id="cb7-2"><a href=""></a><span class="co"># existing Rmd metadata</span></span>
+<span id="cb7-3"><a href=""></a><span class="fu">output</span><span class="kw">:</span><span class="at"> github_document</span></span>
+<span id="cb7-4"><a href=""></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> vignettes/references.json</span></span>
+<span id="cb7-5"><a href=""></a><span class="fu">link-citations</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb7-8"><a href=""></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span>
+<span id="cb7-9"><a href=""></a><span class="fu">filters</span><span class="kw">:</span></span>
+<span id="cb7-10"><a href=""></a><span class="at">  </span><span class="kw">-</span><span class="at"> webr</span></span>
+<span id="cb7-11"><a href=""></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li>rename README.Rmd to README.qmd</li>
+<li>Change code blocks from <code>{r, include = FALSE}</code> to <code>{webr-r}</code></li>
+<li>run <code>quarto render README.qmd</code></li>
+</ol>
+</section>
+<section id="ide" class="slide level2">
+<h2>IDE</h2>
+<p><a href="https://webr.r-wasm.org/latest/">WebR REPL</a></p>
+<div class="footer">
+<p>Learn more: <a href="https://github.com/r-wasm/webr/blob/main/src/repl/App.tsx">Demo workspace code</a></p>
+</div>
+</section>
+<section id="quarto-tutorial-examples" class="slide level2">
+<h2>quarto tutorial examples</h2>
+<p><a href="https://jjallaire.github.io/hopr/" data-preview-link="true">Hands on Programming with R</a></p>
+<p><a href="https://vlyubchich.github.io/tsar/l01_regression.html" data-preview-link="true">Time Series Analysis</a></p>
+<p><a href="https://datasciencebox.org/02-hello-world" data-preview-link="true">Data Science in a Box</a></p>
+<p><a href="https://sta210-s22.github.io/website/" data-preview-link="true">STA 210: Regression Analysis</a></p>
 <div class="quarto-auto-generated-content">
 <p><img src="https://epiverse-trace.github.io/hexlogo.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -1041,6 +1088,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
