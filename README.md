@@ -55,14 +55,14 @@ pak::pak("epiverse-trace/numberize")
 #> ℹ No downloads are needed, 1 pkg is cached
 #> ✔ Got numberize 0.0.1 (source) (31.77 kB)
 #> ℹ Packaging numberize 0.0.1
-#> ✔ Packaged numberize 0.0.1 (491ms)
+#> ✔ Packaged numberize 0.0.1 (551ms)
 #> ℹ Building numberize 0.0.1
-#> ✔ Built numberize 0.0.1 (862ms)
-#> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@fc32825) (21ms)
-#> ✔ 1 pkg: upd 1, dld 1 (NA B) [4s]
+#> ✔ Built numberize 0.0.1 (894ms)
+#> ✔ Installed numberize 0.0.1 (github::epiverse-trace/numberize@fc32825) (1s)
+#> ✔ 1 pkg: upd 1, dld 1 (NA B) [5.3s]
 ```
 
-## Example
+## Example. Compare 2
 
 These examples illustrate the current functionality.
 
@@ -72,35 +72,20 @@ library("numberize")
 # numberize a French string
 numberize("zéro", lang = "fr")
 #> [1] 0
-```
-
-``` r
 
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
 #> [1] 7545
-```
-
-``` r
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
 #> [1] "999,999,999,999,999"
-```
-
-``` r
 
 # some edge cases
 numberize("veintiún", lang = "es")
 #> [1] 21
-```
-
-``` r
 numberize("veintiuno", lang = "es")
 #> [1] 21
-```
-
-``` r
 
 # convert a vector of written values
 numberize(
