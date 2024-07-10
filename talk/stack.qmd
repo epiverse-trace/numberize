@@ -51,11 +51,11 @@ Learn more [Workflow runs](https://github.com/epiverse-trace/numberize/actions)
 ::: {.columns}
 ::: {.column}
 
-![setup R and install depdencies are slow](images/docker-speed-comp-5.png){.border width="600"}
+![slow: setup R, install depdencies](images/docker-speed-comp-5.png){.border width="600"}
 
 :::
 ::: {.column}
-![initialize containers is faster](images/docker-speed-comp-3.png){.border width="600"}
+![fast: initialize containers](images/docker-speed-comp-3.png){.border width="600"}
 
 :::
 
