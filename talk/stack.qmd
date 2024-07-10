@@ -6,6 +6,7 @@ subtitle: "faster CI/CD | reproducible environments | interactive quarto"
 format:
   revealjs:
     navigation-mode: vertical
+    chalkboard: true
     # preview-links: true
     slide-number: true
     theme: dark
