@@ -73,7 +73,7 @@ numberize(
 )
 ```
 
-## Related packages andLimitations
+## Related packages and Limitations
 - [`{numberwang}`](https://github.com/coolbutuseless/numberwang) converts numbers to words and vice versa. Limitation: English only, not on CRAN.
 - [`{nombre}`](https://cran.r-project.org/web/packages/nombre/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
 - [`{english}`](https://cran.r-project.org/web/packages/english/index.html) converts numerics into words. Limitation: English only, no word to number conversion.
