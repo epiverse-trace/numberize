@@ -77,7 +77,7 @@ numberize(
 #> [1]   17   10   65 2024   NA
 ```
 
-## Related packages and Limitations
+## Related packages andLimitations
 
 - [`{numberwang}`](https://github.com/coolbutuseless/numberwang)
   converts numbers to words and vice versa. Limitation: English only,
