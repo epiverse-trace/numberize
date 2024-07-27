@@ -28,10 +28,10 @@ digits_from <- function(text, lang = "en") {
   }
 
   words <- strsplit(text, "\\s+")
-  digits <- lapply(words, function(w) {
-    base_numbers[match(w, base_numbers[[lang]]), "digit"]
-  })
-  digits
+
+  # It's faster to unlist()/relist() than looping over the list
+  digits <- base_numbers[match(unlist(words), base_numbers[[lang]]), "digit"]
+  relist(digits, words)
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
