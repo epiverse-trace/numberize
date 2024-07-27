@@ -27,8 +27,10 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("quatre vingt", "quatre-vingt", text, fixed = TRUE)
   }
 
-  words <- strsplit(text, "\\s+")[[1]]
-  digits <- base_numbers[match(words, base_numbers[[lang]]), "digit"]
+  words <- strsplit(text, "\\s+")
+  digits <- lapply(words, function(w) {
+    base_numbers[match(w, base_numbers[[lang]]), "digit"]
+  })
   digits
 }
 
@@ -43,6 +45,11 @@ digits_from <- function(text, lang = "en") {
 #' @keywords internal
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 number_from <- function(digits) {
+
+  if (anyNA(digits)) {
+    return(NA)
+  }
+
   thousand_index <- match(1000, digits, nomatch = 0)
   million_index <- match(1E6, digits, nomatch = 0)
 
@@ -67,39 +74,6 @@ number_from <- function(digits) {
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Internal function used in the numberize() call for vectors.
-#'
-#' @param text Character string in a supported language.
-#' @param lang Language of the character string.
-#' Currently one of `"en" | "fr" | "es"`.
-#'
-#' @return A numeric value.
-#'
-#' @keywords internal
-#'
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.numberize <- function(text, lang = c("en", "fr", "es")) {
-  # return NA if the input is NA
-  if (is.na(text)) {
-    return(NA)
-  }
-
-  # convert to numeric. Numeric values will pass and non numeric values will be
-  # coerced to NA and converted into numbers.
-  tmp_text <- suppressWarnings(as.numeric(text))
-  if (!is.na(tmp_text)) {
-    return(tmp_text)
-  } else {
-    # when the text does not correspond to a number, digits_from() returns NA
-    digits <- digits_from(text, lang)
-    if (anyNA(digits)) {
-      return(NA)
-    }
-    number_from(digits)
-  }
-}
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Convert a vector string of spelled numbers in a supported language to
 #' its numeric equivalent.
 #'
@@ -120,11 +94,9 @@ number_from <- function(digits) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 numberize <- function(text, lang = c("en", "fr", "es")) {
   lang <- match.arg(lang)
-  vapply(
-    text,
-    .numberize,
-    FUN.VALUE = double(1),
-    lang = lang,
-    USE.NAMES = FALSE
-  )
+
+  digits <- digits_from(text, lang)
+  res <- vapply(digits, number_from, double(1))
+
+  return(res)
 }
