@@ -11,3 +11,4 @@
 ^CITATION\.cff$
 ^__.*$
 ^\.vscode$
+^data-raw$
