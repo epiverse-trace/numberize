@@ -94,9 +94,12 @@ number_from <- function(digits) {
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 numberize <- function(text, lang = c("en", "fr", "es")) {
   lang <- match.arg(lang)
+  
+  # Shortcut if already a numeric (stored as character)
+  res <- suppressWarnings(as.numeric(text))
 
-  digits <- digits_from(text, lang)
-  res <- vapply(digits, number_from, double(1))
+  digits <- digits_from(text[is.na(res)], lang)
+  res[is.na(res)] <- vapply(digits, number_from, double(1))
 
   return(res)
 }
