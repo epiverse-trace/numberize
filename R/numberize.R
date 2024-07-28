@@ -31,7 +31,7 @@ digits_from <- function(text, lang = "en") {
 
   # It's faster to unlist()/relist() than looping over the list
   digits <- base_numbers[match(unlist(words), base_numbers[[lang]]), "digit"]
-  relist(digits, words)
+  utils::relist(digits, words)
 }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
