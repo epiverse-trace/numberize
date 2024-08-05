@@ -8,17 +8,19 @@ its numeric equivalent.}
 numberize(text, lang = c("en", "fr", "es"))
 }
 \arguments{
-\item{text}{Vector containing spelled numbers in a supported language.}
+\item{text}{String vector of spelled numbers in a supported language.}
 
-\item{lang}{The text's language. Currently one of \code{"en" | "fr" | "es"}.
+\item{lang}{The text's language. Currently one of \code{c("en", "fr", "es")}.
 Default is "en"}
 }
 \value{
-A vector of numeric values.
+A numeric vector.
 }
 \description{
-Convert a vector string of spelled numbers in a supported language to
-its numeric equivalent.
+The range of words supported is between \strong{zero} and
+\strong{nine hundred and ninety nine trillion, nine hundred and}
+\strong{ninety nine billion, nine hundred and ninety nine million, nine}
+\strong{hundred and ninety nine thousand, nine hundred and ninety nine}
 }
 \examples{
 # convert to numbers a scalar
