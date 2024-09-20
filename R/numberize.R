@@ -1,3 +1,74 @@
+# data frame that maps numbers to words
+numbers <- data.frame(
+  stringsAsFactors = FALSE,
+  digit = c(
+    0:30, # because es is unique to 30
+    seq(40, 70, by = 10),
+    71:80,
+    90:99,
+    seq(100, 900, by = 100), 1000, 1E6, 1E9, 1E12
+  ),
+  en = c(
+    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+    "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+    "sixteen", "seventeen", "eighteen", "nineteen",
+    "twenty", "", "", "", "", "", "", "", "", "",
+    "thirty", "forty", "fifty", "sixty",
+    "seventy", "", "", "", "", "", "", "", "", "",
+    "eighty",
+    "ninety", "", "", "", "", "", "", "", "", "",
+    "hundred", "", "", "", "", "", "", "", "",
+    "thousand", "million", "billion", "trillion"
+  ),
+  es = c(
+    "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho",
+    "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
+    "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte",
+    "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro",
+    "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", "veintinueve", # nolint
+    "treinta", "cuarenta", "cincuenta", "sesenta",
+    "setenta", "", "", "", "", "", "", "", "", "",
+    "ochenta",
+    "noventa", "", "", "", "", "", "", "", "", "",
+    "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
+    "seiscientos", "setecientos", "ochocientos", "novecientos",
+    "mil", "mill\u00f3n", "mil-millones", "bill\u00f3n"
+  ),
+  fr = c(
+    "z\u00e9ro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
+    "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
+    "quinze", "seize", "dix sept", "dix huit", "dix neuf",
+    "vingt", "", "", "", "", "", "", "", "", "",
+    "trente", "quarante", "cinquante", "soixante",
+    "soixante-dix", "soixante-onze", "soixante-douze", "soixante-treize",
+    "soixante-quatorze", "soixante-quinze", "soixante-seize",
+    "soixante-dix-sept", "soixante-dix-huit", "soixante-dix-neuf",
+    "quatre-vingt",
+    "quatre-vingt-dix", "quatre-vingt-onze", "quatre-vingt-douze", "quatre-vingt-treize", # nolint
+    "quatre-vingt-quatorze", "quatre-vingt-quinze", "quatre-vingt-seize",
+    "quatre-vingt-dix-sept", "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf",
+    "cent", "", "", "", "", "", "", "", "",
+    "mille", "million", "milliard", "billion"
+  ),
+  position = c(
+    rep("units", 10),
+    rep("tens", 45),
+    rep("hundreds", 9),
+    "thousand", "million", "billion", "trillion"
+  ),
+  positional_digit = c(
+    0:9, # units
+    rep(1, 10), # tens (10-19)
+    rep(2, 10), # tens (20-29)
+    3:6, # tens (30-60)
+    rep(7, 10), # tens (70-79)
+    8, # tens (80)
+    rep(9, 10), # tens (90-99)
+    1:9, # hundreds (100-900)
+    rep(1, 4) # thousand, million, billion, trillion
+  )
+)
+
 #' Generate a numeric vector from text in a supported language.
 #'
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
@@ -20,76 +91,7 @@ digits_from <- function(text, lang = "en") {
     FALSE
   }
 
-  # data frame that maps numbers to words
-  numbers <- data.frame(
-    stringsAsFactors = FALSE,
-    digit = c(
-      0:30, # because es is unique to 30
-      seq(40, 70, by = 10),
-      71:80,
-      90:99,
-      seq(100, 900, by = 100), 1000, 1E6, 1E9, 1E12
-    ),
-    en = c(
-      "zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
-      "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-      "sixteen", "seventeen", "eighteen", "nineteen",
-      "twenty", "", "", "", "", "", "", "", "", "",
-      "thirty", "forty", "fifty", "sixty",
-      "seventy", "", "", "", "", "", "", "", "", "",
-      "eighty",
-      "ninety", "", "", "", "", "", "", "", "", "",
-      "hundred", "", "", "", "", "", "", "", "",
-      "thousand", "million", "billion", "trillion"
-    ),
-    es = c(
-      "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho",
-      "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
-      "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte",
-      "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro",
-      "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", "veintinueve", # nolint
-      "treinta", "cuarenta", "cincuenta", "sesenta",
-      "setenta", "", "", "", "", "", "", "", "", "",
-      "ochenta",
-      "noventa", "", "", "", "", "", "", "", "", "",
-      "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
-      "seiscientos", "setecientos", "ochocientos", "novecientos",
-      "mil", "mill\u00f3n", "mil-millones", "bill\u00f3n"
-    ),
-    fr = c(
-      "z\u00e9ro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
-      "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
-      "quinze", "seize", "dix sept", "dix huit", "dix neuf",
-      "vingt", "", "", "", "", "", "", "", "", "",
-      "trente", "quarante", "cinquante", "soixante",
-      "soixante-dix", "soixante-onze", "soixante-douze", "soixante-treize",
-      "soixante-quatorze", "soixante-quinze", "soixante-seize",
-      "soixante-dix-sept", "soixante-dix-huit", "soixante-dix-neuf",
-      "quatre-vingt",
-      "quatre-vingt-dix", "quatre-vingt-onze", "quatre-vingt-douze", "quatre-vingt-treize", # nolint
-      "quatre-vingt-quatorze", "quatre-vingt-quinze", "quatre-vingt-seize",
-      "quatre-vingt-dix-sept", "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf",
-      "cent", "", "", "", "", "", "", "", "",
-      "mille", "million", "milliard", "billion"
-    ),
-    position = c(
-      rep("units", 10),
-      rep("tens", 45),
-      rep("hundreds", 9),
-      "thousand", "million", "billion", "trillion"
-    ),
-    positional_digit = c(
-      0:9, # units
-      rep(1, 10), # tens (10-19)
-      rep(2, 10), # tens (20-29)
-      3:6, # tens (30-60)
-      rep(7, 10), # tens (70-79)
-      8, # tens (80)
-      rep(9, 10), # tens (90-99)
-      1:9, # hundreds (100-900)
-      rep(1, 4) # thousand, million, billion, trillion
-    )
-  )
+
 
   original_text <- text # to report warning if necessary
   # clean and prep
