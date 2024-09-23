@@ -129,3 +129,18 @@ test_that("Inf to return NA", {
   res <- numberize(Inf, lang = "fr")
   expect_true(is.na(res))
 })
+test_that("Spanish words with accents are correctly numberized", {
+  res <- numberize(
+    c(
+      "DIECISÉIS", "VEINTIÚN", "VEINTIDÓS", "VEINTITRÉS", "VEINTISÉIS", "MILLÓN",
+      "BILLÓN",
+      "Seis billones dieciséis mil veintiún millones veintidós mil veintitrés"
+    ),
+    lang = "es"
+  )
+  expect_identical(res, c(16, 21, 22, 23, 26, 1000000, 1000000000000, 6016021022023))
+})
+test_that("French words with accents are correctly numberized", {
+  res <- numberize(c("zéro", "ZÉRO"), lang = "FR")
+  expect_identical(res, c(0, 0))
+})
