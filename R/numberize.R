@@ -1,4 +1,4 @@
-# data frame that maps numbers to words
+# Maps numbers to words. Used in digits_from().
 digit_mappings <- data.frame(
   stringsAsFactors = FALSE,
   digit = c(
@@ -69,6 +69,12 @@ digit_mappings <- data.frame(
   )
 )
 
+#' Test if a given numeric vector can have different meanings.
+#'
+#' @param digits A numeric vector.
+#'
+#' @return Logical. True if the number vector has multiple interpretations.
+#' @keywords internal
 ambiguous <- function(digits) {
   current_position <- digit_mappings[
     match(digits, digit_mappings[["digit"]]), "position"
