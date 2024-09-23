@@ -23,19 +23,19 @@ digit_mappings <- data.frame(
   es = c(
     "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho",
     "nueve", "diez", "once", "doce", "trece", "catorce", "quince",
-    "diecis\u00e9is", "diecisiete", "dieciocho", "diecinueve", "veinte",
-    "veintiuno", "veintid\u00f3s", "veintitr\u00e9s", "veinticuatro",
-    "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", "veintinueve", # nolint
+    "dieciseis", "diecisiete", "dieciocho", "diecinueve", "veinte",
+    "veintiuno", "veintidos", "veintitres", "veinticuatro",
+    "veinticinco", "veintiseis", "veintisiete", "veintiocho", "veintinueve", # nolint
     "treinta", "cuarenta", "cincuenta", "sesenta",
     "setenta", "", "", "", "", "", "", "", "", "",
     "ochenta",
     "noventa", "", "", "", "", "", "", "", "", "",
     "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
     "seiscientos", "setecientos", "ochocientos", "novecientos",
-    "mil", "mill\u00f3n", "mil-millones", "bill\u00f3n"
+    "mil", "millon", "mil-millones", "billon"
   ),
   fr = c(
-    "z\u00e9ro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
+    "zero", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
     "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
     "quinze", "seize", "dix sept", "dix huit", "dix neuf",
     "vingt", "", "", "", "", "", "", "", "", "",
@@ -88,6 +88,57 @@ ambiguous <- function(digits) {
   uncertain
 }
 
+#' Converts a subset of latin characters with accents to their ascii equivalents
+#'
+#' @param text Character. A string or vector
+#'
+#' @return Character. ASCII only.
+#' @keywords internal
+as_ascii <- function(text) {
+  ascii_map <- data.frame(
+    # Source: https://en.wikipedia.org/wiki/List_of_Unicode_characters
+    stringsAsFactors = FALSE,
+    ucode = c( # These appear to be unnecessary here
+      # "\u00C0", "\u00C1", "\u00C2", "\u00C3", "\u00C4", "\u00C5", "\u00C7",
+      # "\u00C8", "\u00C9", "\u00CA", "\u00CB", "\u00CC", "\u00CD", "\u00CE",
+      # "\u00CF", "\u00D1", "\u00D2", "\u00D3", "\u00D4", "\u00D5", "\u00D6",
+      # "\u00D8", "\u00D9", "\u00DA", "\u00DB", "\u00DC", "\u00DD",
+      "\u00E0", "\u00E1", "\u00E2", "\u00E3", "\u00E4", "\u00E5", "\u00E7",
+      "\u00E8", "\u00E9", "\u00EA", "\u00EB", "\u00EC", "\u00ED", "\u00EE",
+      "\u00EF", "\u00F1", "\u00F2", "\u00F3", "\u00F4", "\u00F5", "\u00F6",
+      "\u00F8", "\u00F9", "\u00FA", "\u00FB", "\u00FC", "\u00FD", "\u00FF"
+    ),
+    latin = c( # expects lowercase strings
+      # "À", "Á", "Â", "Ã", "Ä", "Å", "Ç",
+      # "È", "É", "Ê", "Ë", "Ì", "Í", "Î",
+      # "Ï", "Ñ", "Ò", "Ó", "Ô", "Õ", "Ö",
+      # "Ø", "Ù", "Ú", "Û", "Ü", "Ý",
+      "à", "á", "â", "ã", "ä", "å", "ç",
+      "è", "é", "ê", "ë", "ì", "í", "î",
+      "ï", "ñ", "ò", "ó", "ô", "õ", "ö",
+      "ø", "ù", "ú", "û", "ü", "ý", "ÿ"
+    ),
+    ascii = c( # expects lowercase strings
+      # "A", "A", "A", "A", "A", "A", "C",
+      # "E", "E", "E", "E", "I", "I", "I",
+      # "I", "N", "O", "O", "O", "O", "O",
+      # "O", "U", "U", "U", "U", "Y",
+      "a", "a", "a", "a", "a", "a", "c",
+      "e", "e", "e", "e", "i", "i", "i",
+      "i", "n", "o", "o", "o", "o", "o",
+      "o", "u", "u", "u", "u", "y", "y"
+    )
+  )
+  word_characters <- strsplit(text, "", fixed = TRUE)
+  character_vector <- unlist(word_characters)
+  ascii <- ascii_map[match(character_vector, ascii_map[["latin"]]), "ascii"]
+  ascii[is.na(ascii)] <- character_vector[is.na(ascii)]
+  word_characters <- utils::relist(ascii, word_characters)
+  text <- as.character(lapply(word_characters, paste, collapse = ""))
+  text
+}
+
+
 #' Generate a numeric vector from text in a supported language.
 #'
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
@@ -100,9 +151,8 @@ digits_from <- function(text, lang = "en") {
 
   if (lang == "es") {
     text <- gsub("\\bcien\\b", "ciento", text)
-    text <- gsub("millones", "mill\u00f3n", text, fixed = TRUE)
-    text <- gsub("billones", "bill\u00f3n", text, fixed = TRUE)
-    text <- gsub("veinti\u00fan", "veintiuno", text, fixed = TRUE) # edge case
+    text <- gsub("(millon|billon)es\\b", "\\1", text)
+    text <- gsub("veintiun", "veintiuno", text, fixed = TRUE) # edge case
     text <- gsub("\\sun\\s", " uno ", text)
   }
   if (lang == "fr") {
@@ -202,6 +252,7 @@ numberize <- function(text, lang = c("en", "fr", "es")) {
     return(NA)
   }
   text <- trimws(tolower(text)) # do once instead of repeating in digits_from()
+  text <- as_ascii(text)
   # Shortcut if already a numeric (stored as character)
   res <- suppressWarnings(as.numeric(text))
   digits <- digits_from(text[is.na(res)], lang)
