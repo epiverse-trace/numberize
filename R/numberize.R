@@ -1,5 +1,5 @@
 # data frame that maps numbers to words
-numbers <- data.frame(
+digit_mappings <- data.frame(
   stringsAsFactors = FALSE,
   digit = c(
     0:30, # because es is unique to 30
@@ -69,6 +69,19 @@ numbers <- data.frame(
   )
 )
 
+ambiguous <- function(digits) {
+  current_position <- digit_mappings[
+    match(digits, digit_mappings[["digit"]]), "position"
+  ]
+  next_position <- c(tail(current_position, -1), NA) # move forward by 1
+  # returns true if consecutive positions are the same type e.g. unit, unit etc
+  uncertain <- any(current_position == next_position, na.rm = TRUE)
+  if (uncertain) {
+    warning(toString(digits))
+  }
+  uncertain
+}
+
 #' Generate a numeric vector from text in a supported language.
 #'
 #' @param text Word(s) that spell numbers. e.g. "one", "deux", "trois"
@@ -77,27 +90,7 @@ numbers <- data.frame(
 #' @return A numeric vector.
 #' @keywords internal
 digits_from <- function(text, lang = "en") {
-  invalid_structure <- function(positions) {
-    valid_position <- c(
-      "units", "tens", "hundreds", "thousand", "million", "billion", "trillion"
-    )
-    for (i in seq_along(valid_position)) {
-      index <- which(positions %in% valid_position[i])
-      is_adjacent <- any(diff(index) == 1)
-      if (is_adjacent) {
-        return(is_adjacent)
-      }
-    }
-    FALSE
-  }
-
-
-
-  original_text <- text # to report warning if necessary
-  # clean and prep
-  text <- tolower(text) # converts to string as a side effect
-  text <- trimws(text)
-  text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # all lang
+  text <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", text) # replace and, et, y
 
   if (lang == "es") {
     text <- gsub("\\bcien\\b", "ciento", text)
@@ -123,15 +116,13 @@ digits_from <- function(text, lang = "en") {
     text <- gsub("quatre-vingt (sept|huit|neuf)", "quatre-vingt-\\1", text)
   }
 
-  words <- strsplit(text, "\\s+")[[1]]
-  positions <- numbers[match(words, numbers[[lang]]), "position"]
-  if (invalid_structure(positions)) {
-    warning(
-      "[", original_text, "] can be interpreted in different ways.\n"
-    )
-    return(NA)
-  }
-  numbers[match(words, numbers[[lang]]), "digit"]
+  words <- strsplit(text, "\\s+")
+
+  # It's faster to unlist()/relist() than looping over the list
+  digits <- digit_mappings[
+    match(unlist(words), digit_mappings[[lang]]), "digit"
+  ]
+  utils::relist(digits, words)
 }
 
 #' Generate a number from a numeric vector.
@@ -143,6 +134,14 @@ digits_from <- function(text, lang = "en") {
 #'
 #' @keywords internal
 number_from <- function(digits) {
+  if (anyNA(digits)) {
+    return(NA)
+  }
+
+  if (ambiguous(digits)) {
+    return(NA)
+  }
+
   thousand_index <- match(1000, digits, nomatch = 0)
   million_index <- match(1E6, digits, nomatch = 0)
 
@@ -224,15 +223,17 @@ number_from <- function(digits) {
 #' @export
 numberize <- function(text, lang = c("en", "fr", "es")) {
   lang <- tolower(lang)
-  lang <- match.arg(lang)
-  if (is.null(text)) {
+  lang <- match.arg(lang) # match.arg(tolower(lang)) doesn't work
+
+  text[is.infinite(text)] <- NA # handle INF
+  if (length(text) == 0) { # handle NULL
     return(NA)
   }
-  vapply(
-    text,
-    .numberize,
-    FUN.VALUE = double(1),
-    lang = lang,
-    USE.NAMES = FALSE
-  )
+  text <- trimws(tolower(text)) # do once instead of repeating in digits_from()
+  # Shortcut if already a numeric (stored as character)
+  res <- suppressWarnings(as.numeric(text))
+  digits <- digits_from(text[is.na(res)], lang)
+  res[is.na(res)] <- vapply(digits, number_from, double(1))
+
+  return(res)
 }
