@@ -153,11 +153,11 @@ number_from <- function(digits) {
   summed <- 0
   total <- 0
   for (d in digits) {
-    if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
-      total <- ifelse(summed == 0, total + d, total + summed * d)
+    if (d == 100) {
+      summed <- d + d * (summed - 1) * (summed != 0)
+    } else if (d %in% c(1E3, 1E6, 1E9, 1E12)) {
+      total <- total + d + d * (summed - 1) * (summed != 0)
       summed <- 0
-    } else if (d == 100) {
-      summed <- ifelse(summed == 0, d, summed * d)
     } else {
       summed <- summed + d
     }
