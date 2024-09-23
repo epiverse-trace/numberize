@@ -171,40 +171,6 @@ number_from <- function(digits) {
   summed + total
 }
 
-#' Internal function used in the numberize() call for vectors.
-#'
-#' @param text Character string in a supported language.
-#' @param lang Language of the character string.
-#' Currently one of `"en" | "fr" | "es"`.
-#'
-#' @return A numeric value.
-#'
-#' @keywords internal
-#'
-.numberize <- function(text, lang = c("en", "fr", "es")) {
-  text <- toString(text)
-  if (
-    trimws(text) %in%
-      c("NA", "TRUE", "FALSE", "nan", "Inf", "") || # check other R keywords
-      length(text) == 0) { # check for NULL
-    return(NA)
-  }
-
-  # convert to numeric. Numeric values will pass and non numeric values will be
-  # coerced to NA and converted into numbers.
-  tmp_text <- suppressWarnings(as.numeric(text))
-  if (!is.na(tmp_text)) {
-    return(tmp_text)
-  } else {
-    # when the text does not correspond to a number, digits_from() returns NA
-    digits <- digits_from(text, lang)
-    if (anyNA(digits)) {
-      return(NA)
-    }
-    number_from(digits)
-  }
-}
-
 #' Convert a vector string of spelled numbers in a supported language to
 #' its numeric equivalent.
 #'
