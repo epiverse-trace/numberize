@@ -79,7 +79,8 @@ ambiguous <- function(digits) {
   current_position <- digit_mappings[
     match(digits, digit_mappings[["digit"]]), "position"
   ]
-  next_position <- c(utils::tail(current_position, -1), NA) # move forward by 1
+  next_position <- c(current_position[-1], NA) # move forward by 1
+
   # returns true if consecutive positions are the same type e.g. unit, unit etc
   uncertain <- any(current_position == next_position, na.rm = TRUE)
   if (uncertain) {
