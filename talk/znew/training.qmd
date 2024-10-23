@@ -1,12 +1,16 @@
 ---
 title: Vectorize? Howto?
 logo: https://epiverse-trace.github.io/hexlogo.png
-theme:
-  dark: darkly
-  light: flatly
-format: live-html
-engine: knitr
+highlight-style: github
+# format: live-html
+format:
+  live-revealjs:
+    theme: dark
+    embed-resources: true
+      # light: flatly
+# engine: knitr
 webr:
+  # render-df: gt-interactive
   # cell-options:
   #   autorun: true
   packages:
@@ -21,9 +25,14 @@ webr:
 
 ::: {.panel-tabset}
 
-# BlueSky + Tweet = "skeet" says Wikipedia.
+### Briefly
 ```{webr}
 #| echo: true
+#| output: true
+#| include: true
+#| max-lines: 20
+#| persist: true
+
 
 # Categorizes functions found in `file` as vectorized or not.
 # Vectorized functions are defined as ones that are written entirely
@@ -38,7 +47,6 @@ ftype <- function(file_or_url = NULL, packages = NULL) {
   fns <- tmp[tmp["token"] == "SYMBOL_FUNCTION_CALL", "text"] |>
     unique()
 
-  # TODO Include additional packages if library(), require() or pkg:: found
   if (is.null(packages)) packages <- c("base", getOption("defaultPackages"))
   fn <- lapply(packages, function(pkg) ls(paste0("package:", pkg)))
   package <- rep(packages, lengths(fn))
@@ -74,16 +82,16 @@ ftype(url)
 
 ```
 
-# Question / Feedback / Note to Self
+### Feedback
 
-- ### Is it useful enough?
-- ### Vectorize by sending a vector of URLs and/or file paths?
-- ### Include static analysis e.g. how many times each function is called?
-- ### Add calls to library/require/pkgs:: to be included in addition to "default packages"?
-- ### Include in CI/CD pipeline?
+- #### Is it useful enough?
+- #### Vectorize by sending a vector of URLs and/or file paths?
+- #### Include static analysis e.g. how many times each function is called?
+- #### Add calls to library/require/pkgs:: to be included in addition to "default packages"?
+- #### Include in CI/CD pipeline?
 
-# Random
+### Random
 
-Has anyone had a corrupt git repo before?
+#### Howto repair a corrupt git repo?
 
 :::
