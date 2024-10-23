@@ -1,0 +1,89 @@
+---
+title: Vectorize? Howto?
+logo: https://epiverse-trace.github.io/hexlogo.png
+theme:
+  dark: darkly
+  light: flatly
+format: live-html
+engine: knitr
+webr:
+  # cell-options:
+  #   autorun: true
+  packages:
+    # - DT
+    - data.table
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+<!-- Install the extension using instructions below  -->
+<!-- quarto add r-wasm/quarto-live -->
+<!-- Docs: https://r-wasm.github.io/quarto-live/ -->
+
+::: {.panel-tabset}
+
+# BlueSky + Tweet = "skeet" says Wikipedia.
+```{webr}
+#| echo: true
+
+# Categorizes functions found in `file` as vectorized or not.
+# Vectorized functions are defined as ones that are written entirely
+# in C, Fortran etc, or R wrappers around `.Internal()`, `.Call`.
+# https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/
+# https://adv-r.hadley.nz/functions.html
+ftype <- function(file_or_url = NULL, packages = NULL) {
+  stopifnot("File path or url required!" = !is.null(file_or_url))
+  contents <- data.table::fread(file_or_url, sep = "\n", header = FALSE)$V1
+  # can the next line be |> to the line after? How?
+  tmp <- parse(text = contents, keep.source = TRUE) |> getParseData()
+  fns <- tmp[tmp["token"] == "SYMBOL_FUNCTION_CALL", "text"] |>
+    unique()
+
+  # TODO Include additional packages if library(), require() or pkg:: found
+  if (is.null(packages)) packages <- c("base", getOption("defaultPackages"))
+  fn <- lapply(packages, function(pkg) ls(paste0("package:", pkg)))
+  package <- rep(packages, lengths(fn))
+  fn <- unlist(fn)
+
+  . <- type <- vectorized <- NA # for data.table lintr
+
+  data.table::data.table(package, fn)[
+    , .(
+      package, fn,
+      body = sapply(fn, function(fn_name) {
+        tryCatch(as.character(body(fn_name))[1], error = function(e) NA)
+      }),
+      type = unlist(lapply(fn, function(x) {
+        tryCatch(typeof(match.fun(x)), error = function(e) typeof(x))
+      }))
+    )
+  ][
+    , .(
+      package, fn, body, type,
+      vectorized = body %in% c(".Call", ".Internal", NA) & type != "character"
+    )
+  ][list(fn = fns), on = "fn"][
+    ,
+    .(fn, vectorized, package)
+  ][
+    order(vectorized, fn)
+  ]
+}
+
+url <- "https://raw.githubusercontent.com/epiverse-trace/numberize/refs/heads/main/R/numberize.R" # nolint
+ftype(url)
+
+```
+
+# Question / Feedback / Note to Self
+
+- ### Is it useful enough?
+- ### Vectorize by sending a vector of URLs and/or file paths?
+- ### Include static analysis e.g. how many times each function is called?
+- ### Add calls to library/require/pkgs:: to be included in addition to "default packages"?
+- ### Include in CI/CD pipeline?
+
+# Random
+
+Has anyone had a corrupt git repo before?
+
+:::

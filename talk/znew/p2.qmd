@@ -1,0 +1,92 @@
+---
+highlight-style: github
+logo: https://epiverse-trace.github.io/hexlogo.png
+title: Vectorize
+# subtitle: "faster CI/CD | reproducible environments | interactive quarto"
+# format: live-html
+revealjs-plugins:
+  - drop
+format:
+  revealjs:
+    navigation-mode: vertical
+    chalkboard: true
+    # preview-links: true
+    slide-number: true
+    theme: dark
+#    footer: <https://epiverse-trace.github.io>
+
+engine: knitr
+---
+
+ “Vectorize” is just a slightly high-handed way of saying:
+
+    R naturally stores data in columns (or in column major order), so if you are not coding to that pattern you are fighting the language.
+
+::: footer
+[Learn more](https://win-vector.com/2019/01/03/what-does-it-mean-to-write-vectorized-code-in-r/
+)
+:::
+
+## Use "native" vectorisation #11 
+https://github.com/epiverse-trace/numberize/issues/11
+
+
+
+## Preliminary code
+
+
+```r
+# Categorizes functions found in `file` as vectorized or not.
+# Vectorized functions are defined as ones that are written entirely
+# in C, Fortran etc, or R wrappers around `.Internal()`, `.Call`.
+# https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/
+# https://adv-r.hadley.nz/functions.html
+ftype <- function(file = NULL, packages = NULL) {
+  stopifnot("file required" = !is.null(file))
+  data
+  tmp <- parse(file, keep.source = TRUE) |> getParseData()
+  fns <- tmp[tmp["token"] == "SYMBOL_FUNCTION_CALL", "text"] |>
+    unique()
+
+  # TODO Include additional packages if library(), require() or pkg:: found
+  if (is.null(packages)) packages <- c("base", getOption("defaultPackages"))
+  fn <- lapply(packages, function(pkg) ls(paste0("package:", pkg)))
+  package <- rep(packages, lengths(fn))
+  fn <- unlist(fn)
+
+  . <- type <- vectorized <- NA # for data.table lintr
+
+  data.table::data.table(package, fn)[
+    , .(
+      package, fn,
+      body = sapply(fn, function(fn_name) {
+        tryCatch(as.character(body(fn_name))[1], error = function(e) NA)
+      }),
+      type = unlist(lapply(fn, function(x) {
+        tryCatch(typeof(match.fun(x)), error = function(e) typeof(x))
+      }))
+    )
+  ][
+    , .(
+      package, fn, body, type,
+      vectorized = body %in% c(".Call", ".Internal", NA) & type != "character"
+    )
+  ][list(fn = fns), on = "fn"][
+    ,
+    .(fn, vectorized, package)
+  ][
+    order(vectorized, fn)
+  ]
+}
+
+file <- c(
+  "/home", "bahadzie", "R", "packages",
+  "epiverse-trace", "numberize", "R", "numberize.R"
+) |>
+  file.path() |> # this didn't work as expected so pasting below
+  paste0(collapse = "/")
+
+file = "https://raw.githubusercontent.com/epiverse-trace/numberize/refs/heads/main/R/numberize.R"
+
+x <- ftype(file)
+```
