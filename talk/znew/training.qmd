@@ -6,7 +6,7 @@ highlight-style: github
 format:
   live-revealjs:
     theme: dark
-    embed-resources: true
+    # embed-resources: true
       # light: flatly
 # engine: knitr
 webr:
