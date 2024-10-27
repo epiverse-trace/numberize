@@ -8,7 +8,8 @@ message: 'To cite package "numberize" in publications use:'
 type: software
 license: MIT
 title: 'numberize: Convert Words to Numbers in Multiple Languages'
-version: 1.0.0
+version: 1.0.1
+doi: 10.32614/CRAN.package.numberize
 abstract: Converts written out numbers into their equivalent numbers. Supports numbers
   written out in English, French, or Spanish.
 authors:
@@ -19,6 +20,7 @@ authors:
 - family-names: Ahadzie
   given-names: Bankole
   email: bankole.ahadzie@lshtm.ac.uk
+repository: https://CRAN.R-project.org/package=numberize
 repository-code: https://github.com/epiverse-trace/numberize
 url: https://github.com/epiverse-trace/numberize
 contact:
@@ -49,12 +51,13 @@ references:
   authors:
   - family-names: Ooms
     given-names: Jeroen
-    email: jeroen@berkeley.edu
+    email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2024'
+  doi: 10.32614/CRAN.package.spelling
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -66,5 +69,6 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 
