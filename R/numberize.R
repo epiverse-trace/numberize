@@ -233,3 +233,29 @@ nn <- function(x, lang = "en") {
     x
   }, max(lengths(vecs_list)))) # returns a matrix
 }
+
+#' Converts a numeric digit vector into its equivalent number
+#'
+nf <- function(x) {
+  # split digits by powers of 1000 1e3
+  multipliers <- x %in% c(1E3L, 1E6L, 1E9L, 1E12)
+  multipliers <- which(multipliers) + 1L # +1 includes multipler in split
+  split_by_e3 <- split(x, cumsum(seq_along(x) %in% multipliers))
+
+  # calculates each multiplier split and sum all for final number
+  final_number <- lapply(split_by_e3, function(x) {
+    multiplier <- x[x %in% c(1E3L, 1E6L, 1E9L, 1E12)]
+    x <- x[!(x %in% c(1E3L, 1E6L, 1E9L, 1E12))] # subset to remove multiplier
+    if (length(multiplier) == 0) multiplier <- 1 # replace no multipler with 1
+
+    h100 <- match(100L, x)
+    if (!is.na(h100)) { # e.g. [9, 100, 60] # nolint: commented_code_linter.
+      before <- sum(x[seq(h100 - 1L)]) # 9
+      after <- sum(x[(h100 + 1L):length(x)]) # 60
+      multiplier * (before * 100L + after)
+    } else {
+      sum(x) * multiplier
+    }
+  })
+  sum(unlist(final_number))
+}
