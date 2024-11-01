@@ -73,6 +73,10 @@ digit_mappings <- data.frame(
 #'
 #' @param digits A numeric vector.
 #'
+#' @details
+#' A text string like `twenty twenty four` can mean `2024`
+#' `c(20, 24)` or `c(20, 20, 4)`. Because we don't explicit know which one
+#' was intended. We warn about the ambiguity.
 #' @return Logical. True if the number vector has multiple interpretations.
 #' @keywords internal
 ambiguous <- function(digits) {
@@ -209,4 +213,23 @@ numberize <- function(text, lang = c("en", "fr", "es")) {
   res[is.na(res)] <- vapply(digits, number_from, double(1))
 
   return(res)
+}
+
+nn <- function(x, lang = "en") {
+  map_digit <- digit_mappings[, "digit"]
+  names(map_digit) <- digit_mappings[, lang]
+  x <- paste(x, collapse = " Inf ") # make a string
+  x <- gsub("\\sand|-|,|\\bet\\b|\\sy\\s", " ", x) # replace c(and, et, y)
+  x <- gsub("\\s+", " ", x) # collapse multiple space to single space
+  words <- strsplit(x, " ", fixed = TRUE)[[1L]]
+  digits <- map_digit[match(words, names(map_digit))] # introduces NAs for Inf
+  na_s <- is.na(digits)
+  split_indices <- which(na_s)
+  vecs_list <- split(digits, cumsum(seq_along(digits) %in% split_indices))
+  # Map(Filter, list(Negate(is.na)), vecs_list) # nolint
+  vecs_list <- lapply(vecs_list, Filter, f = Negate(is.na)) # remove NAs
+  do.call(cbind, lapply(vecs_list, function(x, longest) {
+    length(x) <- longest
+    x
+  }, max(lengths(vecs_list)))) # returns a matrix
 }
