@@ -223,15 +223,49 @@ nn <- function(x, lang = "en") {
   x <- gsub("\\s+", " ", x) # collapse multiple space to single space
   words <- strsplit(x, " ", fixed = TRUE)[[1L]]
   digits <- map_digit[match(words, names(map_digit))] # introduces NAs for Inf
-  na_s <- is.na(digits)
-  split_indices <- which(na_s)
-  vecs_list <- split(digits, cumsum(seq_along(digits) %in% split_indices))
-  # Map(Filter, list(Negate(is.na)), vecs_list) # nolint
-  vecs_list <- lapply(vecs_list, Filter, f = Negate(is.na)) # remove NAs
-  do.call(cbind, lapply(vecs_list, function(x, longest) {
-    length(x) <- longest
-    x
-  }, max(lengths(vecs_list)))) # returns a matrix
+  names(digits) = NULL
+  # na_s <- is.na(digits)
+  # split_indices <- which(na_s)
+  # vecs_list <- split(digits, cumsum(seq_along(digits) %in% split_indices))
+  # # Map(Filter, list(Negate(is.na)), vecs_list) # nolint
+  # vecs_list <- lapply(vecs_list, Filter, f = Negate(is.na)) # remove NAs
+  # do.call(cbind, lapply(vecs_list, function(x, longest) {
+  #   length(x) <- longest
+  #   x
+  # }, max(lengths(vecs_list)))) # returns a matrix
+
+  splitters <- digits %in% c(1E3L, 1E6L, 1E9L, 1E12)
+  splitters[is.na(digits)] <- TRUE
+  splitters <- which(splitters) + 1L # +1 includes multipler in split
+  splat <- split(digits, cumsum(seq_along(digits) %in% splitters))
+
+  # x <- splat[[4]]
+  calculate_bobs <- lapply(splat, function(yy) {
+    multiplier <- yy[yy %in% c(1E3L, 1E6L, 1E9L, 1E12)]
+    yy <- yy[!(yy %in% c(1E3L, 1E6L, 1E9L, 1E12))] # remove multiplier
+    if (length(multiplier) == 0) multiplier <- 1 # replace no multipler with 1
+    h100 <- match(100L, yy)
+    add_na <- anyNA(yy)
+    if (!is.na(h100)) { # e.g. [9, 100, 60] # nolint: commented_code_linter.
+      before <- sum(yy[seq(h100 - 1L)], na.rm = TRUE) # 9
+      after <- sum(yy[(h100 + 1L):length(yy)], na.rm = TRUE) # 60
+      result <- multiplier * (before * 100L + after)
+    } else {
+      result <- sum(yy, na.rm = TRUE) * multiplier
+    }
+
+    if (add_na) {
+      c(result, NA)
+    } else {
+      result
+    }
+  })
+  calculate_bobs <- unlist(calculate_bobs)
+  finals <- is.na(calculate_bobs)
+  finals <- which(finals)
+  fsplat <- split(calculate_bobs, cumsum(seq_along(calculate_bobs) %in% finals))
+  k <- lapply(fsplat, sum, na.rm = TRUE)
+  k
 }
 
 #' Converts a numeric digit vector into its equivalent number
@@ -245,7 +279,7 @@ nf <- function(x) {
   # calculates each multiplier split and sum all for final number
   final_number <- lapply(split_by_e3, function(x) {
     multiplier <- x[x %in% c(1E3L, 1E6L, 1E9L, 1E12)]
-    x <- x[!(x %in% c(1E3L, 1E6L, 1E9L, 1E12))] # subset to remove multiplier
+    x <- x[!(x %in% c(1E3L, 1E6L, 1E9L, 1E12))] # remove multiplier
     if (length(multiplier) == 0) multiplier <- 1 # replace no multipler with 1
 
     h100 <- match(100L, x)
