@@ -27,7 +27,7 @@ coverage](https://codecov.io/gh/epiverse-trace/numberize/branch/main/graph/badge
 French or Spanish words from `"zero"` to `"nine hundred and ninety nine
 trillion, nine hundred and ninety nine billion, nine hundred and ninety
 nine million, nine hundred and ninety nine thousand, nine hundred and
-ninety nine"` to positive integer values.
+ninety nine"` to positive integer values, and vice versa.
 
 <!-- This sentence is optional and can be removed -->
 
@@ -56,7 +56,7 @@ pak::pak("epiverse-trace/numberize")
 
 ## Example
 
-These examples illustrate the current functionality.
+These examples illustrate the current functionalities.
 
 ``` r
 library("numberize")
@@ -68,6 +68,14 @@ numberize("zéro", lang = "fr")
 # numberize a Spanish string
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
 #> [1] 7545
+
+# verbalize a number in Spanish
+verbalise("500", lang = "es")
+#> [1] quinientos
+
+# verbalize a number in French
+verbalise("21", lang = "es")
+#> [1] vingt et un
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.
