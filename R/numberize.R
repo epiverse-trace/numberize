@@ -203,10 +203,10 @@ numberize <- function(text, lang = c("en", "fr", "es")) {
     return(NA)
   }
   text <- trimws(tolower(text)) # do once instead of repeating in digits_from()
+  not_empty_or_na <- !(text == "" | is.na(text))
   # Shortcut if already a numeric (stored as character)
   res <- suppressWarnings(as.numeric(text))
-  digits <- digits_from(text[is.na(res)], lang)
-  res[is.na(res)] <- vapply(digits, number_from, double(1))
-
+  digits <- digits_from(text[is.na(res) & not_empty_or_na], lang)
+  res[is.na(res) & not_empty_or_na] <- vapply(digits, number_from, double(1))
   return(res)
 }
