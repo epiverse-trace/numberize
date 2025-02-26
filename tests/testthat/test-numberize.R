@@ -85,12 +85,12 @@ test_that("text with non digit word returns NA", {
 })
 
 # NB: this vector is coerced into character by R
-test_that("vector with number and words and NA is properly handled", {
+test_that("vector with number, words, empty string and NA is properly handled", {
   res <- numberize(
-    c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+    c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA, ""),
     lang = "fr"
   )
-  expect_identical(res, c(17, 10, 65, 2024, NA))
+  expect_identical(res, c(17, 10, 65, 2024, NA, NA))
 })
 
 test_that("text with leading and trailing whitespace works", {
