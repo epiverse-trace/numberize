@@ -69,13 +69,9 @@ numberize("zéro", lang = "fr")
 numberize("Siete mil quinientos cuarenta y cinco", lang = "es")
 #> [1] 7545
 
-# verbalize a number in Spanish
-verbalise("500", lang = "es")
-#> [1] quinientos
-
 # verbalize a number in French
-verbalise("21", lang = "es")
-#> [1] vingt et un
+verbalize(21, lang = "fr")
+#> [1] "vingt et un"
 
 # numberize the English string "nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine" # nolint: line_length_linter.
 formatC(numberize("nine hundred and ninety-nine trillion, nine hundred and ninety-nine billion, nine hundred and ninety-nine million, nine hundred and ninety-nine thousand, nine hundred and ninety-nine"), big.mark = ",", format = "fg") # nolint: line_length_linter.

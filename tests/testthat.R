@@ -10,4 +10,4 @@ library(testthat)
 library(numberize) # nolint: missing_package_linter.
 
 test_check("numberize")
-test_check("verbalise")
+test_check("verbalize")
