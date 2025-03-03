@@ -4,8 +4,7 @@ digit_mappings <- data.frame(
   digit = c(
     0:30, # because es is unique to 30
     seq(40, 70, by = 10),
-    71:80,
-    90:99,
+    71:99,
     seq(100, 900, by = 100), 1000, 1E6, 1E9, 1E12
   ),
   en = c(
@@ -15,7 +14,7 @@ digit_mappings <- data.frame(
     "twenty", "", "", "", "", "", "", "", "", "",
     "thirty", "forty", "fifty", "sixty",
     "seventy", "", "", "", "", "", "", "", "", "",
-    "eighty",
+    "eighty", "", "", "", "", "", "", "", "", "",
     "ninety", "", "", "", "", "", "", "", "", "",
     "hundred", "", "", "", "", "", "", "", "",
     "thousand", "million", "billion", "trillion"
@@ -28,44 +27,37 @@ digit_mappings <- data.frame(
     "veinticinco", "veintis\u00e9is", "veintisiete", "veintiocho", "veintinueve", # nolint
     "treinta", "cuarenta", "cincuenta", "sesenta",
     "setenta", "", "", "", "", "", "", "", "", "",
-    "ochenta",
+    "ochenta", "", "", "", "", "", "", "", "", "",
     "noventa", "", "", "", "", "", "", "", "", "",
     "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos",
     "seiscientos", "setecientos", "ochocientos", "novecientos",
     "mil", "mill\u00f3n", "mil-millones", "bill\u00f3n"
   ),
   fr = c(
-    "z\u00e9ro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
-    "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze",
+    "z\u00e9ro", "un", "deux", "trois", "quatre",
+    "cinq", "six", "sept", "huit", "neuf",
+    "dix", "onze", "douze", "treize", "quatorze",
     "quinze", "seize", "dix sept", "dix huit", "dix neuf",
     "vingt", "", "", "", "", "", "", "", "", "",
     "trente", "quarante", "cinquante", "soixante",
     "soixante-dix", "soixante-onze", "soixante-douze", "soixante-treize",
     "soixante-quatorze", "soixante-quinze", "soixante-seize",
     "soixante-dix-sept", "soixante-dix-huit", "soixante-dix-neuf",
-    "quatre-vingt",
-    "quatre-vingt-dix", "quatre-vingt-onze", "quatre-vingt-douze", "quatre-vingt-treize", # nolint
-    "quatre-vingt-quatorze", "quatre-vingt-quinze", "quatre-vingt-seize",
-    "quatre-vingt-dix-sept", "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf",
+    "quatre-vingt", "quatre-vingt-un", "quatre-vingt-deux",
+    "quatre-vingt-trois", "quatre-vingt-quatre", "quatre-vingt-cinq",
+    "quatre-vingt-six", "quatre-vingt-sept", "quatre-vingt-huit",
+    "quatre-vingt-neuf", "quatre-vingt-dix", "quatre-vingt-onze",
+    "quatre-vingt-douze", "quatre-vingt-treize", "quatre-vingt-quatorze",
+    "quatre-vingt-quinze", "quatre-vingt-seize", "quatre-vingt-dix-sept",
+    "quatre-vingt-dix-huit", "quatre-vingt-dix-neuf",
     "cent", "", "", "", "", "", "", "", "",
     "mille", "million", "milliard", "billion"
   ),
   position = c(
     rep("units", 10),
-    rep("tens", 45),
+    rep("tens", 54),
     rep("hundreds", 9),
     "thousand", "million", "billion", "trillion"
-  ),
-  positional_digit = c(
-    0:9, # units
-    rep(1, 10), # tens (10-19)
-    rep(2, 10), # tens (20-29)
-    3:6, # tens (30-60)
-    rep(7, 10), # tens (70-79)
-    8, # tens (80)
-    rep(9, 10), # tens (90-99)
-    1:9, # hundreds (100-900)
-    rep(1, 4) # thousand, million, billion, trillion
   )
 )
 
@@ -108,19 +100,20 @@ digits_from <- function(text, lang = "en") {
   }
   if (lang == "fr") {
     # plural to singular
-    text <- gsub("(cent|mille|million|milliard|billion)s\\b", "\\1", text)
+    text <- gsub("(vingt|cent|mille|million|milliard|billion)s\\b", "\\1", text)
     # handle 70-79
     text <- gsub(
-      "soixante (dix|onze|douze|treize|quatorze|quinze|seize)",
+      "soixante\\s+(dix|onze|douze|treize|quatorze|quinze|seize)",
       "soixante-\\1", text
     )
     text <- gsub("soixante-dix (sept|huit|neuf)", "soixante-dix-\\1", text)
-    # handle 90-99
+    text <- gsub("quatre\\s+vingt", "quatre-vingt", text) # as in digit_mappings
+
+    # handle 87-96
     text <- gsub(
-      "quatre vingt (dix|onze|douze|treize|quatorze|quinze|seize)",
+      "quatre-vingt\\s+(un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|treize|quatorze|quinze|seize)",
       "quatre-vingt-\\1", text
     )
-    text <- gsub("quatre-vingt (sept|huit|neuf)", "quatre-vingt-\\1", text)
   }
 
   words <- strsplit(text, "\\s+")
@@ -202,7 +195,7 @@ numberize <- function(text, lang = c("en", "fr", "es")) {
   if (length(text) == 0) { # handle NULL
     return(NA)
   }
-  text <- trimws(tolower(text)) # do once instead of repeating in digits_from()
+  text <- trimws(tolower(text))
   not_empty_or_na <- !(text == "" | is.na(text))
   # Shortcut if already a numeric (stored as character)
   res <- suppressWarnings(as.numeric(text))
