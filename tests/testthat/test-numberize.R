@@ -107,7 +107,16 @@ test_that("NA to return NA", {
   res <- numberize(NA, lang = "es")
   expect_true(is.na(res))
 })
+test_that("French edge conditions", {
+  res <- numberize(c(
+    "quatre   vingt", "quatre  vingts", "quatre-vingts", "quatre-vingt",
+    "quatre-vingt-quatre", "quatre-vingt-huit", "vingt quatre", "vingt-quatre",
+    "soixante-et-onze", "soixante  et  onze"
+  ), lang = "fr")
+  expect_identical(res, c(80, 80, 80, 80, 84, 88, 24, 24, 71, 71))
+})
 
+#
 test_that("NaN to return NA", {
   res <- numberize(NaN, lang = "es")
   expect_true(is.na(res))
