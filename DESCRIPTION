@@ -1,6 +1,6 @@
 Package: numberize
 Title: Convert Words to Numbers and numbers to words in Multiple Languages
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: c(
     person("Chris", "Hartgerink", , "chris@libscie.org", role = "rev",
            comment = c(ORCID = "0000-0003-1050-6809")),

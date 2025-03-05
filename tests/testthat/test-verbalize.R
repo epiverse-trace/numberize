@@ -81,7 +81,6 @@ test_that("Translating all special french numbers work", {
     1E2, 1E3, 1E6, 1E9, 1E12, 1E15, 1E18, 1E21
   )
   to_expect <- c(
-  
     # 0-19
     "z\u00e9ro", "un", "deux", "trois", "quatre", "cinq", "six", "sept",
     "huit", "neuf", "dix", "onze", "douze", "treize", "quatorze", "quinze",
