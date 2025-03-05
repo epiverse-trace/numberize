@@ -85,12 +85,12 @@ test_that("text with non digit word returns NA", {
 })
 
 # NB: this vector is coerced into character by R
-test_that("vector with number and words and NA is properly handled", {
+test_that("vector with number, words, empty string and NA is properly handled", {
   res <- numberize(
-    c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA),
+    c(17, "dix", "soixante-cinq", "deux mille vingt-quatre", NA, ""),
     lang = "fr"
   )
-  expect_identical(res, c(17, 10, 65, 2024, NA))
+  expect_identical(res, c(17, 10, 65, 2024, NA, NA))
 })
 
 test_that("text with leading and trailing whitespace works", {
@@ -107,7 +107,16 @@ test_that("NA to return NA", {
   res <- numberize(NA, lang = "es")
   expect_true(is.na(res))
 })
+test_that("French edge conditions", {
+  res <- numberize(c(
+    "quatre   vingt", "quatre  vingts", "quatre-vingts", "quatre-vingt",
+    "quatre-vingt-quatre", "quatre-vingt-huit", "vingt quatre", "vingt-quatre",
+    "soixante-et-onze", "soixante  et  onze"
+  ), lang = "fr")
+  expect_identical(res, c(80, 80, 80, 80, 84, 88, 24, 24, 71, 71))
+})
 
+#
 test_that("NaN to return NA", {
   res <- numberize(NaN, lang = "es")
   expect_true(is.na(res))
