@@ -10,7 +10,9 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-9892-2999")),
     person("Hugo", "Gruson", , "hugo.gruson+R@normalesup.org", role = "aut",
            comment = c(ORCID = "0000-0002-4094-1476")),
-    person("Bankole", "Ahadzie", , "bankole.ahadzie@lshtm.ac.uk", role = c("aut", "cre", "cph"))
+    person("Bankole", "Ahadzie", , "bankole.ahadzie@lshtm.ac.uk", role = c("aut", "cre")),
+    person("London School of Hygiene and Tropical Medicine, LSHTM", ,  role = "cph",
+           comment = c(ROR = "00a0jsq62"))
   )
 Description: Converts written out numbers into their equivalent numbers.
     Supports numbers written out in English, French, or Spanish.
