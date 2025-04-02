@@ -2,20 +2,21 @@ Package: numberize
 Title: Convert Words to Numbers in Multiple Languages
 Version: 1.0.2
 Authors@R: c(
-    person("Chris", "Hartgerink", , "chris@libscie.org", role = "rev",
+    person("Chris", "Hartgerink", email = "chris@libscie.org", role = "rev",
            comment = c(ORCID = "0000-0003-1050-6809")),
-    person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "ctb",
+    person("Ulysse", "Boucherie", comment = "https://www.linkedin.com/in/ulysse-boucherie-7a3b2b111/", role = "ctb"),
+    person("Joshua W.", "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = "ctb",
            comment = c(ORCID = "0000-0001-5218-3046")),
-    person("Karim", "Mané", , "karim.mane@lshtm.ac.uk", role = "ctb",
+    person("Karim", "Mané", email = "karim.mane@lshtm.ac.uk", role = "ctb",
            comment = c(ORCID = "0000-0002-9892-2999")),
-    person("Hugo", "Gruson", , "hugo.gruson+R@normalesup.org", role = "aut",
+    person("Hugo", "Gruson", email = "hugo.gruson+R@normalesup.org", role = "aut",
            comment = c(ORCID = "0000-0002-4094-1476")),
-    person("Bankole", "Ahadzie", , "bankole.ahadzie@lshtm.ac.uk", role = c("aut", "cre")),
-    person("London School of Hygiene and Tropical Medicine, LSHTM", ,  role = "cph",
+    person("Bankole", "Ahadzie", email = "bankole.ahadzie@lshtm.ac.uk", role = c("aut", "cre")),
+    person("London School of Hygiene and Tropical Medicine, LSHTM",  role = "cph",
            comment = c(ROR = "00a0jsq62"))
   )
-Description: Converts written out numbers into their equivalent numbers.
-    Supports numbers written out in English, French, or Spanish.
+Description: Converts number spellings into their equivalent numbers.
+    Supports numbers written in English, French, or Spanish.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/numberize
 BugReports: https://github.com/epiverse-trace/numberize/issues
