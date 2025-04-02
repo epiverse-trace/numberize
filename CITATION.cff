@@ -7,10 +7,10 @@ cff-version: 1.2.0
 message: 'To cite package "numberize" in publications use:'
 type: software
 license: MIT
-title: 'numberize: Convert Words to Numbers in Multiple Languages'
-version: 1.0.1
+title: 'numberize: Convert Words to Numbers in Multiple Languages and vice versa'
+version: 1.1.0
 doi: 10.32614/CRAN.package.numberize
-abstract: Converts written out numbers into their equivalent numbers. Supports numbers
+abstract: Converts written out numbers into their equivalent numbers and vice versa. Supports numbers
   written out in English, French, or Spanish.
 authors:
 - family-names: Gruson
