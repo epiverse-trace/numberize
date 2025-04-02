@@ -10,8 +10,8 @@ license: MIT
 title: 'numberize: Convert Words to Numbers in Multiple Languages'
 version: 1.0.2
 doi: 10.32614/CRAN.package.numberize
-abstract: Converts written out numbers into their equivalent numbers. Supports numbers
-  written out in English, French, or Spanish.
+abstract: Converts number spellings into their equivalent numbers. Supports numbers
+  written in English, French, or Spanish.
 authors:
 - family-names: Gruson
   given-names: Hugo
